@@ -164,6 +164,26 @@ function compileExpression(src: string, allowedVars: string[]): EvalFn {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Intégration GeoGebra                                               */
+/* ------------------------------------------------------------------ */
+
+/** Construit l'URL GeoGebra Graphing Calculator avec la fonction pré-remplie. */
+function buildGeoGebraUrl(expr: string): string {
+  const commande = `f(x)=${expr}`;
+  const params = new URLSearchParams({ command: commande });
+  return `https://www.geogebra.org/calculator?${params.toString()}`;
+}
+
+/** Aperçu GeoGebra intégré (iframe), affiché à la demande. */
+function GeoGebraViewer({ url }: { url: string }) {
+  return (
+    <div className="mt-4 overflow-hidden rounded-md border border-board/20">
+      <iframe key={url} src={url} title="GeoGebra" className="h-[480px] w-full" allow="fullscreen" />
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Composant principal                                                */
 /* ------------------------------------------------------------------ */
 
@@ -209,6 +229,7 @@ function ModeFonction() {
   const [xmin, setXmin] = useState(-5);
   const [xmax, setXmax] = useState(5);
   const [erreur, setErreur] = useState<string | null>(null);
+  const [voirGeoGebra, setVoirGeoGebra] = useState(false);
 
   const points = useMemo(() => {
     setErreur(null);
@@ -230,6 +251,8 @@ function ModeFonction() {
 
   const ymin = points.length ? Math.max(-1000, Math.min(...points.map((p) => p.y))) : -5;
   const ymax = points.length ? Math.min(1000, Math.max(...points.map((p) => p.y))) : 5;
+
+  const geoGebraUrl = useMemo(() => buildGeoGebraUrl(expr), [expr]);
 
   return (
     <div>
@@ -266,14 +289,29 @@ function ModeFonction() {
       {erreur && <p className="mt-2 text-sm text-chalk-coral">{erreur}</p>}
 
       <div className="mt-4 overflow-x-auto">
-        <PlotSVG
-          curves={[{ points, couleur: "#2C4E45" }]}
-          xmin={xmin}
-          xmax={xmax}
-          ymin={ymin}
-          ymax={ymax}
-        />
+        <PlotSVG curves={[{ points, couleur: "#2C4E45" }]} xmin={xmin} xmax={xmax} ymin={ymin} ymax={ymax} />
       </div>
+
+      <div className="mt-3 flex flex-wrap gap-3">
+        <button
+          type="button"
+          onClick={() => setVoirGeoGebra((v) => !v)}
+          className="rounded-md bg-board px-4 py-2 text-sm font-medium text-chalk hover:bg-board-light"
+        >
+          {voirGeoGebra ? "Masquer GeoGebra" : "Voir dans GeoGebra ↗"}
+        </button>
+        <a
+          href={geoGebraUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-md border border-board/20 px-4 py-2 text-sm text-ink/70 hover:border-chalk-yellow hover:text-ink"
+        >
+          Ouvrir dans un nouvel onglet
+        </a>
+      </div>
+
+      {voirGeoGebra && <GeoGebraViewer url={geoGebraUrl} />}
+
       <p className="mt-2 text-xs text-ink/50">
         Fonctions disponibles : sin cos tan asin acos atan sqrt abs exp ln log — constantes : pi, e.
       </p>
@@ -300,11 +338,6 @@ function ModeSuite() {
         if (!Number.isFinite(suivant) || Math.abs(suivant) > 1e6) break;
       }
 
-      // Diagramme en escalier / toile d'araignée (cobweb) : (u0,0) -> (u0,u1) -> (u1,u1) -> (u1,u2) -> ...
-      const cobweb: { x: number; y: number }[] = [];
-      for (let i = 0; i < termes.length - 1; i++) {
-        cobweb.push({ x: termes[i], y: termes[i] === termes[0] && i === 0 ? termes[0] : termes[i] });
-      }
       const escalier: { x: number; y: number }[] = [{ x: termes[0], y: termes[0] }];
       for (let i = 0; i < termes.length - 1; i++) {
         escalier.push({ x: termes[i], y: termes[i + 1] });
@@ -323,7 +356,6 @@ function ModeSuite() {
     }
   }, [expr, u0, nMax]);
 
-  // Courbe de f et droite y = x, pour le diagramme en toile d'araignée
   const courbeF = useMemo(() => {
     try {
       const f = compileExpression(expr, ["u"]);
@@ -348,8 +380,8 @@ function ModeSuite() {
   return (
     <div>
       <p className="text-sm text-ink/60">
-        On étudie la suite définie par récurrence <code className="font-mono">u(n+1) = f(u(n))</code>. Écrivez f
-        en fonction de la variable <code className="font-mono">u</code>.
+        On étudie la suite définie par récurrence <code className="font-mono">u(n+1) = f(u(n))</code>. Écrivez f en
+        fonction de la variable <code className="font-mono">u</code>.
       </p>
       <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_auto_auto]">
         <label className="block">
@@ -411,9 +443,9 @@ function ModeSuite() {
         </div>
       </div>
       <p className="mt-3 text-xs text-ink/50">
-        La courbe verte trace f, la droite orange trace y = x, et la ligne bleue est la "toile d'araignée" :
-        elle relie u₀ sur l'axe des x à f(u₀), puis redescend sur y = x pour retrouver u₁, etc. Si la trajectoire
-        se rapproche d'un point d'intersection entre f et y = x, la suite converge vers ce point fixe.
+        La courbe verte trace f, la droite orange trace y = x, et la ligne bleue est la "toile d'araignée" : elle
+        relie u₀ sur l'axe des x à f(u₀), puis redescend sur y = x pour retrouver u₁, etc. Si la trajectoire se
+        rapproche d'un point d'intersection entre f et y = x, la suite converge vers ce point fixe.
       </p>
     </div>
   );
@@ -449,7 +481,6 @@ function PlotSVG({
   return (
     <svg viewBox={`0 0 ${LARGEUR} ${HAUTEUR}`} className="w-full min-w-[420px] max-w-2xl" role="img">
       <rect x={0} y={0} width={LARGEUR} height={HAUTEUR} fill="#FAF9F4" />
-      {/* axes */}
       {axeXy !== null && (
         <line x1={MARGE} y1={axeXy} x2={LARGEUR - MARGE} y2={axeXy} stroke="#1C1C1A" strokeOpacity={0.3} />
       )}
