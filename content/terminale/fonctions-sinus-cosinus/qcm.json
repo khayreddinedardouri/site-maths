@@ -1,0 +1,80 @@
+{
+  "chapitre": "Fonctions sinus et cosinus",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "La fonction cosinus est :",
+      "choix": ["Impaire", "Paire", "Ni paire ni impaire"],
+      "reponse": 1,
+      "explication": "cos(-x) = cos(x) pour tout x : la courbe est symétrique par rapport à l'axe des ordonnées."
+    },
+    {
+      "id": "q2",
+      "question": "La fonction sinus est :",
+      "choix": ["Impaire", "Paire", "Ni paire ni impaire"],
+      "reponse": 0,
+      "explication": "sin(-x) = -sin(x) pour tout x : la courbe est symétrique par rapport à l'origine du repère."
+    },
+    {
+      "id": "q3",
+      "question": "sin et cos sont périodiques de période :",
+      "choix": ["π", "2π", "π/2"],
+      "reponse": 1,
+      "explication": "sin(x + 2π) = sin(x) et cos(x + 2π) = cos(x) pour tout x : la période est 2π."
+    },
+    {
+      "id": "q4",
+      "question": "La dérivée de sin(x) est :",
+      "choix": ["cos(x)", "−cos(x)", "−sin(x)"],
+      "reponse": 0,
+      "explication": "sin'(x) = cos(x), sans changement de signe."
+    },
+    {
+      "id": "q5",
+      "question": "La dérivée de cos(x) est :",
+      "choix": ["sin(x)", "−sin(x)", "cos(x)"],
+      "reponse": 1,
+      "explication": "cos'(x) = -sin(x) : attention au signe moins, contrairement à la dérivée de sin."
+    },
+    {
+      "id": "q6",
+      "question": "Pour f(x) = cos(5x), f'(x) vaut :",
+      "choix": ["−sin(5x)", "5sin(5x)", "−5sin(5x)"],
+      "reponse": 2,
+      "explication": "Avec u(x)=5x, u'(x)=5, on applique (cos u)' = −u' sin(u) = −5sin(5x)."
+    },
+    {
+      "id": "q7",
+      "question": "L'équation cos(x) = cos(a) a pour solutions générales :",
+      "choix": [
+        "x = a + 2kπ uniquement",
+        "x = a + 2kπ ou x = −a + 2kπ",
+        "x = a + kπ uniquement"
+      ],
+      "reponse": 1,
+      "explication": "Il y a toujours deux familles de solutions pour une équation en cosinus : x = a + 2kπ ou x = -a + 2kπ."
+    },
+    {
+      "id": "q8",
+      "question": "L'équation sin(x) = sin(a) a pour solutions générales :",
+      "choix": [
+        "x = a + 2kπ ou x = π − a + 2kπ",
+        "x = a + 2kπ ou x = −a + 2kπ",
+        "x = a + kπ uniquement"
+      ],
+      "reponse": 0,
+      "explication": "Pour une équation en sinus, les deux familles de solutions sont x = a + 2kπ ou x = π - a + 2kπ."
+    },
+    {
+      "id": "q9",
+      "question": "Pour résoudre cos(3x) = 1/2, une astuce utile est de :",
+      "choix": [
+        "Diviser directement par 3 avant de résoudre",
+        "Poser X = 3x, résoudre en X, puis revenir à x",
+        "Ignorer le facteur 3"
+      ],
+      "reponse": 1,
+      "explication": "Le changement de variable X = 3x évite les erreurs sur les bornes et les périodes, on revient à x seulement à la fin."
+    }
+  ]
+}

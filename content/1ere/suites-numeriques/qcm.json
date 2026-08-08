@@ -1,0 +1,26 @@
+{
+  "chapitre": "Suites numériques",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Une suite arithmétique de raison 3 vérifie :",
+      "choix": ["u(n+1) = u(n) + 3", "u(n+1) = 3 × u(n)", "u(n+1) = u(n) - 3"],
+      "reponse": 0,
+      "explication": "Une suite arithmétique ajoute la raison à chaque terme."
+    },
+    {
+      "id": "q2",
+      "question": "Si u(0) = 2 et la suite est géométrique de raison 3, que vaut u(2) ?",
+      "choix": ["8", "18", "6"],
+      "reponse": 1,
+      "explication": "u(2) = u(0) × 3² = 2 × 9 = 18."
+    },
+    {
+      "id": "q3",
+      "question": "Une suite géométrique de raison négative peut :",
+      "choix": ["Alterner de signe", "Rester toujours positive", "Toujours diverger vers +∞"],
+      "reponse": 0,
+      "explication": "Si q < 0, le signe de u(n) alterne à chaque terme."
+    }
+  ]
+}

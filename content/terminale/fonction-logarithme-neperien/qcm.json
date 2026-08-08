@@ -1,0 +1,72 @@
+{
+  "chapitre": "Fonction logarithme népérien",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "ln(x) est défini pour :",
+      "choix": ["Tout réel x", "x > 0 uniquement", "x ≥ 0 uniquement"],
+      "reponse": 1,
+      "explication": "Le logarithme népérien n'est défini que pour les réels strictement positifs."
+    },
+    {
+      "id": "q2",
+      "question": "Que vaut ln(1) ?",
+      "choix": ["0", "1", "e"],
+      "reponse": 0,
+      "explication": "Puisque e⁰ = 1, on a ln(1) = 0."
+    },
+    {
+      "id": "q3",
+      "question": "Pour résoudre e^(2x) = 9, la première étape est :",
+      "choix": [
+        "Diviser les deux membres par 2",
+        "Prendre le ln des deux membres",
+        "Prendre le carré des deux membres"
+      ],
+      "reponse": 1,
+      "explication": "Pour « sortir » x d'un exposant, on applique ln aux deux membres : ln(e^(2x)) = ln(9), soit 2x = ln(9)."
+    },
+    {
+      "id": "q4",
+      "question": "ln(a × b) est égal à :",
+      "choix": ["ln(a) × ln(b)", "ln(a) + ln(b)", "ln(a + b)"],
+      "reponse": 1,
+      "explication": "C'est la relation fonctionnelle : le logarithme transforme un produit en somme."
+    },
+    {
+      "id": "q5",
+      "question": "ln(1/b) est égal à :",
+      "choix": ["1/ln(b)", "−ln(b)", "ln(b)"],
+      "reponse": 1,
+      "explication": "ln(1/b) = ln(1) - ln(b) = 0 - ln(b) = -ln(b)."
+    },
+    {
+      "id": "q6",
+      "question": "La fonction ln est :",
+      "choix": ["Strictement décroissante sur ]0;+∞[", "Strictement croissante sur ]0;+∞[", "Constante"],
+      "reponse": 1,
+      "explication": "ln'(x) = 1/x > 0 pour tout x > 0, donc ln est strictement croissante."
+    },
+    {
+      "id": "q7",
+      "question": "Le signe de ln(x) pour 0 < x < 1 est :",
+      "choix": ["Positif", "Négatif", "Nul"],
+      "reponse": 1,
+      "explication": "Comme ln(1) = 0 et que ln est croissante, ln(x) < 0 pour tout x compris entre 0 et 1."
+    },
+    {
+      "id": "q8",
+      "question": "Pour f(x) = ln(3x + 2), la dérivée f'(x) est :",
+      "choix": ["1/(3x+2)", "3/(3x+2)", "3x/(3x+2)"],
+      "reponse": 1,
+      "explication": "Avec u(x) = 3x + 2 et u'(x) = 3, on applique (ln u)' = u'/u = 3/(3x+2)."
+    },
+    {
+      "id": "q9",
+      "question": "En +∞, entre ln(x) et x, qui grandit le plus vite ?",
+      "choix": ["ln(x)", "x", "Elles grandissent à la même vitesse"],
+      "reponse": 1,
+      "explication": "Par croissances comparées, lim ln(x)/x = 0 en +∞ : x l'emporte toujours largement sur ln(x)."
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+---
+titre: "Limites de fonctions"
+ordre: 6
+partie: "Analyse"
+---
+
+## 🎯 L'idée du chapitre
+
+C'est exactement la même logique que pour les suites (chapitre précédent), mais appliquée
+aux fonctions : que devient `f(x)` quand `x` s'approche d'une valeur, ou part vers l'infini ?
+
+## 1. Limite en `+∞` ou `−∞`
+
+- Si `f(x)` se rapproche d'un réel `l` quand `x → +∞`, on note `lim (x→+∞) f(x) = l` : la
+  fonction **converge**.
+- Si `f(x)` dépasse toute valeur, aussi grande soit-elle, quand `x → +∞`, on note
+  `lim (x→+∞) f(x) = +∞`.
+
+**Limites usuelles :**
+
+```
+lim (x→+∞) x = +∞      lim (x→+∞) √x = +∞      lim (x→+∞) xⁿ = +∞      lim (x→+∞) eˣ = +∞
+lim (x→±∞) 1/x = 0      lim (x→±∞) 1/xⁿ = 0      lim (x→−∞) eˣ = 0
+```
+
+**Asymptote horizontale** : si `lim (x→+∞) f(x) = l`, la droite d'équation `y = l` est une
+asymptote horizontale à la courbe de `f` (la courbe s'en rapproche sans jamais forcément la
+toucher).
+
+## 2. Limite en un réel `a`
+
+On peut aussi étudier ce qui se passe quand `x` s'approche d'un nombre précis `a` (pas
+seulement de l'infini). Parfois la fonction n'est pas définie en `a` (par exemple `1/x` en
+`0`), mais on peut quand même regarder son comportement juste avant et juste après.
+
+**Limites à gauche et à droite** : on note `lim (x→a⁻)` la limite quand `x` s'approche de `a`
+par valeurs **inférieures**, et `lim (x→a⁺)` quand `x` s'approche par valeurs **supérieures**.
+Elles peuvent être différentes !
+
+### Exemple
+
+Pour `f(x) = 1/x` :
+
+```
+lim (x→0⁻) 1/x = −∞          lim (x→0⁺) 1/x = +∞
+```
+
+La droite `x = 0` est alors une **asymptote verticale** à la courbe.
+
+## 3. Opérations sur les limites (comme pour les suites)
+
+Les mêmes règles s'appliquent : somme, produit, quotient — avec les mêmes **formes
+indéterminées** à surveiller : `∞ − ∞`, `0 × ∞`, `∞/∞`, `0/0`.
+
+⚠️ **Piège classique du quotient** : si `lim g(x) = 0`, il faut toujours préciser le **signe**
+de `g(x)` pour savoir si l'on obtient `+∞` ou `−∞` (on note `0⁺` ou `0⁻`).
+
+### Exemple
+
+Soit `h(x) = −3/(x−2)` sur `ℝ \ {2}`. Juste après `2` (`x > 2`), on a `x − 2 → 0⁺`, donc :
+
+```
+lim (x→2⁺) h(x) = −3/0⁺ = −∞
+```
+
+Et juste avant `2` (`x < 2`), `x − 2 → 0⁻`, donc `lim (x→2⁻) h(x) = −3/0⁻ = +∞`.
+
+## 4. Limite d'une fonction composée
+
+Si `lim (x→a) u(x) = b` et `lim (X→b) v(X) = c`, alors `lim (x→a) v(u(x)) = c` : on "enchaîne"
+les deux limites, comme un relais.
+
+### Exemple
+
+`lim (x→+∞) (−x + 1) = −∞` et `lim (X→−∞) eˣ = 0`, donc par composition :
+
+```
+lim (x→+∞) e^(−x+1) = 0
+```
+
+## 5. Limites et comparaison
+
+Comme pour les suites : **théorème de comparaison** (si `f(x) ≤ g(x)` et `f` tend vers `+∞`,
+alors `g` aussi) et **théorème des gendarmes** (si `f(x) ≤ g(x) ≤ h(x)` et `f`, `h` tendent
+vers le même `l`, alors `g` aussi).
+
+### Exemple
+
+Pour `f(x) = 4 + sin(x)/x` en `+∞` : comme `−1 ≤ sin(x) ≤ 1`, on a pour `x > 0` :
+
+```
+4 − 1/x ≤ f(x) ≤ 4 + 1/x
+```
+
+Les deux bornes tendent vers `4`, donc par le théorème des gendarmes : `lim (x→+∞) f(x) = 4`.
+
+## 6. Croissances comparées (exponentielle contre puissances)
+
+L'exponentielle "l'emporte toujours" face à n'importe quelle puissance de `x`, aussi grande
+soit-elle :
+
+```
+lim (x→+∞) eˣ/xⁿ = +∞        lim (x→+∞) xⁿ e⁻ˣ = 0
+```
+
+> 💡 Retiens l'idée : « l'exponentielle grandit plus vite que n'importe quel polynôme ». Cela
+> permet de lever des formes indéterminées `∞ × 0` ou `∞/∞` sans calcul compliqué.
+
+## ✅ À retenir
+
+- Les techniques sont les mêmes que pour les suites : factoriser, comparer, encadrer.
+- Une limite finie en `+∞`/`−∞` donne une **asymptote horizontale** ; une limite infinie en un
+  réel `a` donne une **asymptote verticale**.
+- Face à `g(x) → 0`, toujours préciser `0⁺` ou `0⁺` pour un quotient.
+- L'exponentielle bat toujours les puissances de `x` en `+∞`.

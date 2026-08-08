@@ -1,0 +1,70 @@
+{
+  "chapitre": "Continuité des fonctions d'une variable réelle",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "f est continue en a signifie :",
+      "choix": [
+        "f est dérivable en a",
+        "lim (x→a) f(x) = f(a)",
+        "f(a) existe, peu importe la limite"
+      ],
+      "reponse": 1,
+      "explication": "La continuité exige que la limite en a existe ET qu'elle soit égale à la valeur réelle f(a)."
+    },
+    {
+      "id": "q2",
+      "question": "Une fonction dérivable sur un intervalle I est :",
+      "choix": ["Toujours continue sur I", "Pas forcément continue sur I", "Toujours strictement monotone"],
+      "reponse": 0,
+      "explication": "Dérivable implique toujours continue (l'inverse est faux)."
+    },
+    {
+      "id": "q3",
+      "question": "Pour vérifier la continuité en un point de raccord de deux morceaux de fonction, on compare :",
+      "choix": [
+        "Les deux formules algébriques",
+        "La limite à gauche et la limite à droite en ce point",
+        "Les dérivées à gauche et à droite"
+      ],
+      "reponse": 1,
+      "explication": "Si les limites à gauche et à droite coïncident (et valent f(a)), la fonction est continue au point de raccord."
+    },
+    {
+      "id": "q4",
+      "question": "Le théorème du point fixe s'applique à une suite u(n+1) = f(u(n)) quand :",
+      "choix": [
+        "La suite est croissante",
+        "On sait déjà que la suite converge et f est continue en sa limite",
+        "f est dérivable partout"
+      ],
+      "reponse": 1,
+      "explication": "Il faut d'abord établir la convergence (souvent via le théorème de la limite monotone), puis utiliser la continuité de f pour dire que la limite l vérifie f(l) = l."
+    },
+    {
+      "id": "q5",
+      "question": "D'après le théorème des valeurs intermédiaires, si f est continue sur [a;b] et k est compris entre f(a) et f(b), alors f(x) = k admet :",
+      "choix": ["Aucune solution garantie", "Au moins une solution dans [a;b]", "Exactement une solution dans [a;b]"],
+      "reponse": 1,
+      "explication": "Le TVI de base garantit l'existence d'au moins une solution, pas son unicité."
+    },
+    {
+      "id": "q6",
+      "question": "Pour garantir l'UNICITÉ de la solution de f(x) = k sur [a;b], il faut en plus que f soit :",
+      "choix": ["Positive sur [a;b]", "Strictement monotone sur [a;b]", "Paire sur [a;b]"],
+      "reponse": 1,
+      "explication": "C'est le corollaire du TVI : continuité + stricte monotonie garantissent l'existence ET l'unicité de la solution."
+    },
+    {
+      "id": "q7",
+      "question": "Dans une rédaction type utilisant le corollaire du TVI, il faut citer dans l'ordre :",
+      "choix": [
+        "Continuité, stricte monotonie, k compris entre f(a) et f(b)",
+        "Seulement le calcul de f(a) et f(b)",
+        "La dérivée seconde de f"
+      ],
+      "reponse": 0,
+      "explication": "Ces trois éléments sont les conditions exactes du théorème : sans les trois, la conclusion n'est pas justifiée."
+    }
+  ]
+}

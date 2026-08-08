@@ -1,0 +1,120 @@
+---
+titre: "Compléments sur la dérivation"
+ordre: 5
+partie: "Analyse"
+---
+
+## 🎯 L'idée du chapitre
+
+Tu sais déjà dériver des fonctions simples. Ici, on ajoute deux outils puissants : dériver
+des fonctions **composées** (une fonction "dans" une autre), et étudier la **convexité**
+(la courbe se courbe-t-elle "vers le haut" ou "vers le bas" ?).
+
+## 1. Rappels : dérivées usuelles
+
+| Fonction `f`   | Dérivée `f'`        |
+|-----------------|----------------------|
+| `k` (constante) | `0`                  |
+| `xⁿ`            | `n xⁿ⁻¹`             |
+| `1/x`           | `−1/x²`              |
+| `√x`            | `1/(2√x)`            |
+| `eˣ`            | `eˣ`                 |
+| `cos(x)`        | `−sin(x)`            |
+| `sin(x)`        | `cos(x)`             |
+
+**Opérations :** `(u+v)' = u'+v'`, `(uv)' = u'v + uv'`, `(u/v)' = (u'v − uv')/v²`.
+
+**Tangente** : au point d'abscisse `a`, l'équation de la tangente à la courbe de `f` est
+`y = f'(a)(x − a) + f(a)`.
+
+## 2. Fonction composée : `v ∘ u`
+
+Une fonction composée, c'est une fonction "emboîtée" dans une autre. On note `v ∘ u` la
+fonction "`v` rond `u`", définie par `(v ∘ u)(x) = v(u(x))` : on applique d'abord `u`, puis `v`
+au résultat.
+
+### Exemple
+
+Avec `u(x) = x² + 1` et `v(x) = eˣ`, on obtient `v(u(x)) = e^(x²+1)`.
+
+> 💡 Astuce pour repérer `u` : c'est **ce qu'il y a "à l'intérieur"**. Dans `√(3x − 1)`, on a
+> `u(x) = 3x − 1` (l'intérieur de la racine) et `v(x) = √x`.
+
+## 3. Dérivée d'une fonction composée
+
+**Règle générale** : `(v ∘ u)'(x) = u'(x) × v'(u(x))`.
+
+Dans la pratique, on utilise surtout ces formules toutes faites (avec `u` une fonction
+dérivable) :
+
+| Fonction        | Dérivée               |
+|------------------|------------------------|
+| `uⁿ`            | `n × u' × uⁿ⁻¹`        |
+| `eᵘ`            | `u' × eᵘ`              |
+| `1/u`           | `−u'/u²`               |
+| `√u`            | `u'/(2√u)`             |
+
+### Exemple
+
+Soit `f(x) = e^(3x²−1)`. On identifie `u(x) = 3x² − 1`, donc `u'(x) = 6x`. On applique la
+formule `(eᵘ)' = u' × eᵘ` :
+
+```
+f'(x) = 6x × e^(3x²−1)
+```
+
+## 4. Convexité d'une fonction
+
+Une fonction est **convexe** sur un intervalle si sa courbe reste **entièrement au-dessus**
+de chacune de ses tangentes (elle "fait un sourire" 🙂). Elle est **concave** si sa courbe
+reste **en dessous** de ses tangentes (elle "fait la moue" 🙁).
+
+**Lien avec la dérivée** : `f` est convexe sur `I` si et seulement si `f'` est **croissante**
+sur `I` ; `f` est concave si et seulement si `f'` est **décroissante** sur `I`.
+
+## 5. Dérivée seconde et convexité
+
+Quand `f'` est elle-même dérivable, on note sa dérivée `f''` (**dérivée seconde**).
+
+**Théorème clé** :
+
+- `f` est convexe sur `I` si et seulement si `f''(x) ≥ 0` sur `I`.
+- `f` est concave sur `I` si et seulement si `f''(x) ≤ 0` sur `I`.
+
+### Exemple
+
+Soit `f(x) = x eˣ`. On calcule :
+
+```
+f'(x) = eˣ + x eˣ = (1 + x) eˣ
+f''(x) = eˣ + (1 + x) eˣ = (2 + x) eˣ
+```
+
+Comme `eˣ > 0` toujours, le signe de `f''(x)` est celui de `(2 + x)` :
+
+| `x`      | `−∞`         | `−2`  | `+∞`  |
+|----------|--------------|-------|-------|
+| `f''(x)` | `−`          | `0`   | `+`   |
+
+Donc `f` est **concave** sur `]−∞ ; −2]` et **convexe** sur `[−2 ; +∞[`.
+
+## 6. Point d'inflexion
+
+Un **point d'inflexion** est un point où la courbe **change de convexité** (elle passe de
+concave à convexe, ou l'inverse). En ce point, la tangente **traverse** la courbe au lieu de
+rester d'un seul côté.
+
+**Comment le trouver** : un point d'inflexion existe en `x = a` si `f''(a) = 0` **et** si
+`f''` change de signe en `a` (ne pas oublier cette deuxième condition : si `f''` s'annule sans
+changer de signe, ce n'est pas un point d'inflexion).
+
+Dans l'exemple précédent, `f''` change de signe en `x = −2` : la courbe de `f` admet donc un
+point d'inflexion d'abscisse `−2`.
+
+## ✅ À retenir
+
+- Pour dériver une composée, on repère toujours `u` (l'intérieur) avant d'appliquer la formule.
+- Convexe = la courbe est au-dessus de ses tangentes = `f'` croissante = `f'' ≥ 0`.
+- Un point d'inflexion demande **deux** conditions : `f''(a) = 0` **et** changement de signe.
+
+Fais le quiz pour vérifier que la logique "u à l'intérieur" et le lien convexité/f'' sont bien acquis.

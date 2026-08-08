@@ -1,0 +1,114 @@
+---
+titre: "Continuité des fonctions d'une variable réelle"
+ordre: 7
+partie: "Analyse"
+---
+
+## 🎯 L'idée du chapitre
+
+Une fonction **continue**, c'est une fonction dont on peut tracer la courbe **sans lever le
+crayon**. Ce chapitre sert surtout à justifier qu'une équation `f(x) = k` a bien une (ou des)
+solution(s), grâce au théorème des valeurs intermédiaires — un outil que tu utiliseras très
+souvent en exercice.
+
+## 1. Définition de la continuité
+
+Une fonction `f`, définie sur un intervalle contenant `a`, est **continue en `a`** si :
+
+```
+lim (x→a) f(x) = f(a)
+```
+
+Autrement dit : la limite existe **et** elle est égale à la valeur réelle de la fonction en
+ce point (pas de "trou" ni de "saut" au niveau de `a`).
+
+`f` est **continue sur un intervalle `I`** si elle est continue en chaque point de `I`.
+
+> 💡 Si les limites à gauche et à droite en `a` sont **égales entre elles**, alors `f` est
+> continue en `a` (même si `f` est définie par plusieurs formules différentes de part et
+> d'autre de `a`).
+
+## 2. Fonctions usuelles continues
+
+Ce sont toutes des fonctions que tu connais déjà, et elles sont continues sur leur ensemble
+de définition :
+
+- les fonctions polynômes (affines, second degré, cube...) sont continues sur `ℝ` ;
+- la fonction inverse `1/x` est continue sur `ℝ*` ;
+- la racine carrée `√x` est continue sur `[0 ; +∞[` ;
+- l'exponentielle `eˣ` est continue sur `ℝ` ;
+- le logarithme `ln(x)` est continue sur `]0 ; +∞[` ;
+- `sin` et `cos` sont continues sur `ℝ`.
+
+**Règle pratique** : la somme, le produit, le quotient (là où le dénominateur ne s'annule
+pas) et la composée de fonctions continues sont continus. Et surtout :
+
+> Toute fonction **dérivable** sur un intervalle est **continue** sur cet intervalle.
+> (L'inverse est faux : une fonction peut être continue sans être dérivable, par exemple
+> `|x|` en `0`, qui fait un "angle".)
+
+### Exemple : raccorder deux morceaux
+
+Soit `f` définie par `f(x) = 2 − x` si `x ≤ 1`, et `f(x) = x² − 1` si `x > 1`. Chaque morceau
+est continu (une fonction affine, puis un polynôme). Il reste à vérifier le raccord en `x = 1` :
+
+```
+lim (x→1⁻) f(x) = 2 − 1 = 1        lim (x→1⁺) f(x) = 1² − 1 = 0
+```
+
+Les deux limites sont **différentes** (`1 ≠ 0`) : `f` n'est **pas** continue en `1`, la courbe
+fait un saut à cet endroit.
+
+## 3. Continuité et suites : le théorème du point fixe
+
+Si une suite `(u(n))` est définie par `u(n+1) = f(u(n))` et que l'on sait qu'elle **converge**
+vers un réel `l`, alors, si `f` est continue en `l`, ce réel `l` vérifie forcément
+`f(l) = l` (on dit que `l` est un **point fixe** de `f`).
+
+**Méthode** : cela permet de trouver la valeur exacte d'une limite déjà prouvée convergente
+(par le théorème de la limite monotone, chapitre précédent) : on résout l'équation `f(x) = x`,
+puis on choisit la bonne solution parmi les racines trouvées, en utilisant les bornes déjà
+connues de la suite (par exemple si l'on sait `u(n) ≥ 2` pour tout `n`, on élimine les
+solutions `< 2`).
+
+> 💡 Le [traceur interactif](/outils/traceur) du site permet de visualiser cette convergence
+> directement : il affiche la courbe de `f`, la droite `y = x`, et la trajectoire de la suite
+> en "toile d'araignée".
+
+## 4. Théorème des valeurs intermédiaires (TVI)
+
+C'est le théorème le plus important du chapitre. Si `f` est **continue** sur `[a ; b]`, alors
+**pour tout réel `k` compris entre `f(a)` et `f(b)`**, l'équation `f(x) = k` admet **au moins
+une solution** dans `[a ; b]`.
+
+Intuitivement : si la courbe part d'en bas et arrive en haut sans lever le crayon, elle passe
+forcément par toutes les hauteurs intermédiaires.
+
+## 5. Corollaire (version "avec unicité")
+
+Si en plus `f` est **strictement monotone** (strictement croissante OU strictement
+décroissante) sur `[a ; b]`, alors l'équation `f(x) = k` admet une **unique** solution `α`
+dans `[a ; b]`.
+
+C'est ce corollaire qu'on utilise le plus souvent en pratique, car il garantit qu'il n'y a
+**pas d'autre solution** ailleurs sur l'intervalle.
+
+### Méthode rédigée type
+
+On veut montrer que `f(x) = x³ − 3x + 1` s'annule une seule fois sur `[1 ; 2]`.
+
+1. `f` est un polynôme, donc **continue** sur `[1 ; 2]`.
+2. On calcule `f'(x) = 3x² − 3`, qui est positive sur `[1 ; 2]` (car `x² ≥ 1`) : `f` est donc
+   **strictement croissante** sur cet intervalle.
+3. `f(1) = −1` et `f(2) = 3`. Comme `0` est compris entre `−1` et `3`, d'après le corollaire du
+   TVI, l'équation `f(x) = 0` admet une **unique** solution `α` dans `[1 ; 2]`.
+4. On affine ensuite l'encadrement de `α` à la calculatrice, en testant des valeurs de plus
+   en plus précises (balayage par dichotomie).
+
+## ✅ À retenir
+
+- Continue = pas de saut = les limites à gauche et à droite coïncident avec la valeur en `a`.
+- Dérivable ⟹ continue, mais pas l'inverse.
+- Le TVI (avec monotonie stricte) est **l'outil standard** pour justifier qu'une équation a
+  une unique solution sur un intervalle : toujours citer les 3 conditions (continuité,
+  stricte monotonie, encadrement de `k`).
