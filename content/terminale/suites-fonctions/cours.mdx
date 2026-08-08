@@ -1,0 +1,141 @@
+---
+titre: "Partie 4 — Suites définies par une fonction u(n+1) = f(u(n))"
+ordre: 4.4
+partie: "Analyse"
+---
+
+## 🎯 L'idée du chapitre
+
+On termine ce chapitre avec le type d'exercice le plus complet sur les suites : une suite
+`(u(n))` définie par un premier terme `u(0)` et une relation `u(n+1) = f(u(n))`, où `f` est
+une fonction. On combine ici tout ce qu'on a vu : récurrence (partie 3), limite monotone
+(partie 2), et un nouvel outil, la **continuité**.
+
+## 1. Méthode générale
+
+Pour étudier une suite `u(n+1) = f(u(n))`, on suit en général ce plan :
+
+1. **Encadrer/borner la suite** (souvent par récurrence) : montrer que `u(n)` reste toujours
+   dans un intervalle donné.
+2. **Montrer la monotonie** (croissante ou décroissante), souvent en étudiant le signe de
+   `u(n+1) − u(n)`.
+3. **Conclure à la convergence** grâce au théorème de la limite monotone (partie 2) : une
+   suite croissante et majorée (ou décroissante et minorée) converge.
+4. **Trouver la valeur de la limite** grâce au théorème du point fixe (ci-dessous).
+
+## 2. Le théorème du point fixe
+
+Si une suite `(u(n))` est définie par `u(n+1) = f(u(n))`, que l'on sait qu'elle **converge**
+vers un réel `l`, et que `f` est **continue** en `l`, alors ce réel `l` vérifie forcément :
+
+```
+f(l) = l
+```
+
+On dit que `l` est un **point fixe** de `f`.
+
+> 💡 **Attention à l'ordre logique** : ce théorème ne prouve **pas** que la suite converge —
+> il faut d'abord l'avoir démontré (étape 3 ci-dessus, avec le théorème de la limite
+> monotone). Une fois la convergence acquise, ce théorème permet seulement de **trouver la
+> valeur** de la limite.
+
+<MiniQuiz
+  id="point-fixe-theoreme"
+  titre="Mini-quiz : le théorème du point fixe"
+  questions={[
+    {
+      question: "Le théorème du point fixe s'applique à une suite u(n+1) = f(u(n)) quand :",
+      choix: [
+        "La suite est croissante",
+        "On sait déjà que la suite converge et f est continue en sa limite",
+        "f est dérivable partout",
+      ],
+      reponse: 1,
+      explication: "Il faut d'abord établir la convergence (souvent via le théorème de la limite monotone), puis utiliser la continuité de f.",
+    },
+    {
+      question: "Une fois l trouvé comme solution de f(l) = l, cette équation peut avoir :",
+      choix: ["Toujours une seule solution", "Plusieurs solutions, il faut choisir la bonne", "Jamais de solution"],
+      reponse: 1,
+      explication: "L'équation f(x) = x peut avoir plusieurs solutions ; on élimine les mauvaises grâce aux bornes déjà connues de la suite.",
+    },
+    {
+      question: "Le théorème du point fixe permet de :",
+      choix: [
+        "Prouver que la suite converge",
+        "Trouver la valeur de la limite, une fois la convergence déjà prouvée",
+        "Prouver que f est continue",
+      ],
+      reponse: 1,
+      explication: "Ce théorème ne prouve pas la convergence : il donne seulement la valeur de la limite, une fois celle-ci déjà établie.",
+    },
+  ]}
+/>
+
+## 3. Exemple complet rédigé
+
+Soit `(u(n))` définie par `u(0) = 1` et `u(n+1) = (u(n) + 2) / 2` (donc `f(x) = (x+2)/2`).
+
+**Étape 1 — Encadrement (par récurrence)** : montrons que `0 ≤ u(n) ≤ 2` pour tout `n`.
+
+- Initialisation : `u(0) = 1`, qui vérifie bien `0 ≤ 1 ≤ 2`.
+- Hérédité : si `0 ≤ u(k) ≤ 2`, alors `2 ≤ u(k)+2 ≤ 4`, donc `1 ≤ u(k+1) ≤ 2`, qui est bien
+  inclus dans `[0 ; 2]`. Donc `P(k+1)` est vraie.
+- Conclusion : pour tout `n`, `0 ≤ u(n) ≤ 2`.
+
+**Étape 2 — Monotonie** : `u(n+1) − u(n) = (u(n)+2)/2 − u(n) = (2 − u(n))/2`. Comme
+`u(n) ≤ 2` (étape 1), on a `2 − u(n) ≥ 0`, donc `u(n+1) − u(n) ≥ 0` : la suite est
+**croissante**.
+
+**Étape 3 — Convergence** : `(u(n))` est croissante et majorée par 2, donc elle **converge**
+(théorème de la limite monotone).
+
+**Étape 4 — Valeur de la limite** : `f` est continue sur `ℝ` (fonction affine). D'après le
+théorème du point fixe, la limite `l` vérifie `f(l) = l` :
+
+```
+(l + 2)/2 = l  ⟺  l + 2 = 2l  ⟺  l = 2
+```
+
+Donc `lim (n→+∞) u(n) = 2`.
+
+<MiniQuiz
+  id="point-fixe-exemple"
+  titre="Mini-quiz : l'exemple complet"
+  questions={[
+    {
+      question: "Dans cet exemple, quelle est la première étape de la méthode ?",
+      choix: [
+        "Chercher directement le point fixe",
+        "Montrer par récurrence que la suite reste dans un intervalle donné",
+        "Calculer la dérivée de f",
+      ],
+      reponse: 1,
+      explication: "On commence toujours par borner la suite (ici, montrer qu'elle reste dans [0;2]) avant de parler de monotonie ou de limite.",
+    },
+    {
+      question: "Pour montrer que la suite est croissante, on étudie le signe de :",
+      choix: ["u(n+1) − u(n)", "u(n+1) × u(n)", "u(n)²"],
+      reponse: 0,
+      explication: "Le signe de u(n+1) − u(n) indique directement si la suite est croissante (positif) ou décroissante (négatif).",
+    },
+    {
+      question: "La valeur de la limite trouvée dans cet exemple est :",
+      choix: ["1", "2", "0"],
+      reponse: 1,
+      explication: "On résout (l+2)/2 = l, ce qui donne l = 2.",
+    },
+  ]}
+/>
+
+## ✅ À retenir
+
+- La méthode complète combine dans l'ordre : encadrement (récurrence), monotonie,
+  convergence (limite monotone), puis valeur de la limite (point fixe + continuité).
+- Ne jamais utiliser le théorème du point fixe pour prouver la convergence : il donne
+  seulement la valeur, une fois la convergence déjà acquise autrement.
+- Ce chapitre en 4 parties boucle la boucle : arithmétique/géométrique → limites →
+  récurrence → suites définies par une fonction, l'exercice type du bac.
+
+🎉 Félicitations, tu as terminé les quatre parties du chapitre Suites ! Vérifie ton score de
+progression tout en haut de la page.

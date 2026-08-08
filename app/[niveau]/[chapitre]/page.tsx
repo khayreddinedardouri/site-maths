@@ -1,16 +1,14 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
 import { getChapitres, getCours, getDocuments, getQcm, type Niveau } from "@/lib/content";
 import QcmPlayer from "@/components/QcmPlayer";
 import VideoEmbed from "@/components/VideoEmbed";
+import MiniQuiz from "@/components/MiniQuiz";
+import { ProgressProvider } from "@/components/ProgressContext";
+import ProgressBar from "@/components/ProgressBar";
 
 const NIVEAUX: Niveau[] = ["1ere", "terminale"];
-
-// Composants disponibles directement dans les fichiers cours.mdx (ex: <VideoEmbed ... />)
-const mdxComponents = { VideoEmbed };
 
 export async function generateStaticParams() {
   const params = [];
@@ -55,35 +53,14 @@ export default async function ChapitrePage({
 
         <h1 className="mt-3 font-display text-3xl font-semibold">{cours.titre}</h1>
 
-        <article className="prose prose-neutral mt-8 max-w-none prose-headings:font-display prose-headings:font-semibold">
-          <MDXRemote
-            source={cours.content}
-            components={mdxComponents}
-            options={{
-              mdxOptions: {
-                remarkPlugins: [remarkMath],
-                rehypePlugins: [rehypeKatex],
-              },
-            }}
-          />
-        </article>
+        <ProgressProvider>
+          <ProgressBar />
+          <article className="prose prose-neutral mt-8 max-w-none prose-headings:font-display prose-headings:font-semibold">
+            <MDXRemote source={cours.content} components={{ VideoEmbed, MiniQuiz }} />
+          </article>
+        </ProgressProvider>
 
-        <div className="mt-10 flex flex-col gap-3 rounded-lg border border-chalk-blue/30 bg-chalk-blue/5 p-6 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 className="font-display text-lg">Envie de visualiser une courbe ou une suite ?</h2>
-            <p className="mt-1 text-sm text-ink/60">
-              Utilisez le traceur interactif pour tracer des fonctions ou simuler des suites récurrentes.
-            </p>
-          </div>
-          <Link
-            href="/outils/traceur"
-            className="whitespace-nowrap rounded-md bg-board px-5 py-2 text-sm font-medium text-chalk hover:bg-board-light"
-          >
-            Ouvrir le traceur →
-          </Link>
-        </div>
-
-        <div className="mt-6 rounded-lg border border-board/15 p-6">
+        <div className="mt-10 rounded-lg border border-board/15 p-6">
           <h2 className="font-display text-lg">Exercices</h2>
           {documents.length > 0 ? (
             <ul className="mt-3 space-y-2">

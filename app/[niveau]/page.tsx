@@ -7,6 +7,15 @@ const LABELS: Record<Niveau, string> = {
   terminale: "Terminale",
 };
 
+// Slugs des 4 parties du chapitre Suites : elles sont regroupées sous une seule
+// entrée "Suites" dans la liste, et accessibles via /terminale/suites (page hub).
+const SLUGS_SUITES = [
+  "suites-arithmetiques-geometriques",
+  "suites-limites-convergence",
+  "suites-recurrence",
+  "suites-fonctions",
+];
+
 export async function generateStaticParams() {
   return [{ niveau: "1ere" }, { niveau: "terminale" }];
 }
@@ -21,11 +30,33 @@ function groupByPartie(chapitres: ChapitreMeta[]) {
   return groupes;
 }
 
+/** Remplace les 4 sous-chapitres "suites-..." par une seule entrée "Suites" (hub). */
+function regrouperSuites(chapitres: ChapitreMeta[], niveau: Niveau): ChapitreMeta[] {
+  if (niveau !== "terminale") return chapitres;
+
+  const partiesSuites = chapitres.filter((c) => SLUGS_SUITES.includes(c.slug));
+  if (partiesSuites.length === 0) return chapitres;
+
+  const reste = chapitres.filter((c) => !SLUGS_SUITES.includes(c.slug));
+  const ordreMin = Math.min(...partiesSuites.map((c) => c.ordre));
+  const partieLabel = partiesSuites[0].partie;
+
+  const entreeSuites: ChapitreMeta = {
+    slug: "suites",
+    titre: "Suites",
+    ordre: ordreMin,
+    ...(partieLabel ? { partie: partieLabel } : {}),
+  };
+
+  return [...reste, entreeSuites].sort((a, b) => a.ordre - b.ordre);
+}
+
 export default async function NiveauPage({ params }: { params: { niveau: string } }) {
   const niveau = params.niveau as Niveau;
   if (!LABELS[niveau]) notFound();
 
-  const chapitres = await getChapitres(niveau);
+  const chapitresBruts = await getChapitres(niveau);
+  const chapitres = regrouperSuites(chapitresBruts, niveau);
   const groupes = groupByPartie(chapitres);
   const aDesParties = [...groupes.keys()].some((k) => k !== "");
 
@@ -68,10 +99,10 @@ function ChapitreListe({ niveau, chapitres }: { niveau: Niveau; chapitres: Chapi
         <li key={c.slug}>
           <Link
             href={`/${niveau}/${c.slug}`}
-            className="flex items-center justify-between py-5 transition-colors hover:text-board-light"
+            className="flex items-center justify-between py-5 transition-colors hover:text-pink-500"
           >
             <span className="font-display text-lg">
-              <span className="mr-3 font-mono text-sm text-ink/30">{c.ordre}</span>
+              <span className="mr-3 font-mono text-sm text-ink/30">{Math.floor(c.ordre)}</span>
               {c.titre}
             </span>
             <span className="font-mono text-sm text-ink/40">→</span>

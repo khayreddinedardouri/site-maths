@@ -1,0 +1,152 @@
+---
+titre: "Partie 3 — Raisonnement par récurrence"
+ordre: 4.3
+partie: "Analyse"
+---
+
+## 🎯 L'idée du chapitre
+
+Le raisonnement par récurrence est une technique de **démonstration**, un peu comme une
+chaîne de dominos : si le premier domino tombe, et que chaque domino qui tombe fait tomber
+le suivant, alors **tous** les dominos tombent.
+
+## 1. Le principe
+
+Pour démontrer qu'une proposition `P(n)` est vraie pour tout entier `n ≥ n₀`, on rédige
+toujours dans le même ordre :
+
+1. **Initialisation** : on vérifie que `P(n₀)` est vraie.
+2. **Hérédité** : on suppose `P(k)` vraie pour un entier `k` fixé (hypothèse de récurrence),
+   et on démontre que `P(k+1)` est alors vraie aussi.
+3. **Conclusion** : d'après le principe de récurrence, `P(n)` est vraie pour tout `n ≥ n₀`.
+
+> 💡 L'hérédité ne dit jamais "P(k) est vraie" tout court : elle dit "**si** P(k) est vraie,
+> **alors** P(k+1) l'est aussi". On ne suppose jamais que la propriété est vraie pour de
+> vrai, on suppose juste "pour voir".
+
+<MiniQuiz
+  id="recurrence-principe"
+  titre="Mini-quiz : le principe de récurrence"
+  questions={[
+    {
+      question: "Dans une démonstration par récurrence, l'étape d'hérédité consiste à :",
+      choix: [
+        "Prouver que P(0) est vraie",
+        "Supposer P(k) vraie et en déduire que P(k+1) est vraie",
+        "Prouver que P(k) est vraie pour un k particulier",
+      ],
+      reponse: 1,
+      explication: "L'hérédité est une implication : SI P(k) est vraie, ALORS P(k+1) l'est aussi.",
+    },
+    {
+      question: "L'étape d'initialisation sert à :",
+      choix: [
+        "Vérifier que le premier domino tombe bien",
+        "Prouver l'hérédité",
+        "Conclure la démonstration",
+      ],
+      reponse: 0,
+      explication: "Sans initialisation, même si l'hérédité est vraie, on n'a aucun point de départ garanti.",
+    },
+    {
+      question: "Une démonstration par récurrence sans l'étape d'hérédité :",
+      choix: ["Est valide si l'initialisation est correcte", "Est incomplète, donc invalide", "N'existe pas"],
+      reponse: 1,
+      explication: "Les deux étapes (initialisation ET hérédité) sont indispensables : l'une sans l'autre ne prouve rien.",
+    },
+  ]}
+/>
+
+## 2. Exemple rédigé
+
+On veut démontrer que pour tout entier naturel `n` : `1 + 3 + 5 + ... + (2n+1) = (n+1)²`.
+
+- **Initialisation** (`n = 0`) : à gauche il n'y a que le terme `1`, à droite `(0+1)² = 1`.
+  Les deux valeurs sont égales, donc l'initialisation est vérifiée.
+- **Hérédité** : on suppose que pour un entier `k` fixé, `1 + 3 + ... + (2k+1) = (k+1)²`
+  (hypothèse de récurrence). On ajoute le terme suivant, `(2k+3)`, aux deux membres :
+
+  ```
+  1 + 3 + ... + (2k+1) + (2k+3) = (k+1)² + (2k+3)
+                                  = k² + 2k + 1 + 2k + 3
+                                  = k² + 4k + 4
+                                  = (k+2)²
+  ```
+
+  On retrouve bien la formule au rang `k+1` : `(k+1+1)²`. Donc `P(k+1)` est vraie.
+- **Conclusion** : la propriété est vraie pour tout entier naturel `n`.
+
+<MiniQuiz
+  id="recurrence-exemple"
+  titre="Mini-quiz : l'exemple rédigé"
+  questions={[
+    {
+      question: "Dans l'exemple, l'étape d'hérédité consiste à ajouter aux deux membres :",
+      choix: ["Le terme (2k+1)", "Le terme suivant, (2k+3)", "Le terme (k+1)²"],
+      reponse: 1,
+      explication: "On part de la somme jusqu'à (2k+1) et on ajoute le terme suivant de la liste, (2k+3), pour atteindre le rang k+1.",
+    },
+    {
+      question: "Après avoir ajouté (2k+3), l'expression obtenue se factorise en :",
+      choix: ["(k+1)²", "(k+2)²", "(k+3)²"],
+      reponse: 1,
+      explication: "k² + 4k + 4 = (k+2)², qui correspond bien à la formule au rang k+1 : ((k+1)+1)².",
+    },
+    {
+      question: "Que faut-il vérifier à l'initialisation ici (n=0) ?",
+      choix: ["1 = 1²", "1 + 3 = 2²", "0 = 1"],
+      reponse: 0,
+      explication: "Pour n=0, la somme se réduit au seul terme 1, et (0+1)² = 1 : les deux valeurs coïncident.",
+    },
+  ]}
+/>
+
+## 3. Une propriété classique : l'inégalité de Bernoulli
+
+Pour tout réel `a > 0` et tout entier naturel `n` : `(1+a)ⁿ ≥ 1 + na`. C'est une propriété
+« exigible » (à savoir démontrer par cœur) : entraîne-toi à la refaire sans regarder le
+cours, en suivant les trois étapes (initialisation, hérédité, conclusion).
+
+> 💡 Astuce pour l'hérédité de Bernoulli : on multiplie l'hypothèse de récurrence
+> `(1+a)ᵏ ≥ 1 + ka` par `(1+a)` (qui est positif), puis on développe et on compare à
+> `1 + (k+1)a`.
+
+<MiniQuiz
+  id="recurrence-bernoulli"
+  titre="Mini-quiz : l'inégalité de Bernoulli"
+  questions={[
+    {
+      question: "L'inégalité de Bernoulli s'écrit :",
+      choix: ["(1+a)ⁿ ≥ 1 + na", "(1+a)ⁿ ≤ 1 + na", "(1+a)ⁿ = 1 + na"],
+      reponse: 0,
+      explication: "C'est une inégalité, pas une égalité : (1+a) élevé à la puissance n est toujours au moins égal à 1+na.",
+    },
+    {
+      question: "Pour démontrer Bernoulli par récurrence, la première étape est :",
+      choix: [
+        "Vérifier l'inégalité pour n = 0",
+        "Supposer directement qu'elle est vraie pour tout n",
+        "Dériver l'expression",
+      ],
+      reponse: 0,
+      explication: "Comme toute récurrence, on commence par l'initialisation : vérifier le cas n = 0.",
+    },
+    {
+      question: "Dans l'hérédité de Bernoulli, on multiplie l'hypothèse de récurrence par :",
+      choix: ["a", "(1+a)", "n"],
+      reponse: 1,
+      explication: "On multiplie les deux membres de (1+a)ᵏ ≥ 1+ka par (1+a), qui est positif car a > 0, pour préserver le sens de l'inégalité.",
+    },
+  ]}
+/>
+
+## ✅ À retenir
+
+- Une démonstration par récurrence suit toujours le même plan : initialisation, hérédité,
+  conclusion — ne jamais sauter une étape.
+- L'hérédité est une implication conditionnelle, pas une affirmation.
+- La récurrence servira aussi dans la partie 4, pour prouver qu'une suite reste toujours
+  dans un intervalle donné avant d'étudier sa convergence.
+
+Direction la partie 4, où l'on combine tout ce qu'on a vu pour étudier les suites définies
+par une fonction : `u(n+1) = f(u(n))`.

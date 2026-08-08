@@ -6,48 +6,61 @@ export default async function HomePage() {
   const terminale = await getChapitres("terminale");
 
   return (
-    <div className="paper-grid">
-      <section className="mx-auto max-w-4xl px-6 py-20">
-        <p className="mb-3 font-mono text-xs uppercase tracking-widest text-board-light">
+    <div className="relative overflow-hidden bg-pink-sky-radial">
+      <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 animate-blob rounded-full bg-bebe-pink/50 blur-3xl" />
+      <div className="pointer-events-none absolute -right-16 top-40 h-72 w-72 animate-blob rounded-full bg-sky-bleu/50 blur-3xl [animation-delay:3s]" />
+
+      <section className="relative mx-auto max-w-4xl px-6 py-20">
+        <p className="mb-3 inline-block rounded-full bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-widest text-pink-500 shadow-sm backdrop-blur">
           Cours · Exercices · QCM
         </p>
         <h1 className="max-w-2xl font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">
-          Comprendre les maths, pas seulement les réciter.
+          Comprendre les maths,{" "}
+          <span className="bg-gradient-to-r from-pink-500 to-sky-500 bg-clip-text text-transparent">
+            pas seulement les réciter.
+          </span>
         </h1>
         <p className="mt-4 max-w-xl text-ink/70">
-          Tout le programme de 1ère et Terminale, classé par chapitre, avec des QCM
-          corrigés en direct pour savoir où vous en êtes.
+          Tout le programme de 1ère et Terminale, classé par chapitre, avec des quiz corrigés en
+          direct pour savoir où vous en êtes — à votre rythme, et sans jamais vous ennuyer.
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          <NiveauCard
-            titre="1ère générale"
-            nb={premiere.length}
-            href="/1ere"
-          />
-          <NiveauCard
-            titre="Terminale"
-            nb={terminale.length}
-            href="/terminale"
-          />
+          <NiveauCard titre="1ère générale" nb={premiere.length} href="/1ere" accent="pink" />
+          <NiveauCard titre="Terminale" nb={terminale.length} href="/terminale" accent="sky" />
         </div>
       </section>
     </div>
   );
 }
 
-function NiveauCard({ titre, nb, href }: { titre: string; nb: number; href: string }) {
+function NiveauCard({
+  titre,
+  nb,
+  href,
+  accent,
+}: {
+  titre: string;
+  nb: number;
+  href: string;
+  accent: "pink" | "sky";
+}) {
+  const gradient =
+    accent === "pink" ? "from-pink-400 to-fuchsia-400 shadow-pink-200" : "from-sky-400 to-blue-400 shadow-sky-200";
+
   return (
     <Link
       href={href}
-      className="group block rounded-lg bg-board p-8 text-chalk transition-colors hover:bg-board-light"
+      className={`group relative block overflow-hidden rounded-2xl bg-gradient-to-br p-8 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl ${gradient}`}
     >
-      <h2 className="font-display text-2xl">{titre}</h2>
-      <p className="mt-2 text-sm text-chalk/70">
+      <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10 transition-transform duration-500 group-hover:scale-150" />
+      <h2 className="relative font-display text-2xl">{titre}</h2>
+      <p className="relative mt-2 text-sm text-white/80">
         {nb} chapitre{nb > 1 ? "s" : ""} disponible{nb > 1 ? "s" : ""}
       </p>
-      <span className="mt-6 inline-block text-sm text-chalk-yellow chalk-underline">
-        Voir les chapitres →
+      <span className="relative mt-6 inline-flex items-center gap-1 text-sm font-semibold">
+        Voir les chapitres
+        <span className="transition-transform group-hover:translate-x-1">→</span>
       </span>
     </Link>
   );
