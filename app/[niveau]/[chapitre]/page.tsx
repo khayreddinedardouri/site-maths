@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import { getChapitres, getCours, getDocuments, getQcm, type Niveau } from "@/lib/content";
 import QcmPlayer from "@/components/QcmPlayer";
 import VideoEmbed from "@/components/VideoEmbed";
@@ -56,7 +58,16 @@ export default async function ChapitrePage({
         <ProgressProvider>
           <ProgressBar />
           <article className="prose prose-neutral mt-8 max-w-none prose-headings:font-display prose-headings:font-semibold">
-            <MDXRemote source={cours.content} components={{ VideoEmbed, MiniQuiz }} />
+            <MDXRemote
+              source={cours.content}
+              components={{ VideoEmbed, MiniQuiz }}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkMath],
+                  rehypePlugins: [rehypeKatex],
+                },
+              }}
+            />
           </article>
         </ProgressProvider>
 

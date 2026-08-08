@@ -42,6 +42,13 @@ body {
   outline-offset: 2px;
 }
 
+/* Formules KaTeX : autoriser le défilement horizontal sur mobile plutôt que de déborder */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

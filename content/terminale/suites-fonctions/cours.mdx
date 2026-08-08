@@ -7,37 +7,42 @@ partie: "Analyse"
 ## 🎯 L'idée du chapitre
 
 On termine ce chapitre avec le type d'exercice le plus complet sur les suites : une suite
-`(u(n))` définie par un premier terme `u(0)` et une relation `u(n+1) = f(u(n))`, où `f` est
+$(u_n)$ définie par un premier terme $u_0$ et une relation $u_{n+1} = f(u_n)$, où $f$ est
 une fonction. On combine ici tout ce qu'on a vu : récurrence (partie 3), limite monotone
 (partie 2), et un nouvel outil, la **continuité**.
 
 ## 1. Méthode générale
 
-Pour étudier une suite `u(n+1) = f(u(n))`, on suit en général ce plan :
+Pour étudier une suite $u_{n+1} = f(u_n)$, on suit en général ce plan :
 
-1. **Encadrer/borner la suite** (souvent par récurrence) : montrer que `u(n)` reste toujours
+1. **Encadrer/borner la suite** (souvent par récurrence) : montrer que $u_n$ reste toujours
    dans un intervalle donné.
 2. **Montrer la monotonie** (croissante ou décroissante), souvent en étudiant le signe de
-   `u(n+1) − u(n)`.
+   $u_{n+1} - u_n$.
 3. **Conclure à la convergence** grâce au théorème de la limite monotone (partie 2) : une
    suite croissante et majorée (ou décroissante et minorée) converge.
 4. **Trouver la valeur de la limite** grâce au théorème du point fixe (ci-dessous).
 
 ## 2. Le théorème du point fixe
 
-Si une suite `(u(n))` est définie par `u(n+1) = f(u(n))`, que l'on sait qu'elle **converge**
-vers un réel `l`, et que `f` est **continue** en `l`, alors ce réel `l` vérifie forcément :
+Si une suite $(u_n)$ est définie par $u_{n+1} = f(u_n)$, que l'on sait qu'elle **converge**
+vers un réel $\ell$, et que $f$ est **continue** en $\ell$, alors ce réel $\ell$ vérifie
+forcément :
 
-```
-f(l) = l
-```
+$$
+f(\ell) = \ell
+$$
 
-On dit que `l` est un **point fixe** de `f`.
+On dit que $\ell$ est un **point fixe** de $f$.
 
 > 💡 **Attention à l'ordre logique** : ce théorème ne prouve **pas** que la suite converge —
 > il faut d'abord l'avoir démontré (étape 3 ci-dessus, avec le théorème de la limite
 > monotone). Une fois la convergence acquise, ce théorème permet seulement de **trouver la
 > valeur** de la limite.
+
+> 💡 Le traceur interactif du site (lien en bas de page) permet de visualiser cette
+> convergence : il affiche la courbe de $f$, la droite $y = x$, et la "toile d'araignée"
+> de la suite — la trajectoire se rapproche visuellement du point fixe.
 
 <MiniQuiz
   id="point-fixe-theoreme"
@@ -74,30 +79,36 @@ On dit que `l` est un **point fixe** de `f`.
 
 ## 3. Exemple complet rédigé
 
-Soit `(u(n))` définie par `u(0) = 1` et `u(n+1) = (u(n) + 2) / 2` (donc `f(x) = (x+2)/2`).
+Soit $(u_n)$ définie par $u_0 = 1$ et $u_{n+1} = \dfrac{u_n + 2}{2}$ (donc
+$f(x) = \dfrac{x+2}{2}$).
 
-**Étape 1 — Encadrement (par récurrence)** : montrons que `0 ≤ u(n) ≤ 2` pour tout `n`.
+**Étape 1 — Encadrement (par récurrence)** : montrons que $0 \le u_n \le 2$ pour tout $n$.
 
-- Initialisation : `u(0) = 1`, qui vérifie bien `0 ≤ 1 ≤ 2`.
-- Hérédité : si `0 ≤ u(k) ≤ 2`, alors `2 ≤ u(k)+2 ≤ 4`, donc `1 ≤ u(k+1) ≤ 2`, qui est bien
-  inclus dans `[0 ; 2]`. Donc `P(k+1)` est vraie.
-- Conclusion : pour tout `n`, `0 ≤ u(n) ≤ 2`.
+- Initialisation : $u_0 = 1$, qui vérifie bien $0 \le 1 \le 2$.
+- Hérédité : si $0 \le u_k \le 2$, alors $2 \le u_k+2 \le 4$, donc $1 \le u_{k+1} \le 2$, qui
+  est bien inclus dans $[0 ; 2]$. Donc $P(k+1)$ est vraie.
+- Conclusion : pour tout $n$, $0 \le u_n \le 2$.
 
-**Étape 2 — Monotonie** : `u(n+1) − u(n) = (u(n)+2)/2 − u(n) = (2 − u(n))/2`. Comme
-`u(n) ≤ 2` (étape 1), on a `2 − u(n) ≥ 0`, donc `u(n+1) − u(n) ≥ 0` : la suite est
+**Étape 2 — Monotonie** :
+
+$$
+u_{n+1} - u_n = \frac{u_n+2}{2} - u_n = \frac{2 - u_n}{2}
+$$
+
+Comme $u_n \le 2$ (étape 1), on a $2 - u_n \ge 0$, donc $u_{n+1} - u_n \ge 0$ : la suite est
 **croissante**.
 
-**Étape 3 — Convergence** : `(u(n))` est croissante et majorée par 2, donc elle **converge**
-(théorème de la limite monotone).
+**Étape 3 — Convergence** : $(u_n)$ est croissante et majorée par $2$, donc elle
+**converge** (théorème de la limite monotone).
 
-**Étape 4 — Valeur de la limite** : `f` est continue sur `ℝ` (fonction affine). D'après le
-théorème du point fixe, la limite `l` vérifie `f(l) = l` :
+**Étape 4 — Valeur de la limite** : $f$ est continue sur $\mathbb{R}$ (fonction affine).
+D'après le théorème du point fixe, la limite $\ell$ vérifie $f(\ell) = \ell$ :
 
-```
-(l + 2)/2 = l  ⟺  l + 2 = 2l  ⟺  l = 2
-```
+$$
+\frac{\ell + 2}{2} = \ell \iff \ell + 2 = 2\ell \iff \ell = 2
+$$
 
-Donc `lim (n→+∞) u(n) = 2`.
+Donc $\displaystyle\lim_{n \to +\infty} u_n = 2$.
 
 <MiniQuiz
   id="point-fixe-exemple"

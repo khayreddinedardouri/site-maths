@@ -75,10 +75,41 @@ Votre contenu en markdown ici.
 ```
 
 3. (Optionnel) Ajoutez un `qcm.json` sur le même modèle que les exemples fournis.
-4. (Optionnel) Placez les PDF d'exercices dans
-   `public/content/{niveau}/mon-chapitre/`, ils apparaîtront automatiquement
-   dans la section "Documents" de la page.
+4. (Optionnel) Ajoutez des PDF d'exercices ou de TD **directement dans**
+   `content/{niveau}/mon-chapitre/`, à côté de `cours.mdx`. Ils sont copiés
+   automatiquement vers `public/content/{niveau}/mon-chapitre/` (voir section
+   suivante) et apparaissent alors dans la section "Documents" de la page.
 5. `git add . && git commit -m "Ajout chapitre" && git push` — Vercel redéploie seul.
+
+## Ajouter un TD / une fiche d'exercices à un chapitre existant
+
+Déposez simplement le PDF **dans le dossier du chapitre**, à côté de son `cours.mdx` :
+
+```
+content/{niveau}/mon-chapitre/mon-td.pdf
+```
+
+Un script (`scripts/sync-content-docs.mjs`) le copie automatiquement vers
+`public/content/{niveau}/mon-chapitre/` — c'est cet endroit que Next.js sert
+réellement et que la page de chapitre lit pour afficher la liste des
+"Documents". Ce script tourne tout seul :
+
+- avant `npm run dev` (en local) ;
+- avant `npm run build` (donc aussi au déploiement sur Vercel).
+
+Vous pouvez aussi le lancer à la main à tout moment avec :
+
+```bash
+npm run sync-docs
+```
+
+Il ne fait que **copier** (jamais supprimer) et ignore les fichiers déjà à
+jour, donc il est sans risque de le relancer plusieurs fois. Après avoir
+déposé le PDF, pensez simplement à :
+
+```bash
+git add . && git commit -m "Ajout TD" && git push
+```
 
 ## Écrire des formules en LaTeX dans un cours
 
@@ -89,6 +120,14 @@ Les fichiers `cours.mdx` supportent LaTeX via `remark-math` + `rehype-katex` :
 
 Après avoir récupéré une mise à jour qui touche aux dépendances, pensez à relancer
 `npm install` (trois paquets : `remark-math`, `rehype-katex`, `katex`).
+
+> Ces trois paquets étaient déjà installés mais n'étaient pas réellement branchés
+> sur le rendu MDX (le CSS de KaTeX n'était pas importé, et les plugins
+> `remark-math`/`rehype-katex` n'étaient pas passés à `MDXRemote`) : les `$...$`
+> s'affichaient donc comme du texte brut au lieu de formules. C'est corrigé dans
+> `app/[niveau]/[chapitre]/page.tsx` et `app/layout.tsx`. Tous les chapitres de
+> Suites ont aussi été réécrits avec la vraie syntaxe LaTeX (`$u_n$`, `$$...$$`)
+> à la place de l'ancienne notation avec des backticks (`` `u(n)` ``).
 
 ## Ajouter une vidéo à un chapitre (YouTube ou Google Drive)
 

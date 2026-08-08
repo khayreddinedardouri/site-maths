@@ -6,33 +6,35 @@ partie: "Analyse"
 
 ## 🎯 L'idée du chapitre
 
-Que devient `u(n)` quand `n` devient très grand ? Se rapproche-t-il d'un nombre précis, ou
+Que devient $u_n$ quand $n$ devient très grand ? Se rapproche-t-il d'un nombre précis, ou
 part-il vers l'infini, ou ne se stabilise-t-il jamais ? C'est tout l'enjeu de cette partie.
 
 ## 1. Limite finie (suite convergente)
 
-On dit que `u(n)` **tend vers un réel `l`** quand `n → +∞` si les termes finissent par se
-rapprocher de `l` d'aussi près que l'on veut. On note :
+On dit que $u_n$ **tend vers un réel $\ell$** quand $n \to +\infty$ si les termes finissent
+par se rapprocher de $\ell$ d'aussi près que l'on veut. On note :
 
-```
-lim (n→+∞) u(n) = l
-```
+$$
+\lim_{n \to +\infty} u_n = \ell
+$$
 
-On dit alors que `(u(n))` **converge** vers `l`.
+On dit alors que $(u_n)$ **converge** vers $\ell$.
 
-**Limites usuelles à connaître par cœur** (toutes prises quand `n → +∞`) :
+**Limites usuelles à connaître par cœur** (toutes prises quand $n \to +\infty$) :
 
-```
-lim 1/n = 0        lim 1/nᵏ = 0        lim 1/√n = 0        lim 1/eⁿ = 0
-```
+$$
+\lim \frac{1}{n} = 0 \qquad \lim \frac{1}{n^k} = 0 \qquad \lim \frac{1}{\sqrt{n}} = 0 \qquad
+\lim \frac{1}{e^{\,n}} = 0
+$$
 
 ## 2. Limite infinie (suite divergente)
 
-Une suite qui n'est **pas** convergente est dite **divergente**. Elle peut tendre vers `+∞`
-ou `−∞`, ou bien ne pas avoir de limite du tout (par exemple `u(n) = (−1)ⁿ`, qui alterne
-entre `1` et `−1` sans jamais se fixer).
+Une suite qui n'est **pas** convergente est dite **divergente**. Elle peut tendre vers $+\infty$
+ou $-\infty$, ou bien ne pas avoir de limite du tout (par exemple $u_n = (-1)^n$, qui alterne
+entre $1$ et $-1$ sans jamais se fixer).
 
-**Limites usuelles :** `lim n = +∞`, `lim nᵏ = +∞`, `lim √n = +∞`, `lim eⁿ = +∞`.
+**Limites usuelles :** $\lim n = +\infty$, $\lim n^k = +\infty$, $\lim \sqrt{n} = +\infty$,
+$\lim e^{\,n} = +\infty$.
 
 <MiniQuiz
   id="limite-finie-infinie"
@@ -64,22 +66,24 @@ entre `1` et `−1` sans jamais se fixer).
 Les règles ressemblent à celles des nombres, sauf pour les **formes indéterminées** (F.I.),
 où l'on ne peut rien conclure sans étudier le cas de plus près :
 
-- **Somme** : `+∞ − ∞` est une F.I.
-- **Produit** : `0 × ∞` est une F.I.
-- **Quotient** : `∞/∞` et `0/0` sont des F.I.
+- **Somme** : $+\infty - \infty$ est une F.I.
+- **Produit** : $0 \times \infty$ est une F.I.
+- **Quotient** : $\dfrac{\infty}{\infty}$ et $\dfrac{0}{0}$ sont des F.I.
 
 > 💡 Face à une F.I., la méthode la plus courante est de **factoriser par le terme de plus
 > haut degré** (pour un polynôme) ou par le terme dominant.
 
 ### Exemple
 
-Soit `v(n) = 3n² − 5n`. En `+∞`, on a `+∞ − ∞`, une F.I. On factorise par `n²` :
+Soit $v_n = 3n^2 - 5n$. En $+\infty$, on a $+\infty - \infty$, une F.I. On factorise par
+$n^2$ :
 
-```
-v(n) = n²(3 − 5/n)
-```
+$$
+v_n = n^2\left(3 - \frac{5}{n}\right)
+$$
 
-Comme `lim n² = +∞` et `lim (3 − 5/n) = 3`, par produit : `lim v(n) = +∞`.
+Comme $\lim n^2 = +\infty$ et $\lim\left(3 - \dfrac{5}{n}\right) = 3$, par produit :
+$\lim v_n = +\infty$.
 
 <MiniQuiz
   id="formes-indeterminees"
@@ -116,20 +120,23 @@ Comme `lim n² = +∞` et `lim (3 − 5/n) = 3`, par produit : `lim v(n) = +∞`
 
 ## 4. Limites et comparaison
 
-- **Théorème de comparaison** : si `u(n) ≤ v(n)` à partir d'un certain rang et
-  `lim u(n) = +∞`, alors `lim v(n) = +∞` aussi.
-- **Théorème des gendarmes** : si `u(n) ≤ v(n) ≤ w(n)` à partir d'un certain rang, et que
-  `u` et `w` tendent toutes les deux vers le même réel `l`, alors `v` tend aussi vers `l`.
+- **Théorème de comparaison** : si $u_n \le v_n$ à partir d'un certain rang et
+  $\lim u_n = +\infty$, alors $\lim v_n = +\infty$ aussi.
+- **Théorème des gendarmes** : si $u_n \le v_n \le w_n$ à partir d'un certain rang, et que
+  $u_n$ et $w_n$ tendent toutes les deux vers le même réel $\ell$, alors $v_n$ tend aussi vers
+  $\ell$.
 
 ### Exemple (gendarmes)
 
-On veut la limite de `v(n) = 5 + sin(n)/n`. Comme `−1 ≤ sin(n) ≤ 1`, on a pour `n > 0` :
+On veut la limite de $v_n = 5 + \dfrac{\sin(n)}{n}$. Comme $-1 \le \sin(n) \le 1$, on a pour
+$n > 0$ :
 
-```
-5 − 1/n ≤ v(n) ≤ 5 + 1/n
-```
+$$
+5 - \frac{1}{n} \le v_n \le 5 + \frac{1}{n}
+$$
 
-Or `lim (5 − 1/n) = lim (5 + 1/n) = 5`. D'après le théorème des gendarmes, `lim v(n) = 5`.
+Or $\lim\left(5 - \dfrac1n\right) = \lim\left(5 + \dfrac1n\right) = 5$. D'après le théorème
+des gendarmes, $\lim v_n = 5$.
 
 <MiniQuiz
   id="gendarmes-comparaison"
@@ -158,14 +165,14 @@ Or `lim (5 − 1/n) = lim (5 + 1/n) = 5`. D'après le théorème des gendarmes, 
 
 ## 5. Suites majorées, minorées, bornées, et théorème de la limite monotone
 
-- `(u(n))` est **majorée** par `M` si tous ses termes restent `≤ M`.
-- `(u(n))` est **minorée** par `m` si tous ses termes restent `≥ m`.
-- `(u(n))` est **bornée** si elle est à la fois majorée et minorée.
+- $(u_n)$ est **majorée** par $M$ si tous ses termes vérifient $u_n \le M$.
+- $(u_n)$ est **minorée** par $m$ si tous ses termes vérifient $u_n \ge m$.
+- $(u_n)$ est **bornée** si elle est à la fois majorée et minorée.
 
 **Théorème de la limite monotone** (très utilisé pour les suites définies par récurrence) :
 
-- Une suite **croissante et majorée** converge.
-- Une suite **décroissante et minorée** converge.
+> - Une suite **croissante et majorée** converge.
+> - Une suite **décroissante et minorée** converge.
 
 ⚠️ Ce théorème prouve *qu'une limite existe*, mais ne donne pas sa valeur !
 
@@ -202,14 +209,14 @@ Or `lim (5 − 1/n) = lim (5 + 1/n) = 5`. D'après le théorème des gendarmes, 
   ]}
 />
 
-## 6. Limite de `qⁿ`
+## 6. Limite de $q^n$
 
-| Valeur de `q`     | `lim (n→+∞) qⁿ` |
-|--------------------|-----------------|
-| `q ≤ −1`           | n'existe pas    |
-| `−1 < q < 1`        | `0`             |
-| `q = 1`             | `1`             |
-| `q > 1`             | `+∞`            |
+| Valeur de $q$ | $\displaystyle\lim_{n\to+\infty} q^n$ |
+|---|---|
+| $q \le -1$ | n'existe pas |
+| $-1 < q < 1$ | $0$ |
+| $q = 1$ | $1$ |
+| $q > 1$ | $+\infty$ |
 
 <MiniQuiz
   id="limite-qn"
@@ -240,7 +247,8 @@ Or `lim (5 − 1/n) = lim (5 + 1/n) = 5`. D'après le théorème des gendarmes, 
 
 - Une F.I. n'est pas "pas de réponse", c'est "il faut chercher un peu plus" (factoriser,
   encadrer...).
-- Le théorème des gendarmes est l'outil-clé quand une suite contient `sin`, `cos` ou `(−1)ⁿ`.
+- Le théorème des gendarmes est l'outil-clé quand une suite contient $\sin$, $\cos$ ou
+  $(-1)^n$.
 - Une suite croissante et majorée converge : c'est souvent le point de départ des exercices
   sur les suites récurrentes (voir partie 4).
 

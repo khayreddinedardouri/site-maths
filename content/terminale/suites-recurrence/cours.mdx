@@ -12,17 +12,17 @@ le suivant, alors **tous** les dominos tombent.
 
 ## 1. Le principe
 
-Pour démontrer qu'une proposition `P(n)` est vraie pour tout entier `n ≥ n₀`, on rédige
+Pour démontrer qu'une proposition $P(n)$ est vraie pour tout entier $n \ge n_0$, on rédige
 toujours dans le même ordre :
 
-1. **Initialisation** : on vérifie que `P(n₀)` est vraie.
-2. **Hérédité** : on suppose `P(k)` vraie pour un entier `k` fixé (hypothèse de récurrence),
-   et on démontre que `P(k+1)` est alors vraie aussi.
-3. **Conclusion** : d'après le principe de récurrence, `P(n)` est vraie pour tout `n ≥ n₀`.
+1. **Initialisation** : on vérifie que $P(n_0)$ est vraie.
+2. **Hérédité** : on suppose $P(k)$ vraie pour un entier $k$ fixé (hypothèse de récurrence),
+   et on démontre qu'alors $P(k+1)$ est vraie aussi.
+3. **Conclusion** : d'après le principe de récurrence, $P(n)$ est vraie pour tout $n \ge n_0$.
 
-> 💡 L'hérédité ne dit jamais "P(k) est vraie" tout court : elle dit "**si** P(k) est vraie,
-> **alors** P(k+1) l'est aussi". On ne suppose jamais que la propriété est vraie pour de
-> vrai, on suppose juste "pour voir".
+> 💡 L'hérédité ne dit jamais "$P(k)$ est vraie" tout court : elle dit "**si** $P(k)$ est
+> vraie, **alors** $P(k+1)$ l'est aussi". On ne suppose jamais que la propriété est vraie
+> pour de vrai, on suppose juste "pour voir".
 
 <MiniQuiz
   id="recurrence-principe"
@@ -59,22 +59,21 @@ toujours dans le même ordre :
 
 ## 2. Exemple rédigé
 
-On veut démontrer que pour tout entier naturel `n` : `1 + 3 + 5 + ... + (2n+1) = (n+1)²`.
+On veut démontrer que pour tout entier naturel $n$ :
+$1 + 3 + 5 + \dots + (2n+1) = (n+1)^2$.
 
-- **Initialisation** (`n = 0`) : à gauche il n'y a que le terme `1`, à droite `(0+1)² = 1`.
-  Les deux valeurs sont égales, donc l'initialisation est vérifiée.
-- **Hérédité** : on suppose que pour un entier `k` fixé, `1 + 3 + ... + (2k+1) = (k+1)²`
-  (hypothèse de récurrence). On ajoute le terme suivant, `(2k+3)`, aux deux membres :
+- **Initialisation** ($n=0$) : à gauche il n'y a que le terme $1$ ; à droite,
+  $(0+1)^2 = 1$. Les deux valeurs sont égales : l'initialisation est vérifiée.
+- **Hérédité** : on suppose que pour un entier $k$ fixé,
+  $1 + 3 + \dots + (2k+1) = (k+1)^2$ (hypothèse de récurrence). On ajoute le terme
+  suivant, $(2k+3)$, aux deux membres :
 
-  ```
-  1 + 3 + ... + (2k+1) + (2k+3) = (k+1)² + (2k+3)
-                                  = k² + 2k + 1 + 2k + 3
-                                  = k² + 4k + 4
-                                  = (k+2)²
-  ```
+$$
+1 + 3 + \dots + (2k+1) + (2k+3) = (k+1)^2 + (2k+3) = k^2+2k+1+2k+3 = k^2+4k+4 = (k+2)^2
+$$
 
-  On retrouve bien la formule au rang `k+1` : `(k+1+1)²`. Donc `P(k+1)` est vraie.
-- **Conclusion** : la propriété est vraie pour tout entier naturel `n`.
+  On retrouve bien la formule au rang $k+1$ : $(k+1+1)^2$. Donc $P(k+1)$ est vraie.
+- **Conclusion** : la propriété est vraie pour tout entier naturel $n$.
 
 <MiniQuiz
   id="recurrence-exemple"
@@ -103,13 +102,18 @@ On veut démontrer que pour tout entier naturel `n` : `1 + 3 + 5 + ... + (2n+1) 
 
 ## 3. Une propriété classique : l'inégalité de Bernoulli
 
-Pour tout réel `a > 0` et tout entier naturel `n` : `(1+a)ⁿ ≥ 1 + na`. C'est une propriété
-« exigible » (à savoir démontrer par cœur) : entraîne-toi à la refaire sans regarder le
-cours, en suivant les trois étapes (initialisation, hérédité, conclusion).
+Pour tout réel $a > 0$ et tout entier naturel $n$ :
+
+$$
+(1+a)^n \ge 1 + na
+$$
+
+C'est une propriété **exigible** (à savoir démontrer par cœur) : entraîne-toi à la refaire
+sans regarder le cours, en suivant les trois étapes (initialisation, hérédité, conclusion).
 
 > 💡 Astuce pour l'hérédité de Bernoulli : on multiplie l'hypothèse de récurrence
-> `(1+a)ᵏ ≥ 1 + ka` par `(1+a)` (qui est positif), puis on développe et on compare à
-> `1 + (k+1)a`.
+> $(1+a)^k \ge 1 + ka$ par $(1+a)$ (qui est positif), puis on développe et on compare à
+> $1 + (k+1)a$.
 
 <MiniQuiz
   id="recurrence-bernoulli"
@@ -149,4 +153,4 @@ cours, en suivant les trois étapes (initialisation, hérédité, conclusion).
   dans un intervalle donné avant d'étudier sa convergence.
 
 Direction la partie 4, où l'on combine tout ce qu'on a vu pour étudier les suites définies
-par une fonction : `u(n+1) = f(u(n))`.
+par une fonction : $u_{n+1} = f(u_n)$.

@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/sync-content-docs.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/sync-content-docs.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync-docs": "node scripts/sync-content-docs.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
