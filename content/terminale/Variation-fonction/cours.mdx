@@ -1,0 +1,321 @@
+---
+titre: "Étude des variations et extremums"
+ordre: 4
+partie: "Analyse"
+---
+
+## 🎯 L'idée du chapitre
+
+Le signe de $f'$ te dit **tout** sur le comportement de $f$ : est-ce qu'elle monte, descend, a un
+sommet ou un creux ? C'est l'outil le plus utilisé de toute l'année, et il est très mécanique
+une fois compris.
+
+Trois parties, courtes et concrètes :
+1. Signe de $f'$ ↔ sens de variation
+2. Tableau de variations et extremums
+3. Optimisation — un problème concret à résoudre
+
+---
+
+## Partie 1 — Signe de f' et sens de variation
+
+<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "320px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="320" height="50" rx="8" fill="#38bdf8" opacity="0.08" stroke="#38bdf8" strokeOpacity="0.3" strokeWidth="1.2" />
+  <text x="16" y="24" fontSize="16">📈</text>
+  <text x="46" y="22" fontSize="13" fontWeight="600" fill="currentColor">f'(x) &gt; 0</text>
+  <text x="46" y="39" fontSize="11" fill="currentColor" opacity="0.75">f est croissante</text>
+
+  <rect x="0" y="65" width="320" height="50" rx="8" fill="#fb7185" opacity="0.08" stroke="#fb7185" strokeOpacity="0.3" strokeWidth="1.2" />
+  <text x="16" y="89" fontSize="16">📉</text>
+  <text x="46" y="87" fontSize="13" fontWeight="600" fill="currentColor">f'(x) &lt; 0</text>
+  <text x="46" y="104" fontSize="11" fill="currentColor" opacity="0.75">f est décroissante</text>
+
+  <rect x="0" y="130" width="320" height="50" rx="8" fill="currentColor" opacity="0.04" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <text x="16" y="154" fontSize="16">➖</text>
+  <text x="46" y="152" fontSize="13" fontWeight="600" fill="currentColor">f'(x) = 0</text>
+  <text x="46" y="169" fontSize="11" fill="currentColor" opacity="0.75">tangente horizontale, souvent un extremum</text>
+</svg>
+
+**Exemple à faire :** soit $f(x) = x^2 - 4x + 1$.
+- $f'(x) = 2x - 4$
+- $f'(x) = 0 \iff x = 2$ ; $f'(x) > 0 \iff x > 2$ ; $f'(x) < 0 \iff x < 2$
+- Donc $f$ est **décroissante sur $]-\infty ; 2]$** puis **croissante sur $[2 ; +\infty[$**.
+
+<MiniQuiz
+  id="signe-derivee-jeu"
+  titre="🎮 Jeu : signe ou variation ?"
+  questions={[
+    {
+      question: "Si f'(x) < 0 sur un intervalle, alors f est :",
+      choix: ["Croissante", "Décroissante", "Constante"],
+      reponse: 1,
+      explication: "Une dérivée négative signifie que la fonction décroît sur cet intervalle.",
+    },
+    {
+      question: "Si f est croissante sur un intervalle, alors f' y est :",
+      choix: ["Positive (ou nulle)", "Négative", "Toujours nulle"],
+      reponse: 0,
+      explication: "Croissance ⇔ dérivée positive ou nulle sur l'intervalle.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 2 — Tableau de variations et extremums
+
+Le **tableau de variations** résume en un coup d'œil : le signe de $f'$, le sens de variation de
+$f$, et les valeurs remarquables (extremums).
+<svg viewBox="0 0 400 170" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "400px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="400" height="170" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+
+  <line x1="0" y1="40" x2="400" y2="40" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="85" x2="400" y2="85" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+
+  <line x1="80" y1="0" x2="80" y2="170" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="220" y1="0" x2="220" y2="170" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+
+  <text x="40" y="25" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">x</text>
+  <text x="100" y="25" fontSize="12" textAnchor="middle" fill="currentColor">−∞</text>
+  <text x="220" y="25" fontSize="12" textAnchor="middle" fill="currentColor">2</text>
+  <text x="370" y="25" fontSize="12" textAnchor="middle" fill="currentColor">+∞</text>
+
+  <text x="40" y="67" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">f'(x)</text>
+  <line x1="80" y1="60" x2="220" y2="60" stroke="#fb7185" strokeWidth="2" />
+  <text x="150" y="55" fontSize="13" textAnchor="middle" fill="#fb7185">−</text>
+  <text x="220" y="55" fontSize="12" textAnchor="middle" fill="currentColor">0</text>
+  <line x1="220" y1="60" x2="360" y2="60" stroke="#38bdf8" strokeWidth="2" />
+  <text x="290" y="55" fontSize="13" textAnchor="middle" fill="#38bdf8">+</text>
+
+  <text x="40" y="130" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">f(x)</text>
+  <path d="M 90 100 L 210 145" stroke="#fb7185" strokeWidth="2.5" fill="none" />
+  <path d="M 230 145 L 350 100" stroke="#38bdf8" strokeWidth="2.5" fill="none" />
+  <circle cx="220" cy="145" r="4" fill="currentColor" />
+  <text x="220" y="163" fontSize="11" textAnchor="middle" fill="currentColor">min = −3</text>
+</svg>
+
+### Extremum local vs global
+
+- **Extremum local** : le point le plus haut/bas **dans son voisinage** (pas forcément sur toute
+  la courbe).
+- **Extremum global** : le point le plus haut/bas sur **tout l'ensemble de définition**.
+
+> 💡 Un extremum global est toujours un extremum local, mais l'inverse n'est pas vrai — une
+> fonction peut avoir plusieurs "creux" locaux sans que ce soit le minimum absolu.
+
+<MiniQuiz
+  id="extremums-jeu"
+  titre="🎮 Jeu : local ou global ?"
+  questions={[
+    {
+      question: "Un extremum global est toujours :",
+      choix: ["Un extremum local aussi", "Différent d'un extremum local", "Situé en x=0"],
+      reponse: 0,
+      explication: "Le minimum ou maximum absolu de la fonction est nécessairement aussi un extremum local.",
+    },
+    {
+      question: "Dans le tableau de variations, un extremum apparaît quand :",
+      choix: ["f' change de signe", "f' est toujours positive", "f n'est pas définie"],
+      reponse: 0,
+      explication: "Un changement de signe de f' (de + à − ou de − à +) signale un maximum ou un minimum local.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 3 — Optimisation : un problème concret
+
+**Exemple à faire :** on veut fabriquer une boîte sans couvercle à partir d'un carré de carton
+de côté $12$ cm, en découpant un carré de côté $x$ à chaque coin puis en repliant. Quel $x$
+maximise le volume de la boîte ?
+
+- Volume : $V(x) = x(12-2x)^2$, pour $x \in [0 ; 6]$
+- On dérive : $V'(x) = (12-2x)^2 + x \times 2(12-2x)\times(-2) = (12-2x)(12-6x)$
+- $V'(x) = 0 \iff x = 6$ ou $x = 2$ ; seul $x=2$ est un extremum intérieur à $[0;6]$
+- Tableau de signe : $V'$ positive avant $2$, négative après → **maximum en $x=2$**
+- $V(2) = 2 \times 8^2 = 128$ cm³
+
+**Résultat** : la boîte a un volume maximal de $128$ cm³ pour $x = 2$ cm.
+
+<VideoEmbed youtube="ZDfYS9xQJDo" title="Exercice : étudier les variations" />
+
+<MiniQuiz
+  id="optimisation-jeu"
+  titre="🎮 Jeu : la méthode d'optimisation"
+  questions={[
+    {
+      question: "Pour résoudre un problème d'optimisation, la première étape est :",
+      choix: [
+        "Dériver directement sans poser de fonction",
+        "Écrire la quantité à optimiser comme une fonction d'une seule variable",
+        "Deviner la réponse puis vérifier",
+      ],
+      reponse: 1,
+      explication: "Il faut d'abord traduire le problème concret en une fonction V(x), f(x)... à étudier.",
+    },
+    {
+      question: "Dans l'exemple de la boîte, le maximum du volume est trouvé en :",
+      choix: ["Cherchant où V'(x) = 0 puis en étudiant le signe", "Essayant toutes les valeurs de x une par une", "Prenant x = 6"],
+      reponse: 0,
+      explication: "Comme toujours pour un extremum : on résout V'(x)=0 puis on vérifie le changement de signe.",
+    },
+  ]}
+/>
+## Partie 2 — Tableau des signes
+
+Avant d'étudier une fonction (résoudre une inéquation, déterminer un domaine, simplifier un
+quotient...), on a souvent besoin de connaître le **signe d'une fonction $f$** ou $g$ selon les
+valeurs de $x$ — c'est le rôle du tableau de signes.
+
+### Méthode générale
+
+1. Trouver les valeurs qui annulent la fonction (résoudre $f(x)=0$).
+2. Placer ces valeurs dans l'ordre croissant.
+3. Déterminer le signe de $f(x)$ sur chaque intervalle délimité.
+4. Reporter les signes dans le tableau.
+
+### Cas particulier très fréquent : le second degré $ax^2+bx+c$
+
+Le signe d'une fonction du second degré dépend du signe de son **discriminant**
+$\Delta = b^2 - 4ac$.
+
+<svg viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "360px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="360" height="110" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="40" x2="360" y2="40" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="90" y1="0" x2="90" y2="110" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="180" y1="0" x2="180" y2="110" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="270" y1="0" x2="270" y2="110" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+
+  <text x="45" y="25" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">x</text>
+  <text x="135" y="25" fontSize="12" textAnchor="middle" fill="currentColor">x₁</text>
+  <text x="225" y="25" fontSize="12" textAnchor="middle" fill="currentColor">x₂</text>
+
+  <text x="45" y="79" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">f(x)</text>
+  <text x="135" y="70" fontSize="13" textAnchor="middle" fill="#38bdf8">signe de a</text>
+  <text x="180" y="65" fontSize="12" textAnchor="middle" fill="currentColor">0</text>
+  <text x="225" y="70" fontSize="13" textAnchor="middle" fill="#fb7185">signe de −a</text>
+  <text x="315" y="70" fontSize="13" textAnchor="middle" fill="#38bdf8">signe de a</text>
+</svg>
+
+> 💡 **Règle à retenir** : quand $\Delta>0$ (deux racines $x_1$ et $x_2$), le trinôme est du
+> signe de $a$ **à l'extérieur** des racines, et du signe de **$-a$ entre** les deux racines.
+
+---
+
+### Cas 1 — $\Delta > 0$ (deux racines distinctes)
+
+**Exemple à faire :** signe de $f(x) = x^2 - 5x + 6$.
+
+- $\Delta = (-5)^2 - 4\times1\times6 = 25-24 = 1$, donc $\Delta > 0$
+- Deux racines : $x_1 = \dfrac{5-1}{2} = 2$ et $x_2 = \dfrac{5+1}{2} = 3$
+- Ici $a=1>0$
+
+<svg viewBox="0 0 360 100" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "360px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="360" height="100" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="35" x2="360" y2="35" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="90" y1="0" x2="90" y2="100" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="180" y1="0" x2="180" y2="100" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="270" y1="0" x2="270" y2="100" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+
+  <text x="45" y="22" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">x</text>
+  <text x="135" y="22" fontSize="12" textAnchor="middle" fill="currentColor">2</text>
+  <text x="225" y="22" fontSize="12" textAnchor="middle" fill="currentColor">3</text>
+
+  <text x="45" y="72" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">f(x)</text>
+  <text x="135" y="65" fontSize="14" textAnchor="middle" fill="#38bdf8">+</text>
+  <text x="180" y="60" fontSize="12" textAnchor="middle" fill="currentColor">0</text>
+  <text x="225" y="65" fontSize="14" textAnchor="middle" fill="#fb7185">−</text>
+  <text x="270" y="60" fontSize="12" textAnchor="middle" fill="currentColor">0</text>
+  <text x="315" y="65" fontSize="14" textAnchor="middle" fill="#38bdf8">+</text>
+</svg>
+
+**Résultat** : $f(x) > 0$ sur $]-\infty ; 2[ \cup ]3 ; +\infty[$, et $f(x) < 0$ sur $]2 ; 3[$.
+
+---
+
+### Cas 2 — $\Delta = 0$ (racine double)
+
+**Exemple à faire :** signe de $g(x) = x^2 - 4x + 4$.
+
+- $\Delta = (-4)^2 - 4\times1\times4 = 16-16 = 0$, donc $\Delta = 0$
+- Une seule racine (double) : $x_0 = \dfrac{4}{2} = 2$
+- Ici $a=1>0$
+
+<svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "320px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="320" height="100" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="35" x2="320" y2="35" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="80" y1="0" x2="80" y2="100" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="200" y1="0" x2="200" y2="100" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+
+  <text x="40" y="22" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">x</text>
+  <text x="200" y="22" fontSize="12" textAnchor="middle" fill="currentColor">2</text>
+
+  <text x="40" y="72" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">g(x)</text>
+  <text x="140" y="65" fontSize="14" textAnchor="middle" fill="#38bdf8">+</text>
+  <text x="200" y="60" fontSize="12" textAnchor="middle" fill="currentColor">0</text>
+  <text x="260" y="65" fontSize="14" textAnchor="middle" fill="#38bdf8">+</text>
+</svg>
+
+**Résultat** : $g(x) \ge 0$ pour tout $x$, avec $g(x) = 0$ uniquement en $x=2$. Le trinôme garde
+**toujours le signe de $a$**, sauf en sa racine double où il s'annule.
+
+---
+
+### Cas 3 — $\Delta < 0$ (aucune racine réelle)
+
+**Exemple à faire :** signe de $h(x) = x^2 + x + 3$.
+
+- $\Delta = 1^2 - 4\times1\times3 = 1-12 = -11$, donc $\Delta < 0$
+- Aucune racine réelle
+- Ici $a=1>0$
+
+<svg viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "320px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="320" height="90" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="35" x2="320" y2="35" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="80" y1="0" x2="80" y2="90" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+
+  <text x="40" y="22" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">x</text>
+  <text x="200" y="22" fontSize="12" textAnchor="middle" fill="currentColor">−∞ à +∞</text>
+
+  <text x="40" y="65" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">h(x)</text>
+  <text x="200" y="60" fontSize="14" textAnchor="middle" fill="#38bdf8">+ (toujours)</text>
+</svg>
+
+**Résultat** : $h(x) > 0$ pour **tout** $x \in \mathbb{R}$ — le trinôme garde toujours le signe
+de $a$, sans jamais s'annuler.
+
+<MiniQuiz
+  id="tableau-signes-jeu"
+  titre="🎮 Jeu : signe d'un trinôme"
+  questions={[
+    {
+      question: "Si Δ < 0, le signe du trinôme ax²+bx+c est :",
+      choix: [
+        "Toujours le signe de a, sans jamais s'annuler",
+        "Toujours négatif",
+        "Change de signe deux fois",
+      ],
+      reponse: 0,
+      explication: "Sans racine réelle, le trinôme garde constamment le signe de a sur tout ℝ.",
+    },
+    {
+      question: "Si Δ > 0, le trinôme est du signe de a :",
+      choix: ["Entre les deux racines", "À l'extérieur des deux racines", "Seulement en x=0"],
+      reponse: 1,
+      explication: "Entre les racines le trinôme est du signe de −a ; à l'extérieur, il est du signe de a.",
+    },
+    {
+      question: "Si Δ = 0, le trinôme :",
+      choix: [
+        "Change de signe en sa racine double",
+        "Garde le signe de a partout, en s'annulant uniquement à la racine double",
+        "Est toujours nul",
+      ],
+      reponse: 1,
+      explication: "Avec une racine double, le trinôme touche 0 en ce point mais garde le même signe (celui de a) de part et d'autre.",
+    },
+  ]}
+/>
+
+---
