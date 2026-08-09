@@ -1,0 +1,331 @@
+---
+titre: "Fonction logarithme népérien"
+ordre: 8
+partie: "Analyse"
+---
+
+## 🎯 L'idée du chapitre
+
+La fonction logarithme népérien est **la réciproque de l'exponentielle** : elle "défait" ce
+que l'exponentielle "fait". Elle transforme les produits en sommes, ce qui en fait un outil
+puissant pour résoudre des équations avec des puissances.
+
+Trois parties :
+1. Définition, propriétés algébriques et courbe
+2. Étude complète (limites, dérivée, variations)
+3. Croissances comparées
+
+---
+
+## Partie 1 — Définition et propriétés
+
+<VideoEmbed youtube="" title="Le cours : la fonction logarithme népérien" />
+
+### 1.1 Définition
+
+Pour tout réel $x > 0$, il existe un **unique** réel $y$ tel que $e^y = x$. On note ce réel
+$y = \ln(x)$ (« logarithme népérien de $x$ »).
+
+$$
+\ln(x) = y \iff e^y = x \qquad (x > 0)
+$$
+
+> 💡 Autrement dit : $\ln$ et $\exp$ sont **réciproques** l'une de l'autre. Composer l'une
+> avec l'autre "annule" l'effet :
+> $$
+> \ln(e^x) = x \quad \text{pour tout } x \in \mathbb{R} \qquad\qquad e^{\ln(x)} = x \quad \text{pour tout } x > 0
+> $$
+
+⚠️ $\ln(x)$ n'est défini **que pour $x > 0$**. C'est la première chose à vérifier dans tout
+exercice sur le logarithme.
+
+Deux valeurs particulières à connaître par cœur :
+
+$$
+\ln(1) = 0 \qquad\qquad \ln(e) = 1
+$$
+
+### 1.2 Propriétés algébriques
+
+<svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "380px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="380" height="210" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="35" x2="380" y2="35" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="0" y1="70" x2="380" y2="70" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="0" y1="105" x2="380" y2="105" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="0" y1="140" x2="380" y2="140" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="0" y1="175" x2="380" y2="175" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+
+  <text x="20" y="22" fontSize="12" fill="currentColor">ln(1) = 0</text>
+  <text x="20" y="57" fontSize="12" fill="currentColor">ln(e) = 1</text>
+  <text x="20" y="92" fontSize="12" fill="currentColor">ln(a × b) = ln(a) + ln(b)</text>
+  <text x="20" y="127" fontSize="12" fill="currentColor">ln(a / b) = ln(a) − ln(b)</text>
+  <text x="20" y="162" fontSize="12" fill="currentColor">ln(1 / a) = −ln(a)</text>
+  <text x="20" y="197" fontSize="12" fill="currentColor">ln(aⁿ) = n × ln(a)</text>
+</svg>
+
+Le logarithme transforme les produits en sommes, et les puissances en produits :
+
+$$
+\ln(ab) = \ln(a) + \ln(b) \qquad\qquad \ln\!\left(\frac{a}{b}\right) = \ln(a) - \ln(b)
+$$
+
+$$
+\ln\!\left(\frac{1}{a}\right) = -\ln(a) \qquad\qquad \ln(a^n) = n\ln(a) \qquad\qquad \ln(\sqrt{a}) = \frac12\ln(a)
+$$
+
+(toutes ces égalités supposent $a > 0$ et $b > 0$)
+
+> 💡 Ces règles sont l'exacte "traduction" des propriétés de l'exponentielle : là où $\exp$
+> transformait une somme en produit, $\ln$ fait l'inverse et transforme un produit en somme.
+
+<MiniQuiz
+  id="ln-definition"
+  titre="Mini-quiz : définition et propriétés"
+  questions={[
+    {
+      question: "ln(x) est défini pour :",
+      choix: ["Tout réel x", "x > 0 uniquement", "x ≥ 0 uniquement"],
+      reponse: 1,
+      explication: "Le logarithme népérien n'est défini que pour les réels strictement positifs.",
+    },
+    {
+      question: "ln(1) vaut :",
+      choix: ["0", "1", "e"],
+      reponse: 0,
+      explication: "Comme e⁰ = 1, on a bien ln(1) = 0.",
+    },
+    {
+      question: "ln(ab) est égal à :",
+      choix: ["ln(a) × ln(b)", "ln(a) + ln(b)", "ln(a) − ln(b)"],
+      reponse: 1,
+      explication: "Le logarithme transforme un produit en somme : ln(ab) = ln(a) + ln(b).",
+    },
+  ]}
+/>
+
+### 1.3 Signe et sens de variation
+
+- $\ln(x) < 0$ si $0 < x < 1$
+- $\ln(x) = 0$ si $x = 1$
+- $\ln(x) > 0$ si $x > 1$
+
+La fonction $\ln$ est **strictement croissante** sur $]0 ; +\infty[$.
+
+<svg viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "380px", margin: "16px auto", display: "block"}}>
+  <line x1="40" y1="10" x2="40" y2="250" stroke="#fb7185" strokeWidth="2" strokeDasharray="6 4" />
+  <line x1="20" y1="170" x2="360" y2="170" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" />
+  <path d="M 49 246 L 58 218 L 70 198 L 100 170 L 130 154 L 160 142 L 203 130 L 250 120 L 310 110 L 340 106"
+    fill="none" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+  <circle cx="100" cy="170" r="4" fill="#fb7185" />
+  <text x="94" y="188" fontSize="12" fill="currentColor" textAnchor="middle">(1 ; 0)</text>
+  <circle cx="203" cy="130" r="4" fill="#fb7185" />
+  <text x="211" y="127" fontSize="12" fill="currentColor">(e ; 1)</text>
+  <text x="46" y="24" fontSize="12" fill="#fb7185">x = 0 (asymptote)</text>
+</svg>
+
+- La courbe passe par $(1 ; 0)$ et $(e ; 1)$.
+- Elle est **symétrique** de la courbe de $\exp$ par rapport à la droite $y = x$ (réciprocité).
+- La droite $x = 0$ (l'axe des ordonnées) est **asymptote verticale** en $0^+$ (voir partie 2).
+
+
+---
+
+## Partie 2 — Étude complète
+
+<VideoEmbed youtube="" title="La fonction logarithme népérien et ses propriétés" />
+
+<svg viewBox="0 0 380 130" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "380px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="380" height="130" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <text x="190" y="20" fontSize="13" fontWeight="600" textAnchor="middle" fill="currentColor">Récapitulatif de l'étude</text>
+  <line x1="0" y1="30" x2="380" y2="30" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="62" x2="380" y2="62" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="0" y1="94" x2="380" y2="94" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="160" y1="30" x2="160" y2="130" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+
+  <text x="80" y="50" fontSize="12" fill="currentColor" textAnchor="middle">Dérivée</text>
+  <text x="270" y="50" fontSize="12" fill="#38bdf8" fontWeight="600" textAnchor="middle">(ln x)' = 1/x</text>
+
+  <text x="80" y="82" fontSize="12" fill="currentColor" textAnchor="middle">Limite en 0⁺</text>
+  <text x="270" y="82" fontSize="12" fill="#38bdf8" fontWeight="600" textAnchor="middle">−∞</text>
+
+  <text x="80" y="114" fontSize="12" fill="currentColor" textAnchor="middle">Limite en +∞</text>
+  <text x="270" y="114" fontSize="12" fill="#38bdf8" fontWeight="600" textAnchor="middle">+∞</text>
+</svg>
+
+### 2.1 Dérivée
+
+$$
+(\ln x)' = \frac{1}{x} \qquad (x > 0)
+$$
+
+**Cas général — dérivée de $\ln(u(x))$** (composée, avec $u(x) > 0$) :
+
+$$
+\left(\ln(u)\right)' = \frac{u'}{u}
+$$
+
+**Exemple à faire :** dériver $f(x) = \ln(2x+5)$ sur son ensemble de définition.
+
+- Ici $u(x) = 2x+5$, donc $u'(x) = 2$.
+- $f'(x) = \dfrac{2}{2x+5}$
+
+### 2.2 Limites
+
+$$
+\lim_{x \to 0^+} \ln(x) = -\infty \qquad\qquad \lim_{x \to +\infty} \ln(x) = +\infty
+$$
+
+> 💡 La limite $-\infty$ en $0^+$ explique pourquoi $x=0$ est **asymptote verticale** (vu en
+> Partie 1).
+
+### 2.3 Tableau de variations
+
+Comme $(\ln x)' = \dfrac{1}{x} > 0$ pour tout $x > 0$, la fonction logarithme est
+**strictement croissante** sur tout $]0 ; +\infty[$, sans jamais redescendre.
+
+<svg viewBox="0 0 380 170" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "380px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="380" height="170" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1.2" />
+  <line x1="72" y1="0" x2="72" y2="170" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1.2" />
+  <line x1="0" y1="36" x2="380" y2="36" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1.2" />
+  <line x1="72" y1="76" x2="380" y2="76" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1.2" />
+  <line x1="122" y1="36" x2="122" y2="170" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1" strokeDasharray="3 3" />
+  <line x1="328" y1="36" x2="328" y2="170" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1" strokeDasharray="3 3" />
+
+  <text x="36" y="22" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">x</text>
+  <text x="122" y="22" fontSize="12" textAnchor="middle" fill="currentColor">0</text>
+  <text x="328" y="22" fontSize="12" textAnchor="middle" fill="currentColor">+∞</text>
+
+  <text x="36" y="52" fontSize="10.5" textAnchor="middle" fill="currentColor">Signe de</text>
+  <text x="36" y="65" fontSize="10.5" textAnchor="middle" fill="currentColor">(ln x)'</text>
+  <text x="225" y="60" fontSize="15" fontWeight="600" textAnchor="middle" fill="#38bdf8">+</text>
+
+  <text x="36" y="112" fontSize="10.5" textAnchor="middle" fill="currentColor">Variations</text>
+  <text x="36" y="125" fontSize="10.5" textAnchor="middle" fill="currentColor">de ln(x)</text>
+  <path d="M 130 155 L 320 92" stroke="#38bdf8" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+  <text x="125" y="165" fontSize="11" textAnchor="middle" fill="currentColor">−∞</text>
+  <text x="330" y="85" fontSize="11" textAnchor="middle" fill="currentColor">+∞</text>
+</svg>
+
+**Exemple à faire :** résoudre $\ln(3x-2) \le 0$ sur son ensemble de définition.
+
+- **Condition d'existence** : $3x-2 > 0 \iff x > \dfrac{2}{3}$.
+- Comme $0 = \ln(1)$ et que $\ln$ est strictement croissante, on compare directement :
+
+$$
+\ln(3x-2) \le \ln(1) \iff 3x-2 \le 1 \iff x \le 1
+$$
+
+- En combinant avec la condition d'existence : $S = \left]\dfrac{2}{3} ; 1\right]$.
+
+<MiniQuiz
+  id="ln-etude"
+  titre="Mini-quiz : étude complète"
+  questions={[
+    {
+      question: "La dérivée de ln(x) est :",
+      choix: ["1/x", "x", "ln(x)"],
+      reponse: 0,
+      explication: "C'est la propriété fondamentale à connaître : (ln x)' = 1/x pour x > 0.",
+    },
+    {
+      question: "lim(x→0⁺) ln(x) vaut :",
+      choix: ["0", "-∞", "+∞"],
+      reponse: 1,
+      explication: "Quand x s'approche de 0 par valeurs positives, ln(x) tend vers -∞.",
+    },
+    {
+      question: "Pour résoudre ln(3x−2) ≤ 0, il faut d'abord vérifier :",
+      choix: ["Que x est positif", "La condition d'existence 3x−2 > 0", "Que 3x−2 ≤ 1"],
+      reponse: 1,
+      explication: "Avant toute comparaison, il faut s'assurer que l'expression dans le ln est bien strictement positive.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 3 — Croissances comparées
+
+Le logarithme croît **beaucoup plus lentement** que n'importe quelle puissance de $x$, même
+très petite. C'est le symétrique des croissances comparées vues avec $e^x$.
+
+### Résultats à connaître
+
+$$
+\lim_{x \to +\infty} \frac{\ln(x)}{x} = 0 \qquad\qquad \lim_{x \to 0^+} x\,\ln(x) = 0
+$$
+
+> 💡 En $+\infty$, $x$ "écrase" $\ln(x)$ — même en divisant par $x$, le logarithme reste
+> négligeable. En $0^+$, c'est $x$ qui l'emporte : bien que $\ln(x)$ tende vers $-\infty$,
+> $x$ tend vers $0$ tellement vite qu'il écrase le logarithme.
+
+**Exemple simple à faire :** déterminer $\displaystyle\lim_{x \to +\infty}
+\bigl(\ln(x) - x\bigr)$. Ici $\ln(x) \to +\infty$ et $-x \to -\infty$ : ce n'est pas une
+F.I. directe, mais on factorise quand même pour être rigoureux :
+
+$$
+\ln(x) - x = x\left(\frac{\ln(x)}{x} - 1\right)
+$$
+
+Or $\displaystyle\lim_{x\to+\infty} \frac{\ln(x)}{x} = 0$ (croissances comparées), donc
+$\displaystyle\lim_{x\to+\infty}\left(\frac{\ln(x)}{x}-1\right) = -1$.
+
+Comme $\displaystyle\lim_{x\to+\infty} x = +\infty$ :
+
+$$
+\lim_{x \to +\infty} (\ln(x) - x) = -\infty
+$$
+
+**Exemple moyen à faire :** déterminer $\displaystyle\lim_{x \to 0^+} x^2 \ln(x)$ — forme
+indéterminée $0 \times \infty$.
+
+On réécrit en faisant apparaître le résultat de croissances comparées connu :
+
+$$
+x^2 \ln(x) = x \times \bigl(x\ln(x)\bigr)
+$$
+
+Or $\displaystyle\lim_{x\to0^+} x\ln(x) = 0$ (croissances comparées) et
+$\displaystyle\lim_{x\to0^+} x = 0$, donc par produit :
+
+$$
+\lim_{x \to 0^+} x^2\ln(x) = 0
+$$
+
+<MiniQuiz
+  id="ln-croissances-comparees"
+  titre="Mini-quiz : croissances comparées"
+  questions={[
+    {
+      question: "lim(x→+∞) ln(x)/x vaut :",
+      choix: ["0", "1", "+∞"],
+      reponse: 0,
+      explication: "x l'emporte toujours sur ln(x) en +∞, même en divisant : la limite est 0.",
+    },
+    {
+      question: "lim(x→0⁺) x·ln(x) vaut :",
+      choix: ["-∞", "0", "+∞"],
+      reponse: 1,
+      explication: "En 0⁺, x tend vers 0 tellement vite qu'il écrase ln(x) qui tend vers -∞ : le produit tend vers 0.",
+    },
+    {
+      question: "De façon générale, en +∞, x l'emporte toujours sur :",
+      choix: ["ln(x), quelle que soit la puissance comparée", "Seulement sur ln(x)/2", "Il ne l'emporte jamais"],
+      reponse: 0,
+      explication: "Les croissances comparées disent que toute puissance de x, même petite, écrase ln(x) en +∞.",
+    },
+  ]}
+/>
+
+## ✅ À retenir
+
+- **Définition** : $\ln$ est la réciproque de $\exp$ : $\ln(x) = y \iff e^y = x$, définie
+  pour $x > 0$.
+- **Propriétés algébriques** : transforme produits en sommes ($\ln(ab) = \ln(a)+\ln(b)$, etc.).
+- $\ln(x) > 0 \iff x > 1$ ; fonction strictement croissante sur $]0;+\infty[$.
+- $(\ln u)' = \dfrac{u'}{u}$ pour une composée.
+- Limites : $-\infty$ en $0^+$, $+\infty$ en $+\infty$.
+- **Croissances comparées** : $\ln(x)$ est toujours écrasé par $x^n$ (même petit $n$) en
+  $+\infty$, et par $x$ en $0^+$.
+
+🎉 Bravo, tu maîtrises maintenant les deux fonctions clés de l'analyse : $\exp$ et $\ln$ !

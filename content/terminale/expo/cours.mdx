@@ -1,0 +1,259 @@
+---
+titre: "Fonction exponentielle"
+ordre: 6
+partie: "Analyse"
+---
+
+
+## Partie 1 — Définition et propriétés algébriques
+
+### 1.1 Définition
+
+Il existe une **unique** fonction $f$ dérivable sur $\mathbb{R}$ telle que :
+$$
+f' = f \qquad \text{et} \qquad f(0) = 1
+$$
+
+Cette fonction est appelée **fonction exponentielle**, notée $\exp$, ou plus couramment $e^x$.
+
+> 💡 Autrement dit : c'est la seule fonction qui **ne change pas quand on la dérive**, et qui
+> vaut $1$ en $x=0$. On admet son existence (la démonstration complète n'est pas exigée).
+
+Le nombre $e = \exp(1) \approx 2{,}718$ est appelé **nombre d'Euler**.
+
+### 1.2 Propriétés algébriques
+
+<svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "380px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="380" height="210" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="35" x2="380" y2="35" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="0" y1="70" x2="380" y2="70" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="0" y1="105" x2="380" y2="105" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="0" y1="140" x2="380" y2="140" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="0" y1="175" x2="380" y2="175" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+
+  <text x="20" y="22" fontSize="12" fill="currentColor">e⁰ = 1</text>
+  <text x="20" y="57" fontSize="12" fill="currentColor">e¹ = e ≈ 2,718</text>
+  <text x="20" y="92" fontSize="12" fill="currentColor">eᵃ⁺ᵇ = eᵃ × eᵇ</text>
+  <text x="20" y="127" fontSize="12" fill="currentColor">eᵃ⁻ᵇ = eᵃ / eᵇ</text>
+  <text x="20" y="162" fontSize="12" fill="currentColor">e⁻ᵃ = 1 / eᵃ</text>
+  <text x="20" y="197" fontSize="12" fill="currentColor">(eᵃ)ⁿ = eᵃⁿ</text>
+</svg>
+
+> 💡 Ces règles sont **identiques** à celles des puissances — normal, $e^x$ suit exactement
+> les mêmes lois de calcul que $a^n$.
+
+### 1.3 Signe
+
+Pour tout réel $x$ : $e^x > 0$ (**jamais nulle, toujours strictement positive**). C'est une
+propriété immédiate de la définition, qu'on utilisera tout au long de l'étude qui suit.
+
+---
+
+## Partie 2 — Étude complète
+
+### 2.1 Dérivée
+
+$$
+(e^x)' = e^x
+$$
+
+C'est **la** propriété fondamentale de cette fonction : elle est sa propre dérivée.
+
+**Cas général — dérivée de $e^{u(x)}$** (composée) :
+$$
+\left(e^{u}\right)' = u' \, e^{u}
+$$
+
+**Exemple à faire :** dériver $f(x) = e^{3x+1}$.
+- Ici $u(x) = 3x+1$, donc $u'(x)=3$.
+- $f'(x) = 3\,e^{3x+1}$
+
+### 2.2 Limites
+
+$$
+\lim_{x \to -\infty} e^x = 0 \qquad\qquad \lim_{x \to +\infty} e^x = +\infty
+$$
+
+### 2.3 Sens de variation et tableau de variations
+
+Comme $(e^x)' = e^x > 0$ pour tout $x$ (propriété 1.3), la fonction exponentielle est
+**strictement croissante** sur tout $\mathbb{R}$.
+<svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "360px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="360" height="140" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="35" x2="360" y2="35" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="75" x2="360" y2="75" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="70" y1="0" x2="70" y2="140" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+
+  <text x="35" y="22" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">x</text>
+  <text x="120" y="22" fontSize="12" textAnchor="middle" fill="currentColor">−∞</text>
+  <text x="310" y="22" fontSize="12" textAnchor="middle" fill="currentColor">+∞</text>
+
+  <text x="35" y="59" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">(eˣ)'</text>
+  <text x="215" y="47" fontSize="14" textAnchor="middle" fill="#38bdf8">+</text>
+
+  <text x="35" y="112" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">eˣ</text>
+  <path d="M 90 120 L 340 85" stroke="#38bdf8" strokeWidth="2.5" fill="none" />
+  <text x="100" y="132" fontSize="11" fill="currentColor">0</text>
+  <text x="335" y="78" fontSize="11" fill="currentColor">+∞</text>
+</svg>
+
+### 2.4 Récapitulatif de l'étude
+
+<svg viewBox="0 0 380 130" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "380px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="380" height="130" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="30" x2="380" y2="30" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="62" x2="380" y2="62" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="0" y1="94" x2="380" y2="94" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+  <line x1="160" y1="0" x2="160" y2="130" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+
+  <text x="80" y="20" fontSize="12" fill="currentColor" textAnchor="middle">Dérivée</text>
+  <text x="270" y="20" fontSize="12" fill="#38bdf8" fontWeight="600" textAnchor="middle">(eˣ)' = eˣ</text>
+
+  <text x="80" y="50" fontSize="12" fill="currentColor" textAnchor="middle">Limite en −∞</text>
+  <text x="270" y="50" fontSize="12" fill="#38bdf8" fontWeight="600" textAnchor="middle">0</text>
+
+  <text x="80" y="82" fontSize="12" fill="currentColor" textAnchor="middle">Limite en +∞</text>
+  <text x="270" y="82" fontSize="12" fill="#38bdf8" fontWeight="600" textAnchor="middle">+∞</text>
+
+  <text x="80" y="114" fontSize="12" fill="currentColor" textAnchor="middle">Variation</text>
+  <text x="270" y="114" fontSize="12" fill="#38bdf8" fontWeight="600" textAnchor="middle">croissante sur ℝ</text>
+</svg>
+
+**Exemple à faire :** résoudre $e^{2x-1} > 1$.
+
+Comme $1 = e^0$ et que $\exp$ est strictement croissante, on compare directement les exposants :
+$$
+e^{2x-1} > e^0 \iff 2x-1 > 0 \iff x > \frac12
+$$
+
+<MiniQuiz
+  id="expo-etude"
+  titre="Mini-quiz : étude complète"
+  questions={[
+    {
+      question: "La dérivée de eˣ est :",
+      choix: ["x·e^(x-1)", "eˣ", "0"],
+      reponse: 1,
+      explication: "C'est la propriété fondamentale : la fonction exponentielle est sa propre dérivée.",
+    },
+    {
+      question: "lim(x→−∞) eˣ vaut :",
+      choix: ["0", "−∞", "1"],
+      reponse: 0,
+      explication: "L'exponentielle tend vers 0 en −∞.",
+    },
+    {
+      question: "e^(2x-1) > 1 équivaut à :",
+      choix: ["2x−1 > 0", "2x−1 < 0", "x > 1"],
+      reponse: 0,
+      explication: "Comme exp est strictement croissante et 1=e⁰, on compare directement les exposants : 2x−1 > 0.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 3 — Courbe représentative
+
+Maintenant que l'étude est faite (partie 2), on peut tracer la courbe : croissante sur
+$\mathbb{R}$, partant de $0$ (sans jamais l'atteindre) en $-\infty$, et montant vers $+\infty$.
+
+<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "380px", margin: "16px auto", display: "block"}}>
+  <line x1="20" y1="210" x2="360" y2="210" stroke="#fb7185" strokeWidth="2" strokeDasharray="6 4" />
+  <line x1="140" y1="10" x2="140" y2="220" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.5" />
+  <path d="M 20 208.8 Q 60 206 100 200 Q 140 185 160 169 Q 180 142 200 98 Q 212 59 220 30"
+    fill="none" stroke="#38bdf8" strokeWidth="3" />
+  <circle cx="140" cy="185" r="4" fill="#fb7185" />
+  <text x="148" y="182" fontSize="12" fill="currentColor">(0 ; 1)</text>
+  <circle cx="180" cy="142" r="4" fill="#fb7185" />
+  <text x="188" y="140" fontSize="12" fill="currentColor">(1 ; e)</text>
+  <text x="230" y="205" fontSize="12" fill="#fb7185">y = 0 (asymptote)</text>
+</svg>
+
+- La courbe passe par $(0 ; 1)$ et $(1 ; e)$ — retrouvés directement depuis les propriétés
+  algébriques (1.2).
+- Elle est toujours **au-dessus de l'axe des abscisses** (signe, vu en 1.3).
+- La droite $y=0$ est **asymptote horizontale** en $-\infty$ — conséquence directe de la limite
+  calculée en 2.2.
+- La tangente en $x=0$ a pour équation $y = x+1$ (avec $f'(0)=e^0=1$ comme pente).
+
+---
+
+## Partie 4 — Croissances comparées
+
+L'exponentielle croît **beaucoup plus vite** que n'importe quelle puissance de $x$, même très
+grande. C'est ce qu'on appelle les **croissances comparées**.
+
+### Résultats à connaître
+
+$$
+\lim_{x \to +\infty} \frac{e^x}{x} = +\infty \qquad\qquad \lim_{x \to -\infty} x\,e^x = 0
+$$
+
+> 💡 En $+\infty$, $e^x$ "écrase" $x$ — même en divisant par $x$, l'exponentielle continue de
+> l'emporter. En $-\infty$, c'est l'inverse : $e^x$ tend vers $0$ tellement vite qu'il écrase
+> même un $x$ qui tend vers $-\infty$.
+
+**Exemple simple à faire :** déterminer $\displaystyle\lim_{x \to +\infty} \left(e^x - x\right)$
+— forme indéterminée $\infty-\infty$.
+
+On factorise par $e^x$ :
+$$
+e^x - x = e^x\left(1 - \frac{x}{e^x}\right)
+$$
+Or $\displaystyle\lim_{x\to+\infty} \frac{x}{e^x} = 0$ (croissances comparées, cas inverse de
+$\frac{e^x}{x}$), donc $\displaystyle\lim_{x\to+\infty}\left(1-\frac{x}{e^x}\right) = 1$.
+
+Comme $\displaystyle\lim_{x\to+\infty} e^x = +\infty$ :
+$$
+\lim_{x \to +\infty} (e^x - x) = +\infty
+$$
+
+**Exemple moyen à faire :** déterminer $\displaystyle\lim_{x \to +\infty}
+\dfrac{e^x}{x^2}$ — forme indéterminée $\dfrac{\infty}{\infty}$.
+
+On réécrit en faisant apparaître le résultat de croissances comparées connu :
+$$
+\frac{e^x}{x^2} = \frac{e^x}{x} \times \frac1x
+$$
+On admet le résultat général de croissances comparées
+$\displaystyle\lim_{x\to+\infty} \dfrac{e^x}{x^n} = +\infty$ pour tout entier $n$, donc :
+$$
+\lim_{x \to +\infty} \frac{e^x}{x^2} = +\infty
+$$
+
+<MiniQuiz
+  id="croissances-comparees"
+  titre="Mini-quiz : croissances comparées"
+  questions={[
+    {
+      question: "lim(x→+∞) eˣ/x vaut :",
+      choix: ["0", "1", "+∞"],
+      reponse: 2,
+      explication: "L'exponentielle l'emporte toujours sur x, même divisée par x : la limite est +∞.",
+    },
+    {
+      question: "lim(x→−∞) x·eˣ vaut :",
+      choix: ["−∞", "0", "+∞"],
+      reponse: 1,
+      explication: "En −∞, eˣ tend vers 0 tellement vite qu'il écrase x : le produit tend vers 0.",
+    },
+    {
+      question: "De façon générale, en +∞, eˣ l'emporte toujours sur :",
+      choix: ["Toute puissance xⁿ, aussi grande soit n", "Seulement sur x", "Seulement sur x²"],
+      reponse: 0,
+      explication: "Les croissances comparées disent que eˣ écrase n'importe quelle puissance de x en +∞, quel que soit l'exposant n.",
+    },
+  ]}
+/>
+
+## ✅ À retenir
+
+- **Définition** : $\exp$ est l'unique fonction telle que $f'=f$ et $f(0)=1$.
+- **Propriétés algébriques** : identiques à celles des puissances ($e^{a+b}=e^a e^b$, etc.).
+- **Étude** : $(e^x)'=e^x$, croissante sur $\mathbb{R}$, limites $0$ en $-\infty$ et $+\infty$
+  en $+\infty$.
+- **Courbe** : construite à partir de l'étude — passe par $(0;1)$ et $(1;e)$, asymptote $y=0$.
+- **Croissances comparées** : $e^x$ l'emporte toujours sur $x^n$ en $+\infty$, quel que soit $n$.
+
+🎉 Bravo, tu maîtrises maintenant la fonction la plus importante de l'analyse !
