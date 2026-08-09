@@ -95,13 +95,24 @@ $$
 
 ### 2.1 Règles de calcul sur les puissances
 
-| Règle | Exemple |
-|---|---|
-| $a^m \times a^n = a^{m+n}$ | $2^3 \times 2^2 = 2^5 = 32$ |
-| $\dfrac{a^m}{a^n} = a^{m-n}$ | $\dfrac{2^5}{2^2} = 2^3 = 8$ |
-| $(a^m)^n = a^{mn}$ | $(2^2)^3 = 2^6 = 64$ |
-| $a^{-n} = \dfrac{1}{a^n}$ | $2^{-3} = \dfrac{1}{8}$ |
-| $a^0 = 1$ (pour $a \ne 0$) | $5^0 = 1$ |
+<div style={{display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "12px", margin: "20px 0"}}>
+  <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: "10px", padding: "14px", background: "rgba(56,189,248,0.06)"}}>
+    <p style={{fontFamily: "monospace", fontSize: "15px", margin: "0 0 6px"}}>$a^m \times a^n = a^{m+n}$</p>
+    <p style={{fontSize: "13px", opacity: 0.7, margin: 0}}>Ex : $2^3 \times 2^2 = 2^5 = 32$</p>
+  </div>
+  <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: "10px", padding: "14px", background: "rgba(56,189,248,0.06)"}}>
+    <p style={{fontFamily: "monospace", fontSize: "15px", margin: "0 0 6px"}}>$\dfrac{a^m}{a^n} = a^{m-n}$</p>
+    <p style={{fontSize: "13px", opacity: 0.7, margin: 0}}>Ex : $\dfrac{2^5}{2^2} = 2^3 = 8$</p>
+  </div>
+  <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: "10px", padding: "14px", background: "rgba(56,189,248,0.06)"}}>
+    <p style={{fontFamily: "monospace", fontSize: "15px", margin: "0 0 6px"}}>$(a^m)^n = a^{mn}$</p>
+    <p style={{fontSize: "13px", opacity: 0.7, margin: 0}}>Ex : $(2^2)^3 = 2^6 = 64$</p>
+  </div>
+  <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: "10px", padding: "14px", background: "rgba(56,189,248,0.06)"}}>
+    <p style={{fontFamily: "monospace", fontSize: "15px", margin: "0 0 6px"}}>$a^{-n} = \dfrac{1}{a^n}$</p>
+    <p style={{fontSize: "13px", opacity: 0.7, margin: 0}}>Ex : $2^{-3} = \dfrac{1}{8}$</p>
+  </div>
+</div>
 
 ### 2.2 Racine carrée — définition et existence
 
@@ -110,12 +121,20 @@ dont le carré vaut $x$ : $(\sqrt{x})^2 = x$.
 
 ### 2.3 Propriétés de la racine carrée
 
-| Règle | Condition |
-|---|---|
-| $\sqrt{a \times b} = \sqrt{a} \times \sqrt{b}$ | $a \ge 0$ et $b \ge 0$ |
-| $\sqrt{\dfrac{a}{b}} = \dfrac{\sqrt{a}}{\sqrt{b}}$ | $a \ge 0$ et $b > 0$ |
-| $\sqrt{a^2} = \lvert a \rvert$ | pour tout $a$ |
-
+<div style={{display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px", margin: "20px 0"}}>
+  <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: "10px", padding: "14px", background: "rgba(56,189,248,0.06)"}}>
+    <p style={{fontFamily: "monospace", fontSize: "15px", margin: "0 0 6px"}}>$\sqrt{a \times b} = \sqrt{a} \times \sqrt{b}$</p>
+    <p style={{fontSize: "13px", opacity: 0.7, margin: 0}}>Condition : $a \ge 0$ et $b \ge 0$</p>
+  </div>
+  <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: "10px", padding: "14px", background: "rgba(56,189,248,0.06)"}}>
+    <p style={{fontFamily: "monospace", fontSize: "15px", margin: "0 0 6px"}}>$\sqrt{\dfrac{a}{b}} = \dfrac{\sqrt{a}}{\sqrt{b}}$</p>
+    <p style={{fontSize: "13px", opacity: 0.7, margin: 0}}>Condition : $a \ge 0$ et $b > 0$</p>
+  </div>
+  <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: "10px", padding: "14px", background: "rgba(56,189,248,0.06)"}}>
+    <p style={{fontFamily: "monospace", fontSize: "15px", margin: "0 0 6px"}}>$\sqrt{a^2} = \lvert a \rvert$</p>
+    <p style={{fontSize: "13px", opacity: 0.7, margin: 0}}>Valable pour tout $a$</p>
+  </div>
+</div>
 > ⚠️ Piège classique : $\sqrt{a+b} \ne \sqrt{a} + \sqrt{b}$ — la racine carrée **ne se
 > distribue jamais** sur une somme.
 
@@ -178,12 +197,20 @@ $$
 Contrairement à une équation du premier degré, $x^2 = k$ peut avoir **0, 1 ou 2 solutions**
 selon le signe de $k$ :
 
-| Cas | Solutions |
-|---|---|
-| $k > 0$ | deux solutions : $x = \sqrt{k}$ et $x = -\sqrt{k}$ |
-| $k = 0$ | une seule solution : $x = 0$ |
-| $k < 0$ | aucune solution réelle (un carré ne peut pas être négatif) |
-
+<div style={{display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "12px", margin: "20px 0"}}>
+  <div style={{border: "1px solid rgba(56,189,248,0.3)", borderRadius: "10px", padding: "14px", background: "rgba(56,189,248,0.06)"}}>
+    <p style={{fontFamily: "monospace", fontSize: "15px", margin: "0 0 6px", fontWeight: 600}}>$k > 0$</p>
+    <p style={{fontSize: "13px", opacity: 0.8, margin: 0}}>Deux solutions : $x=\sqrt{k}$ et $x=-\sqrt{k}$</p>
+  </div>
+  <div style={{border: "1px solid rgba(56,189,248,0.3)", borderRadius: "10px", padding: "14px", background: "rgba(56,189,248,0.06)"}}>
+    <p style={{fontFamily: "monospace", fontSize: "15px", margin: "0 0 6px", fontWeight: 600}}>$k = 0$</p>
+    <p style={{fontSize: "13px", opacity: 0.8, margin: 0}}>Une seule solution : $x=0$</p>
+  </div>
+  <div style={{border: "1px solid rgba(251,113,133,0.3)", borderRadius: "10px", padding: "14px", background: "rgba(251,113,133,0.06)"}}>
+    <p style={{fontFamily: "monospace", fontSize: "15px", margin: "0 0 6px", fontWeight: 600}}>$k < 0$</p>
+    <p style={{fontSize: "13px", opacity: 0.8, margin: 0}}>Aucune solution réelle</p>
+  </div>
+</div>
 <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "420px", margin: "0 auto", display: "block"}}>
   <line x1="20" y1="230" x2="380" y2="230" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
   <line x1="200" y1="20" x2="200" y2="245" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />

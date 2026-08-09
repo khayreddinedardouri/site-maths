@@ -68,21 +68,44 @@ toujours dans le même ordre :
 
 ## 4. Exemple rédigé
 
-On veut démontrer que pour tout entier naturel $n$ :
-$1 + 3 + 5 + \dots + (2n+1) = (n+1)^2$.
-
-- **Initialisation** ($n=0$) : à gauche il n'y a que le terme $1$ ; à droite,
-  $(0+1)^2 = 1$. Les deux valeurs sont égales : l'initialisation est vérifiée.
-- **Hérédité** : on suppose que pour un entier $k$ fixé,
-  $1 + 3 + \dots + (2k+1) = (k+1)^2$ (hypothèse de récurrence). On ajoute le terme
-  suivant, $(2k+3)$, aux deux membres :
-
+On considère la suite $(u_n)$ définie par $u_0 = 1$ et $u_{n+1} = 2u_n + 1$. On veut démontrer
+que pour tout entier naturel $n$ :
 $$
-1 + 3 + \dots + (2k+1) + (2k+3) = (k+1)^2 + (2k+3) = k^2+2k+1+2k+3 = k^2+4k+4 = (k+2)^2
+u_n = 2^{n+1} - 1
 $$
 
-  On retrouve bien la formule au rang $k+1$ : $(k+1+1)^2$. Donc $P(k+1)$ est vraie.
-- **Conclusion** : la propriété est vraie pour tout entier naturel $n$.
+**Étape 1 — Initialisation** ($n=0$) :
+
+À gauche : $u_0 = 1$ (donné dans l'énoncé). À droite : $2^{0+1} - 1 = 2 - 1 = 1$.
+
+Les deux valeurs sont égales : l'initialisation est vérifiée.
+
+**Étape 2 — Hérédité**
+
+On suppose que pour un entier $k$ fixé, la propriété est vraie (hypothèse de récurrence) :
+$$
+u_k = 2^{k+1} - 1
+$$
+
+On veut montrer qu'elle reste vraie au rang suivant, $k+1$, c'est-à-dire que
+$u_{k+1} = 2^{k+2} - 1$. On part de la relation de récurrence donnée par l'énoncé :
+$$
+u_{k+1} = 2u_k + 1
+$$
+
+On remplace $u_k$ par l'expression de l'hypothèse de récurrence :
+$$
+u_{k+1} = 2\left(2^{k+1} - 1\right) + 1 = 2^{k+2} - 2 + 1 = 2^{k+2} - 1
+$$
+
+On retrouve bien la formule attendue au rang $k+1$. Donc $P(k+1)$ est vraie.
+
+**Étape 3 — Conclusion**
+
+D'après le principe de récurrence, la propriété est vraie pour tout entier naturel $n$ :
+$$
+u_n = 2^{n+1} - 1
+$$
 
 <MiniQuiz
   id="recurrence-exemple"

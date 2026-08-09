@@ -104,15 +104,54 @@ $f'$, qui à chaque $x$ associe le nombre dérivé $f'(x)$.
 
 ### 2.2 Dérivées des fonctions usuelles
 
-| $f(x)$ | $f'(x)$ | Remarque |
-|---|---|---|
-| $k$ (nombre constant) | $0$ | une constante ne varie pas |
-| $x$ | $1$ | pente constante égale à 1 |
-| $x^2$ | $2x$ | cas particulier de $x^n$ avec $n=2$ |
-| $x^3$ | $3x^2$ | cas particulier de $x^n$ avec $n=3$ |
-| $x^n$ | $n\,x^{n-1}$ | formule générale, $n$ entier |
-| $\dfrac{1}{x}$ | $-\dfrac{1}{x^2}$ | définie pour $x \ne 0$ |
-| $\sqrt{x}$ | $\dfrac{1}{2\sqrt{x}}$ | définie pour $x > 0$ |
+<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "380px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="400" height="240" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.2" />
+
+  <line x1="90" y1="0" x2="90" y2="240" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.2" />
+  <line x1="190" y1="0" x2="190" y2="240" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.2" />
+
+  <line x1="0" y1="30" x2="400" y2="30" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.2" />
+  <line x1="0" y1="60" x2="400" y2="60" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.2" />
+  <line x1="0" y1="90" x2="400" y2="90" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.2" />
+  <line x1="0" y1="120" x2="400" y2="120" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.2" />
+  <line x1="0" y1="150" x2="400" y2="150" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.2" />
+  <line x1="0" y1="180" x2="400" y2="180" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.2" />
+  <line x1="0" y1="210" x2="400" y2="210" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.2" />
+
+  <rect x="0" y="0" width="400" height="30" fill="#38bdf8" opacity="0.08" />
+
+  <text x="45" y="19" fontSize="11" fontWeight="600" fill="currentColor" textAnchor="middle">f(x)</text>
+  <text x="140" y="19" fontSize="11" fontWeight="600" fill="currentColor" textAnchor="middle">f'(x)</text>
+  <text x="295" y="19" fontSize="11" fontWeight="600" fill="currentColor" textAnchor="middle">Remarque</text>
+
+  <text x="45" y="49" fontSize="11" fill="currentColor" textAnchor="middle">k (constante)</text>
+  <text x="140" y="49" fontSize="11" fontWeight="600" fill="#38bdf8" textAnchor="middle">0</text>
+  <text x="295" y="49" fontSize="10" fill="currentColor" opacity="0.75" textAnchor="middle">constante ne varie pas</text>
+
+  <text x="45" y="79" fontSize="11" fill="currentColor" textAnchor="middle">x</text>
+  <text x="140" y="79" fontSize="11" fontWeight="600" fill="#38bdf8" textAnchor="middle">1</text>
+  <text x="295" y="79" fontSize="10" fill="currentColor" opacity="0.75" textAnchor="middle">pente constante = 1</text>
+
+  <text x="45" y="109" fontSize="11" fill="currentColor" textAnchor="middle">x²</text>
+  <text x="140" y="109" fontSize="11" fontWeight="600" fill="#38bdf8" textAnchor="middle">2x</text>
+  <text x="295" y="109" fontSize="10" fill="currentColor" opacity="0.75" textAnchor="middle">xⁿ avec n=2</text>
+
+  <text x="45" y="139" fontSize="11" fill="currentColor" textAnchor="middle">x³</text>
+  <text x="140" y="139" fontSize="11" fontWeight="600" fill="#38bdf8" textAnchor="middle">3x²</text>
+  <text x="295" y="139" fontSize="10" fill="currentColor" opacity="0.75" textAnchor="middle">xⁿ avec n=3</text>
+
+  <text x="45" y="169" fontSize="11" fill="currentColor" textAnchor="middle">xⁿ</text>
+  <text x="140" y="169" fontSize="11" fontWeight="600" fill="#38bdf8" textAnchor="middle">n·xⁿ⁻¹</text>
+  <text x="295" y="169" fontSize="10" fill="currentColor" opacity="0.75" textAnchor="middle">formule générale</text>
+
+  <text x="45" y="199" fontSize="11" fill="currentColor" textAnchor="middle">1/x</text>
+  <text x="140" y="199" fontSize="11" fontWeight="600" fill="#38bdf8" textAnchor="middle">−1/x²</text>
+  <text x="295" y="199" fontSize="10" fill="currentColor" opacity="0.75" textAnchor="middle">x ≠ 0</text>
+
+  <text x="45" y="229" fontSize="11" fill="currentColor" textAnchor="middle">√x</text>
+  <text x="140" y="229" fontSize="11" fontWeight="600" fill="#38bdf8" textAnchor="middle">1/(2√x)</text>
+  <text x="295" y="229" fontSize="10" fill="currentColor" opacity="0.75" textAnchor="middle">x &gt; 0</text>
+</svg>
 
 > ⚠️ Piège fréquent : la dérivée de $x^n$ fait apparaître $n$ **devant** et $n-1$ **en
 > exposant**. Beaucoup d'élèves oublient de baisser l'exposant d'une unité.

@@ -97,11 +97,34 @@ Soit $(u_n)$ définie par $u_0 = 1$ et $u_{n+1} = 2u_n - 3$ pour tout $n$.
 
 ### ✅ À retenir (partie 1)
 
-| | Arithmétique | Géométrique |
-|---|---|---|
-| Relation | $u_{n+1} = u_n + r$ | $u_{n+1} = q\,u_n$ |
-| Terme général | $u_n = u_0 + nr$ | $u_n = u_0\,q^{\,n}$ |
-| Opération | On **ajoute** | On **multiplie** |
+<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "520px", margin: "20px auto", display: "block", fontFamily: "inherit"}}>
+  <rect x="0" y="0" width="500" height="220" rx="14" fill="none" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.5" />
+
+  <line x1="170" y1="0" x2="170" y2="220" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.5" />
+  <line x1="335" y1="0" x2="335" y2="220" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.5" />
+
+  <line x1="0" y1="46" x2="500" y2="46" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.5" />
+  <line x1="0" y1="110" x2="500" y2="110" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.5" />
+  <line x1="0" y1="166" x2="500" y2="166" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1.5" />
+
+  <rect x="170" y="0" width="165" height="46" fill="#38bdf8" opacity="0.08" />
+  <rect x="335" y="0" width="165" height="46" fill="#fb7185" opacity="0.08" />
+
+  <text x="252" y="28" fontSize="15" fontWeight="600" fill="#38bdf8" textAnchor="middle">Arithmétique</text>
+  <text x="417" y="28" fontSize="15" fontWeight="600" fill="#fb7185" textAnchor="middle">Géométrique</text>
+
+  <text x="16" y="82" fontSize="13" fill="currentColor" opacity="0.7">Relation</text>
+  <text x="252" y="82" fontSize="14" fill="currentColor" textAnchor="middle">uₙ₊₁ = uₙ + r</text>
+  <text x="417" y="82" fontSize="14" fill="currentColor" textAnchor="middle">uₙ₊₁ = q·uₙ</text>
+
+  <text x="16" y="142" fontSize="13" fill="currentColor" opacity="0.7">Terme général</text>
+  <text x="252" y="142" fontSize="14" fill="currentColor" textAnchor="middle">uₙ = u₀ + nr</text>
+  <text x="417" y="142" fontSize="14" fill="currentColor" textAnchor="middle">uₙ = u₀ · qⁿ</text>
+
+  <text x="16" y="194" fontSize="13" fill="currentColor" opacity="0.7">Opération</text>
+  <text x="252" y="194" fontSize="14" fontWeight="600" fill="currentColor" textAnchor="middle">On ajoute</text>
+  <text x="417" y="194" fontSize="14" fontWeight="600" fill="currentColor" textAnchor="middle">On multiplie</text>
+</svg>
 
 Une suite arithmético-géométrique se ramène toujours à une suite géométrique auxiliaire
 $v_n = u_n - \ell$, où $\ell$ est le point fixe de la relation.
