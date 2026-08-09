@@ -1,0 +1,278 @@
+---
+titre: "Dérivation — rappels et approfondissements"
+ordre: 1
+partie: "Analyse"
+---
+
+## 🎯 L'idée du chapitre
+
+Ce chapitre est organisé en trois parties :
+1. **Nombre dérivé** et **tangente** — le lien entre dérivée et courbe.
+2. **Fonction dérivée** et **dérivées usuelles** — les formules à connaître par cœur.
+3. **Opérations sur les dérivées** — comment dériver une fonction "composée"
+
+---
+
+## Partie 1 — Nombre dérivé et tangente
+
+### 1.1 L'idée intuitive
+
+Si on zoome énormément sur une courbe autour d'un point, elle finit par ressembler à une **droite** :
+c'est la **tangente** en ce point. La dérivée $f'(a)$ est précisément la **pente (coefficient
+directeur)** de cette tangente.
+
+<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "420px", margin: "0 auto", display: "block"}}>
+  <line x1="20" y1="230" x2="380" y2="230" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+  <line x1="200" y1="20" x2="200" y2="245" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+  <polyline points="20,57.2 50,110 80,153.2 110,186.8 140,210.8 170,225.2 200,230 230,225.2 260,210.8 290,186.8 320,153.2 350,110 380,57.2"
+    fill="none" stroke="#38bdf8" strokeWidth="3" />
+  <line x1="65" y1="143.6" x2="155" y2="230" stroke="#fb7185" strokeWidth="2.5" strokeDasharray="6 4" />
+  <circle cx="110" cy="186.8" r="5" fill="#fb7185" />
+  <text x="118" y="180" fontSize="14" fill="currentColor">A (a ; f(a))</text>
+  <text x="30" y="80" fontSize="13" fill="#38bdf8">courbe de f</text>
+  <text x="60" y="130" fontSize="13" fill="#fb7185">tangente en A</text>
+</svg>
+
+### 1.2 Définition du nombre dérivé
+
+Le nombre dérivé de $f$ en $a$, noté $f'(a)$, est la limite du **taux d'accroissement** :
+
+$$
+f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}
+$$
+
+- Si cette limite **existe et est finie**, on dit que $f$ est **dérivable en $a$**.
+- $f'(a)$ est alors le **coefficient directeur de la tangente** à la courbe de $f$ au point
+  d'abscisse $a$.
+
+### 1.3 Équation de la tangente
+
+L'équation de la tangente à la courbe de $f$ au point d'abscisse $a$ est :
+
+$$
+y = f'(a)(x - a) + f(a)
+$$
+
+> 💡 **Astuce pour retenir** : c'est l'équation d'une droite qui passe par le point $(a ; f(a))$
+> avec pour pente $f'(a)$ — exactement comme $y = m(x - x_0) + y_0$.
+
+**Exemple à faire :** soit $f(x) = x^2$. Déterminer l'équation de la tangente au point
+d'abscisse $a = 3$.
+
+- On calcule $f'(x) = 2x$, donc $f'(3) = 6$.
+- On calcule $f(3) = 9$.
+- On remplace dans la formule : $y = 6(x - 3) + 9$
+- On développe : $y = 6x - 18 + 9$, donc $y = 6x - 9$.
+
+**Résultat** : la tangente à la courbe de $f(x) = x^2$ au point d'abscisse $3$ a pour équation
+$y = 6x - 9$.
+
+### 1.4 Exemple Video
+<VideoEmbed youtube="lNeSqzcy_Ag" title="Introduction aux suites" />
+
+<MiniQuiz
+  id="tangente-equation"
+  titre="Mini-quiz : nombre dérivé et tangente"
+  questions={[
+    {
+      question: "Le nombre dérivé f'(a) correspond graphiquement à :",
+      choix: [
+        "La valeur de f en a",
+        "La pente de la tangente à la courbe au point d'abscisse a",
+        "La longueur de la courbe entre 0 et a",
+      ],
+      reponse: 1,
+      explication: "f'(a) est le coefficient directeur (la pente) de la tangente à la courbe au point d'abscisse a.",
+    },
+    {
+      question: "L'équation de la tangente en a est de la forme :",
+      choix: ["y = f'(a) × x", "y = f'(a)(x − a) + f(a)", "y = f(a) × x + f'(a)"],
+      reponse: 1,
+      explication: "C'est l'équation d'une droite de pente f'(a) passant par le point (a ; f(a)).",
+    },
+  ]}
+/>
+
+---
+
+## Partie 2 — Fonction dérivée et dérivées usuelles
+
+### 2.1 De f'(a) à la fonction f'
+
+Si $f$ est dérivable en **tout point** d'un intervalle, on peut définir la **fonction dérivée**
+$f'$, qui à chaque $x$ associe le nombre dérivé $f'(x)$.
+
+### 2.2 Dérivées des fonctions usuelles
+
+| $f(x)$ | $f'(x)$ | Remarque |
+|---|---|---|
+| $k$ (nombre constant) | $0$ | une constante ne varie pas |
+| $x$ | $1$ | pente constante égale à 1 |
+| $x^2$ | $2x$ | cas particulier de $x^n$ avec $n=2$ |
+| $x^3$ | $3x^2$ | cas particulier de $x^n$ avec $n=3$ |
+| $x^n$ | $n\,x^{n-1}$ | formule générale, $n$ entier |
+| $\dfrac{1}{x}$ | $-\dfrac{1}{x^2}$ | définie pour $x \ne 0$ |
+| $\sqrt{x}$ | $\dfrac{1}{2\sqrt{x}}$ | définie pour $x > 0$ |
+
+> ⚠️ Piège fréquent : la dérivée de $x^n$ fait apparaître $n$ **devant** et $n-1$ **en
+> exposant**. Beaucoup d'élèves oublient de baisser l'exposant d'une unité.
+
+<MiniQuiz
+  id="derivees-usuelles"
+  titre="Mini-quiz : dérivées usuelles"
+  questions={[
+    {
+      question: "La dérivée de f(x) = x⁵ est :",
+      choix: ["5x⁴", "x⁴", "5x⁵"],
+      reponse: 0,
+      explication: "On applique n·x^(n−1) avec n = 5 : la dérivée est 5x⁴.",
+    },
+    {
+      question: "La dérivée d'une fonction constante f(x) = 7 est :",
+      choix: ["7", "1", "0"],
+      reponse: 2,
+      explication: "Une fonction constante ne varie jamais : sa dérivée est toujours 0.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 3 — Opérations sur les dérivées
+
+### 3.1 Somme et produit par une constante
+
+$$
+(u+v)' = u' + v' \qquad\qquad (k \cdot u)' = k \cdot u'
+$$
+
+**Exemple à faire :** dériver $f(x) = 3x^2 + 5x$.
+- $u(x) = 3x^2 \Rightarrow u'(x) = 3 \times 2x = 6x$
+- $v(x) = 5x \Rightarrow v'(x) = 5$
+- $f'(x) = 6x + 5$
+
+### 3.2 Produit de deux fonctions
+
+$$
+(uv)' = u'v + uv'
+$$
+
+**Exemple à faire :** dériver $f(x) = (2x+1)(x^2-3)$.
+- $u(x) = 2x+1 \Rightarrow u'(x) = 2$
+- $v(x) = x^2-3 \Rightarrow v'(x) = 2x$
+- $f'(x) = 2 \times (x^2-3) + (2x+1) \times 2x = 2x^2 - 6 + 4x^2 + 2x = 6x^2 + 2x - 6$
+
+### 3.3 Quotient de deux fonctions
+
+$$
+\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}
+$$
+
+**Exemple à faire :** dériver $f(x) = \dfrac{x+1}{x-2}$ (définie pour $x \ne 2$).
+- $u(x) = x+1 \Rightarrow u'(x) = 1$
+- $v(x) = x-2 \Rightarrow v'(x) = 1$
+- $f'(x) = \dfrac{1 \times (x-2) - (x+1) \times 1}{(x-2)^2} = \dfrac{x-2-x-1}{(x-2)^2} = \dfrac{-3}{(x-2)^2}$
+
+### 3.4 Dérivée de $u^n$ (puissance d'une fonction)
+
+$$
+\left(u^n\right)' = n \, u' \, u^{n-1}
+$$
+
+> 💡 C'est la généralisation de la formule $(x^n)' = n\,x^{n-1}$, mais appliquée à une fonction
+> $u$ à la place de $x$ — il ne faut **jamais oublier de multiplier par $u'$**.
+
+**Exemple à faire :** dériver $f(x) = (3x-1)^2$.
+- Ici $u(x) = 3x-1$ donc $u'(x) = 3$, et $n = 2$.
+- $f'(x) = 2 \times 3 \times (3x-1)^{1} = 6(3x-1) = 18x - 6$
+
+> 💡 **Vérification possible** : on peut aussi développer $(3x-1)^2 = 9x^2 - 6x + 1$ puis
+> dériver directement : $f'(x) = 18x - 6$. Même résultat !
+
+**Deuxième exemple à faire :** dériver $f(x) = (x^2+1)^3$.
+- Ici $u(x) = x^2+1$ donc $u'(x) = 2x$, et $n = 3$.
+- $f'(x) = 3 \times 2x \times (x^2+1)^{2} = 6x(x^2+1)^2$
+
+<VideoEmbed youtube="sLTGkSn4CxA" title="Introduction aux suites" />
+
+
+<MiniQuiz
+  id="operations-derivees"
+  titre="Mini-quiz : opérations sur les dérivées"
+  questions={[
+    {
+      question: "Pour dériver un produit u × v, on utilise la formule :",
+      choix: ["u' × v'", "u'v + uv'", "u'v − uv'"],
+      reponse: 1,
+      explication: "La dérivée d'un produit est u'v + uv' — ne jamais dériver terme à terme comme pour une somme.",
+    },
+    {
+      question: "Pour dériver un quotient u/v, le dénominateur de f' est :",
+      choix: ["v", "v²", "u × v"],
+      reponse: 1,
+      explication: "La formule du quotient donne toujours (u'v − uv') au numérateur et v² au dénominateur.",
+    },
+    {
+        question: "Pour dériver f(x) = (2x+3)³, il faut :",
+        choix: ["Dériver directement comme x³","Utiliser la formule (uⁿ)' = n·u'·u^(n-1) avec u(x) = 2x+3","Développer obligatoirement avant de dériver",],
+        reponse: 1,
+        explication: "On utilise (uⁿ)' = n·u'·u^(n-1) : ici u(x) = 2x+3, u'(x) = 2, et n = 3.",
+    },
+  ]}
+/>
+
+---
+
+## 🔑 Point très utilisé : la tangente horizontale ($f'(a) = 0$)
+
+Quand $f'(a) = 0$, la tangente au point d'abscisse $a$ est **horizontale**. Ce point correspond
+très souvent à un **maximum ou un minimum local** de la fonction — c'est l'outil clé du
+prochain chapitre sur les variations.
+
+<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "420px", margin: "0 auto", display: "block"}}>
+  <line x1="20" y1="210" x2="380" y2="210" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+  <line x1="40" y1="20" x2="40" y2="230" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+  <polyline points="60,182 80,163 100,146 120,131 140,118 160,107 180,100 200,97 220,100 240,107 260,118 280,131 300,146 320,163 340,182"
+    fill="none" stroke="#38bdf8" strokeWidth="3" />
+  <circle cx="200" cy="97" r="5" fill="#fb7185" />
+  <line x1="130" y1="97" x2="270" y2="97" stroke="#fb7185" strokeWidth="2.5" strokeDasharray="6 4" />
+  <text x="210" y="85" fontSize="14" fill="currentColor">f'(a) = 0</text>
+  <text x="140" y="115" fontSize="13" fill="#fb7185">tangente horizontale</text>
+</svg>
+
+**Exemple à faire :** soit $f(x) = x^2 - 4x + 1$. Trouver le point où la tangente est horizontale.
+- $f'(x) = 2x - 4$
+- On résout $f'(x) = 0 \iff 2x - 4 = 0 \iff x = 2$
+- $f(2) = 4 - 8 + 1 = -3$
+
+**Résultat** : la tangente est horizontale au point $(2 ; -3)$ — c'est le minimum de la parabole.
+
+<MiniQuiz
+  id="tangente-horizontale"
+  titre="Mini-quiz : tangente horizontale"
+  questions={[
+    {
+      question: "Une tangente horizontale en a signifie que :",
+      choix: ["f(a) = 0", "f'(a) = 0", "f est constante sur tout l'intervalle"],
+      reponse: 1,
+      explication: "Une tangente horizontale a une pente nulle, donc f'(a) = 0 — cela ne dit rien sur la valeur de f(a) elle-même.",
+    },
+    {
+      question: "Pour f(x) = x² − 4x + 1, en quel point la tangente est-elle horizontale ?",
+      choix: ["(2 ; −3)", "(0 ; 1)", "(4 ; 1)"],
+      reponse: 0,
+      explication: "On résout f'(x) = 2x − 4 = 0, donc x = 2, puis f(2) = −3.",
+    },
+  ]}
+/>
+
+## ✅ À retenir
+
+- $f'(a)$ = pente de la tangente en $a$ ; équation de la tangente : $y = f'(a)(x-a) + f(a)$.
+- Connaître par cœur les dérivées usuelles ($x^n$, $\frac1x$, $\sqrt x$) et les 4 règles
+  d'opérations (somme, produit, quotient, composée $u^n$).
+- $f'(a) = 0$ $\Rightarrow$ tangente horizontale $\Rightarrow$ souvent un extremum local — clé
+  du chapitre suivant sur les variations.
+
+
+

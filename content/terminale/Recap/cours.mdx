@@ -1,0 +1,577 @@
+---
+titre: "Outils et bases de calcul"
+ordre: 0
+partie: "Fondamentaux"
+---
+
+## 🎯 L'idée du chapitre
+
+Beaucoup de blocages en maths ne viennent pas des nouvelles notions (dérivée, suites, fonctions...)
+mais des **automatismes de calcul** qui auraient dû être acquis avant. Ce chapitre est un
+**recueil d'outils** à consulter à chaque fois que tu bloques sur une simplification, une racine,
+une fraction ou une équation — c'est ta boîte à outils pour toute l'année.
+
+Neuf parties :
+1. Simplifier une expression algébrique
+2. Puissances et racines carrées
+3. Résoudre $x^2 = k$
+4. "Défaire" une puissance $n$ — introduction pratique au logarithme népérien
+5. Calcul fractionnaire — les bases
+6. Fractions étagées (fractions de fractions)
+7. Priorités opératoires
+8. Résoudre équations et inéquations
+9. Identités remarquables
+
+---
+
+## Partie 1 — Simplifier une expression algébrique
+
+### 1.1 Développer
+
+Développer, c'est **supprimer les parenthèses** en distribuant la multiplication :
+$$
+a(b+c) = ab + ac
+$$
+
+**Exemple à faire :** développer $3(2x - 5)$.
+$$
+3(2x-5) = 3\times 2x - 3\times 5 = 6x - 15
+$$
+
+**Double distributivité** : $(a+b)(c+d) = ac + ad + bc + bd$
+
+**Exemple à faire :** développer $(x+2)(x-3)$.
+$$
+(x+2)(x-3) = x^2 -3x +2x -6 = x^2 - x - 6
+$$
+
+### 1.2 Factoriser
+
+Factoriser, c'est l'opération **inverse** : transformer une somme en produit, en repérant un
+facteur commun.
+
+**Exemple à faire :** factoriser $6x^2 + 9x$.
+- Facteur commun : $3x$
+$$
+6x^2+9x = 3x(2x+3)
+$$
+
+### 1.3 Le piège du signe devant une parenthèse
+
+$$
+-(a - b) = -a + b \qquad \text{(et surtout PAS } -a-b\text{)}
+$$
+
+> ⚠️ Erreur la plus fréquente en algèbre : oublier de changer le signe du **deuxième** terme
+> quand on supprime une parenthèse précédée d'un signe moins.
+
+**Exemple à faire :** simplifier $5x - (2x - 7)$.
+$$
+5x - (2x-7) = 5x - 2x + 7 = 3x + 7
+$$
+
+<MiniQuiz
+  id="simplification-base"
+  titre="Mini-quiz : simplification"
+  questions={[
+    {
+      question: "Développer −(3x − 4) donne :",
+      choix: ["−3x − 4", "−3x + 4", "3x − 4"],
+      reponse: 1,
+      explication: "Le signe moins devant la parenthèse change le signe de CHAQUE terme à l'intérieur : −3x + 4.",
+    },
+    {
+      question: "Factoriser 4x² + 8x donne :",
+      choix: ["4x(x+2)", "4(x²+2x)", "x(4x+8)"],
+      reponse: 0,
+      explication: "Le plus grand facteur commun à 4x² et 8x est 4x, ce qui donne 4x(x+2).",
+    },
+  ]}
+/>
+
+---
+
+## Partie 2 — Puissances et racines carrées
+
+### 2.1 Règles de calcul sur les puissances
+
+| Règle | Exemple |
+|---|---|
+| $a^m \times a^n = a^{m+n}$ | $2^3 \times 2^2 = 2^5 = 32$ |
+| $\dfrac{a^m}{a^n} = a^{m-n}$ | $\dfrac{2^5}{2^2} = 2^3 = 8$ |
+| $(a^m)^n = a^{mn}$ | $(2^2)^3 = 2^6 = 64$ |
+| $a^{-n} = \dfrac{1}{a^n}$ | $2^{-3} = \dfrac{1}{8}$ |
+| $a^0 = 1$ (pour $a \ne 0$) | $5^0 = 1$ |
+
+### 2.2 Racine carrée — définition et existence
+
+$\sqrt{x}$ existe seulement si $x \ge 0$. Par définition, $\sqrt{x}$ est le nombre **positif**
+dont le carré vaut $x$ : $(\sqrt{x})^2 = x$.
+
+### 2.3 Propriétés de la racine carrée
+
+| Règle | Condition |
+|---|---|
+| $\sqrt{a \times b} = \sqrt{a} \times \sqrt{b}$ | $a \ge 0$ et $b \ge 0$ |
+| $\sqrt{\dfrac{a}{b}} = \dfrac{\sqrt{a}}{\sqrt{b}}$ | $a \ge 0$ et $b > 0$ |
+| $\sqrt{a^2} = \lvert a \rvert$ | pour tout $a$ |
+
+> ⚠️ Piège classique : $\sqrt{a+b} \ne \sqrt{a} + \sqrt{b}$ — la racine carrée **ne se
+> distribue jamais** sur une somme.
+
+<VideoEmbed youtube="y2HlgP09Bog" title="Calculer une racine carrée" />
+
+### 2.4 Simplifier une racine (faire sortir un carré parfait)
+
+**Méthode** : chercher le plus grand carré parfait qui divise le nombre sous la racine.
+
+**Exemple à faire :** simplifier $\sqrt{75}$.
+$$
+\sqrt{75} = \sqrt{25 \times 3} = \sqrt{25}\times\sqrt{3} = 5\sqrt{3}
+$$
+
+<VideoEmbed youtube="CrTjK3Qa72s" title="Appliquer les formules sur les racines carrées" />
+
+### 2.5 Rendre un dénominateur "rationnel"
+
+Quand une racine carrée traîne au dénominateur, on multiplie **haut et bas** par cette même
+racine pour la faire disparaître du dénominateur.
+
+**Exemple à faire :** simplifier $\dfrac{3}{\sqrt{2}}$.
+$$
+\frac{3}{\sqrt{2}} = \frac{3\times\sqrt{2}}{\sqrt{2}\times\sqrt{2}} = \frac{3\sqrt{2}}{2}
+$$
+
+<VideoEmbed youtube="8pB5pq2MyDM" title="Réduire les racines carrées" />
+
+<MiniQuiz
+  id="racines-carrees"
+  titre="Mini-quiz : puissances et racines"
+  questions={[
+    {
+      question: "√(a+b) est égal à :",
+      choix: ["√a + √b", "Rien de simple — ne se distribue pas sur une somme", "a+b"],
+      reponse: 1,
+      explication: "La racine carrée ne se distribue jamais sur une addition, contrairement à la multiplication.",
+    },
+    {
+      question: "√75 simplifié s'écrit :",
+      choix: ["5√3", "3√5", "25√3"],
+      reponse: 0,
+      explication: "75 = 25 × 3, et 25 est un carré parfait (5²), donc √75 = 5√3.",
+    },
+    {
+      question: "Pour rendre 3/√2 sans racine au dénominateur, on multiplie haut et bas par :",
+      choix: ["2", "√2", "3"],
+      reponse: 1,
+      explication: "Multiplier par √2 en haut et en bas transforme le dénominateur √2×√2 = 2, qui n'a plus de racine.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 3 — Résoudre $x^2 = k$
+
+### 3.1 Le principe
+
+Contrairement à une équation du premier degré, $x^2 = k$ peut avoir **0, 1 ou 2 solutions**
+selon le signe de $k$ :
+
+| Cas | Solutions |
+|---|---|
+| $k > 0$ | deux solutions : $x = \sqrt{k}$ et $x = -\sqrt{k}$ |
+| $k = 0$ | une seule solution : $x = 0$ |
+| $k < 0$ | aucune solution réelle (un carré ne peut pas être négatif) |
+
+<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "420px", margin: "0 auto", display: "block"}}>
+  <line x1="20" y1="230" x2="380" y2="230" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+  <line x1="200" y1="20" x2="200" y2="245" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+  <polyline points="60,230 80,193.8 100,160.4 120,130 140,102.4 160,77.8 180,56 200,37 220,56 240,77.8 260,102.4 280,130 300,160.4 320,193.8 340,230"
+    fill="none" stroke="#38bdf8" strokeWidth="3" />
+  <line x1="40" y1="102.4" x2="380" y2="102.4" stroke="#fb7185" strokeWidth="2.5" strokeDasharray="6 4" />
+  <circle cx="140" cy="102.4" r="5" fill="#fb7185" />
+  <circle cx="260" cy="102.4" r="5" fill="#fb7185" />
+  <text x="345" y="98" fontSize="14" fill="#fb7185">y = k</text>
+  <text x="100" y="120" fontSize="13" fill="currentColor">−√k</text>
+  <text x="265" y="120" fontSize="13" fill="currentColor">√k</text>
+  <text x="50" y="70" fontSize="13" fill="#38bdf8">y = x²</text>
+</svg>
+
+La droite horizontale $y=k$ coupe la parabole $y=x^2$ en **deux points symétriques** par
+rapport à l'axe des ordonnées, aux abscisses $-\sqrt{k}$ et $\sqrt{k}$.
+
+### 3.2 Le piège : $\sqrt{x^2} \ne x$
+
+$$
+\sqrt{x^2} = \lvert x \rvert
+$$
+
+Ce n'est **pas** $x$ tout court, car $\sqrt{\ }$ renvoie toujours un résultat **positif**. Si
+$x$ est négatif, $\sqrt{x^2}$ redonne son opposé (positif).
+
+<VideoEmbed youtube="ef15aeQRs6w" title="Résoudre une équation du type x²=a" />
+
+**Exemple à faire :** résoudre $x^2 = 16$.
+$$
+x = \sqrt{16} = 4 \quad \text{ou} \quad x = -\sqrt{16} = -4
+$$
+$$
+S = \{-4~;~4\}
+$$
+
+**Deuxième exemple à faire :** résoudre $(x+2)^2 = 9$.
+$$
+x+2 = 3 \quad \text{ou} \quad x+2=-3
+$$
+$$
+x = 1 \quad \text{ou} \quad x = -5
+$$
+
+<MiniQuiz
+  id="equation-carre"
+  titre="Mini-quiz : résoudre x² = k"
+  questions={[
+    {
+      question: "L'équation x² = −5 admet :",
+      choix: ["Deux solutions", "Une solution", "Aucune solution réelle"],
+      reponse: 2,
+      explication: "Un carré est toujours positif ou nul, donc il ne peut jamais être égal à un nombre négatif.",
+    },
+    {
+      question: "√(x²) est toujours égal à :",
+      choix: ["x", "|x|", "x²"],
+      reponse: 1,
+      explication: "La racine carrée renvoie toujours un résultat positif, donc √(x²) = |x|, pas x directement.",
+    },
+    {
+      question: "Les solutions de x² = 16 sont :",
+      choix: ["Seulement 4", "4 et −4", "8 et −8"],
+      reponse: 1,
+      explication: "x = √16 = 4 ou x = −√16 = −4.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 4 — "Défaire" une puissance $n$ : introduction au logarithme népérien
+
+### 4.1 Le problème
+
+On sait résoudre $x^2 = k$ avec la racine carrée. Mais comment résoudre une équation où
+l'inconnue est **en exposant**, comme $3^x = 20$ ? La racine carrée ne sert à rien ici — il
+faut un **nouvel outil**.
+
+### 4.2 Le logarithme népérien, en mode d'emploi (pas la théorie complète)
+
+Le logarithme népérien, noté $\ln$, est une fonction qui permet de "faire descendre" un
+exposant. Tu n'as pas encore besoin de comprendre toute sa théorie (ce sera un chapitre à part
+entier) — retiens seulement cette règle pratique :
+
+$$
+\ln(a^n) = n \times \ln(a)
+$$
+
+> 💡 Un peu comme $\sqrt{\ }$ "défait" un carré, $\ln$ "fait descendre" un exposant — c'est
+> l'outil qui permet de résoudre des équations où l'inconnue est en haut (en exposant).
+
+<VideoEmbed youtube="mD5c6W4Avro" title="Logarithmes — Introduction" />
+
+**Exemple à faire :** résoudre $3^x = 20$.
+
+On applique $\ln$ des deux côtés de l'égalité :
+$$
+\ln(3^x) = \ln(20)
+$$
+On utilise la règle $\ln(a^n) = n\ln(a)$ pour faire descendre le $x$ :
+$$
+x \times \ln(3) = \ln(20)
+$$
+On isole $x$ :
+$$
+x = \frac{\ln(20)}{\ln(3)} \approx 2{,}73
+$$
+
+> 📌 On reverra en détail **pourquoi** cette règle fonctionne et toutes les autres propriétés
+> du logarithme dans le chapitre dédié. Ici, retiens juste **comment l'utiliser** pour
+> débloquer une équation avec l'inconnue en exposant.
+
+<MiniQuiz
+  id="log-intro"
+  titre="Mini-quiz : introduction au logarithme"
+  questions={[
+    {
+      question: "La règle ln(aⁿ) = n·ln(a) sert principalement à :",
+      choix: [
+        "Simplifier une fraction",
+        "Faire descendre un exposant pour isoler une inconnue",
+        "Calculer une racine carrée",
+      ],
+      reponse: 1,
+      explication: "Cette règle permet de transformer un exposant en facteur multiplicatif, ce qui permet ensuite d'isoler l'inconnue.",
+    },
+    {
+      question: "Pour résoudre 3^x = 20, la première étape est :",
+      choix: [
+        "Diviser les deux côtés par 3",
+        "Appliquer ln des deux côtés de l'équation",
+        "Prendre la racine carrée des deux côtés",
+      ],
+      reponse: 1,
+      explication: "Comme l'inconnue est en exposant, on applique le logarithme népérien des deux côtés pour pouvoir la faire descendre.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 5 — Calcul fractionnaire : les bases
+
+<VideoEmbed youtube="a0Qb812W75c" title="Le cours : les fractions (opérations)" />
+
+### 5.1 Addition/soustraction — même dénominateur
+
+$$
+\frac{a}{D} + \frac{b}{D} = \frac{a+b}{D}
+$$
+
+### 5.2 Addition/soustraction — dénominateurs différents
+
+Il faut d'abord **mettre au même dénominateur** en multipliant chaque fraction par ce qu'il
+manque à son dénominateur.
+
+**Exemple à faire :** calculer $\dfrac{1}{4} + \dfrac{1}{6}$.
+
+Dénominateur commun : $12$ (car $4\times3=12$ et $6\times2=12$).
+$$
+\frac{1}{4}+\frac{1}{6} = \frac{3}{12}+\frac{2}{12} = \frac{5}{12}
+$$
+
+### 5.3 Cas $\dfrac{a}{b} + c$ (fraction + nombre entier)
+
+On écrit $c$ sous forme de fraction de dénominateur $b$ : $c = \dfrac{bc}{b}$.
+
+**Exemple à faire :** calculer $\dfrac{2}{5} + 3$.
+$$
+\frac{2}{5}+3 = \frac{2}{5}+\frac{15}{5} = \frac{17}{5}
+$$
+
+### 5.4 Multiplication de fractions
+
+$$
+\frac{a}{b} \times \frac{c}{d} = \frac{a\times c}{b\times d}
+$$
+
+**Exemple à faire :** calculer $\dfrac{2}{3} \times \dfrac{5}{7}$.
+$$
+\frac{2}{3}\times\frac{5}{7} = \frac{10}{21}
+$$
+
+### 5.5 Division de fractions
+
+Diviser par une fraction, c'est **multiplier par son inverse** :
+$$
+\frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c}
+$$
+
+**Exemple à faire :** calculer $\dfrac{3}{4} \div \dfrac{2}{5}$.
+$$
+\frac{3}{4}\div\frac{2}{5} = \frac{3}{4}\times\frac{5}{2} = \frac{15}{8}
+$$
+
+<MiniQuiz
+  id="fractions-base"
+  titre="Mini-quiz : calcul fractionnaire"
+  questions={[
+    {
+      question: "1/4 + 1/6 =",
+      choix: ["2/10", "5/12", "1/12"],
+      reponse: 1,
+      explication: "Au dénominateur commun 12 : 3/12 + 2/12 = 5/12.",
+    },
+    {
+      question: "Diviser par une fraction revient à :",
+      choix: ["La multiplier par elle-même", "Multiplier par son inverse", "Additionner son inverse"],
+      reponse: 1,
+      explication: "Diviser par a/b équivaut à multiplier par b/a (l'inverse).",
+    },
+    {
+      question: "2/5 + 3 =",
+      choix: ["5/5", "17/5", "2/8"],
+      reponse: 1,
+      explication: "On écrit 3 = 15/5, donc 2/5 + 15/5 = 17/5.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 6 — Fractions étagées (fractions de fractions)
+
+Une fraction étagée est une fraction dont le numérateur et/ou le dénominateur contiennent
+eux-mêmes des fractions, comme $\dfrac{a/b}{c/d}$.
+
+**Méthode** : transformer l'écriture en une division classique, puis appliquer la règle
+"multiplier par l'inverse".
+
+**Exemple à faire :** simplifier $\dfrac{\frac{2}{3}}{\frac{4}{5}}$.
+$$
+\frac{2/3}{4/5} = \frac{2}{3}\div\frac{4}{5} = \frac{2}{3}\times\frac{5}{4} = \frac{10}{12}=\frac{5}{6}
+$$
+
+> ⚠️ Piège fréquent : ne jamais simplifier un terme au numérateur avec un terme d'une **somme**
+> au dénominateur (ou inversement) — la simplification ne s'applique qu'à des **facteurs**
+> communs à toute l'expression, pas à un morceau isolé d'une addition.
+
+<MiniQuiz
+  id="fractions-etagees"
+  titre="Mini-quiz : fractions étagées"
+  questions={[
+    {
+      question: "(2/3) / (4/5) est équivalent à :",
+      choix: ["2/3 × 5/4", "2/3 × 4/5", "2/3 + 5/4"],
+      reponse: 0,
+      explication: "Diviser par 4/5 revient à multiplier par son inverse, 5/4.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 7 — Priorités opératoires
+
+Ordre à respecter, toujours dans cet ordre :
+1. Parenthèses
+2. Puissances et racines
+3. Multiplications et divisions (de gauche à droite)
+4. Additions et soustractions (de gauche à droite)
+
+**Exemple à faire :** calculer $2 + 3 \times 4^2$.
+$$
+2 + 3\times16 = 2+48 = 50
+$$
+
+> ⚠️ Piège fréquent avec les fractions écrites en ligne : $\dfrac{a}{bc}$ signifie
+> $\dfrac{a}{b\times c}$ (tout le produit $bc$ est au dénominateur), contrairement à
+> $\dfrac{a}{b}\times c$ qui multiplie par $c$ **après** la division.
+
+<MiniQuiz
+  id="priorites"
+  titre="Mini-quiz : priorités opératoires"
+  questions={[
+    {
+      question: "2 + 3 × 4² vaut :",
+      choix: ["50", "80", "22"],
+      reponse: 0,
+      explication: "On calcule d'abord 4² = 16, puis 3×16 = 48, puis 2+48 = 50.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 8 — Résoudre équations et inéquations : méthodes de base
+
+### 8.1 Isoler l'inconnue
+
+Ce qu'on fait à un membre de l'égalité, il faut le faire à l'autre.
+
+**Exemple à faire :** résoudre $3x - 5 = 10$.
+$$
+3x = 15 \implies x = 5
+$$
+
+### 8.2 Le piège des inéquations : changement de sens
+
+Quand on **multiplie ou divise par un nombre négatif**, le sens de l'inégalité **s'inverse**.
+
+**Exemple à faire :** résoudre $-2x + 3 > 7$.
+$$
+-2x > 4 \implies x < -2 \quad (\text{le sens a changé car on divise par } -2)
+$$
+
+### 8.3 Équation produit nul
+
+$$
+A \times B = 0 \iff A = 0 \text{ ou } B = 0
+$$
+
+**Exemple à faire :** résoudre $(x-1)(x+4) = 0$.
+$$
+x = 1 \quad \text{ou} \quad x = -4
+$$
+
+<MiniQuiz
+  id="equations-base"
+  titre="Mini-quiz : équations et inéquations"
+  questions={[
+    {
+      question: "Quand on divise les deux membres d'une inéquation par un nombre négatif :",
+      choix: ["Rien ne change", "Le sens de l'inégalité s'inverse", "L'inéquation devient une égalité"],
+      reponse: 1,
+      explication: "Diviser ou multiplier par un nombre négatif inverse toujours le sens de l'inégalité.",
+    },
+    {
+      question: "(x−1)(x+4) = 0 a pour solutions :",
+      choix: ["x = 1 et x = 4", "x = 1 et x = −4", "x = −1 et x = 4"],
+      reponse: 1,
+      explication: "Un produit nul signifie qu'un des deux facteurs est nul : x−1=0 donne x=1, x+4=0 donne x=−4.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 9 — Identités remarquables
+
+$$
+(a+b)^2 = a^2+2ab+b^2
+$$
+$$
+(a-b)^2 = a^2-2ab+b^2
+$$
+$$
+(a-b)(a+b) = a^2-b^2
+$$
+
+Ces identités s'utilisent **dans les deux sens** : pour développer rapidement, ou pour
+reconnaître une forme et **factoriser**.
+
+**Exemple à faire (développer) :** $(x+3)^2 = x^2+6x+9$
+
+**Exemple à faire (factoriser en sens inverse) :** $x^2 - 25 = (x-5)(x+5)$ (on reconnaît
+$a^2-b^2$ avec $a=x$ et $b=5$)
+
+<MiniQuiz
+  id="identites-remarquables"
+  titre="Mini-quiz : identités remarquables"
+  questions={[
+    {
+      question: "(x+3)² développé donne :",
+      choix: ["x²+9", "x²+6x+9", "x²+3x+9"],
+      reponse: 1,
+      explication: "(a+b)² = a²+2ab+b² avec a=x et b=3 : x²+2×3x+9 = x²+6x+9.",
+    },
+    {
+      question: "x² − 25 factorisé donne :",
+      choix: ["(x−5)²", "(x−5)(x+5)", "(x−25)(x+1)"],
+      reponse: 1,
+      explication: "C'est la forme a²−b² avec a=x et b=5, donc (x−5)(x+5).",
+    },
+  ]}
+/>
+
+## ✅ À retenir
+
+- **Développer/factoriser** : toujours vérifier le signe devant une parenthèse.
+- **Racines** : $\sqrt{a\times b}=\sqrt a\times\sqrt b$, mais jamais sur une somme ;
+  $\sqrt{x^2}=|x|$.
+- **$x^2=k$** : deux solutions si $k>0$, une si $k=0$, aucune si $k<0$.
+- **$\ln$** : outil pour faire descendre un exposant, $\ln(a^n)=n\ln(a)$.
+- **Fractions** : même dénominateur pour additionner ; multiplier par l'inverse pour diviser.
+- **Inéquations** : diviser/multiplier par un négatif inverse le sens.
+- **Identités remarquables** : à utiliser dans les deux sens (développer ou factoriser).
+
+🎉 Garde ce chapitre sous la main toute l'année — reviens-y dès qu'un calcul te bloque dans un
+autre chapitre !

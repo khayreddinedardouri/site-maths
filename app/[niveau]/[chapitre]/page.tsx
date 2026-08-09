@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PdfViewer from "@/components/PdfViewer";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
@@ -73,19 +74,27 @@ export default async function ChapitrePage({
 
         <div className="mt-10 rounded-lg border border-board/15 p-6">
           <h2 className="font-display text-lg">Exercices</h2>
-          {documents.length > 0 ? (
-            <ul className="mt-3 space-y-2">
+          {documents.length > 0 ? ( 
+            <div className="mt-3 space-y-8">
               {documents.map((doc) => (
-                <li key={doc}>
-                  <a
-                    href={`/content/${niveau}/${params.chapitre}/${doc}`}
-                    className="text-sm text-board-light chalk-underline hover:text-chalk-coral"
-                  >
-                    {doc}
-                  </a>
-                </li>
+                <div key={doc}>
+                  <div className="mb-2 flex items-center justify-between">
+                    <p className="text-sm font-medium text-board-light">{doc}</p>
+                    <a
+                      href={`/content/${niveau}/${params.chapitre}/${doc}`}
+                      download
+                      className="text-xs text-board-light chalk-underline hover:text-chalk-coral"
+                    >
+                      Télécharger le PDF
+                    </a>
+                  </div>
+                  <PdfViewer
+                    url={`/content/${niveau}/${params.chapitre}/${doc}`}
+                    title={doc}
+                  />
+                </div>
               ))}
-            </ul>
+            </div>
           ) : (
             <p className="mt-2 text-sm text-ink/50">
               Aucun exercice pour l'instant. Déposez un PDF dans{" "}

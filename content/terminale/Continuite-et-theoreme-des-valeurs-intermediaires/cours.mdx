@@ -1,0 +1,220 @@
+---
+titre: "Continuité et théorème des valeurs intermédiaires"
+ordre: 2
+partie: "Analyse"
+---
+
+## 🎯 L'idée du chapitre
+
+Une fonction **continue** est une fonction dont la courbe se trace **sans lever le crayon**.
+Cette idée toute simple permet de démontrer un résultat très puissant : le **théorème des
+valeurs intermédiaires (TVI)**, qui garantit l'existence de solutions à des équations du type
+$f(x) = k$, même quand on ne sait pas les résoudre par le calcul.
+
+Ce chapitre est organisé en trois parties :
+1. La notion de **continuité** d'une fonction.
+2. Le **théorème des valeurs intermédiaires** et son **corollaire** (cas des fonctions
+   strictement monotones).
+3. La **résolution d'équations** $f(x) = k$ à l'aide de ces outils, avec la méthode de
+   dichotomie.
+
+---
+
+## Partie 1 — Continuité d'une fonction
+
+### 1.1 Définition intuitive
+
+Une fonction $f$ est **continue** sur un intervalle $I$ si l'on peut tracer sa courbe
+représentative sur $I$ **sans lever le crayon**, c'est-à-dire sans qu'il y ait de saut, de trou
+ou d'asymptote verticale à l'intérieur de $I$.
+
+> 💡 Autrement dit : si $a \in I$, alors $f$ ne fait pas de "saut" en $a$ — la valeur de $f$ en
+> $a$ correspond bien à la valeur vers laquelle $f(x)$ tend quand $x$ se rapproche de $a$.
+
+### 1.2 Définition avec les limites
+
+Une fonction $f$ est continue en un point $a$ de son ensemble de définition si :
+$$
+\lim_{x \to a} f(x) = f(a)
+$$
+
+$f$ est continue sur un intervalle $I$ si elle est continue en tout point de $I$.
+
+### 1.3 Fonctions usuelles continues
+
+Les fonctions suivantes sont continues sur leur ensemble de définition :
+
+- les fonctions **polynômes**
+- la fonction **racine carrée** $\sqrt{x}$ (sur $[0 ; +\infty[$)
+- la fonction **exponentielle** $e^x$
+- la fonction **logarithme népérien** $\ln(x)$ (sur $]0 ; +\infty[$)
+- les fonctions **sinus** et **cosinus**
+
+Par opérations (somme, produit, quotient là où le dénominateur ne s'annule pas, composée), la
+continuité se conserve. En pratique : **toute fonction "construite normalement" avec ces
+briques est continue** sur son ensemble de définition.
+### 1.4 Exemple Video
+
+<VideoEmbed youtube="1JVdJWQC6z8" title="Introduction aux suites" />
+
+### 1.5 Continuité à gauche et à droite
+
+On peut aussi étudier la continuité **d'un seul côté** d'un point $a$ :
+
+- $f$ est **continue à gauche** en $a$ si $\displaystyle\lim_{x \to a^-} f(x) = f(a)$
+- $f$ est **continue à droite** en $a$ si $\displaystyle\lim_{x \to a^+} f(x) = f(a)$
+
+$f$ est continue en $a$ **si et seulement si** elle est continue à la fois à gauche et à droite
+en $a$, **avec la même limite** des deux côtés.
+
+> 💡 C'est très utile pour étudier une fonction **définie par morceaux** : il faut vérifier
+> séparément la limite à gauche et la limite à droite au point de raccordement, puis comparer
+> les deux à la valeur de $f$ en ce point.
+
+**Exemple** : soit $f$ définie par morceaux sur $\mathbb{R}$ par
+$$
+f(x) = \begin{cases} x + 1 & \text{si } x < 1 \\ 3 - x & \text{si } x \ge 1 \end{cases}
+$$
+
+- Limite à gauche en $1$ : $\displaystyle\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} (x+1) = 2$
+- Limite à droite en $1$ : $\displaystyle\lim_{x \to 1^+} f(x) = \lim_{x \to 1^+} (3-x) = 2$
+- Valeur en $1$ (avec la deuxième expression, car $x \ge 1$) : $f(1) = 3 - 1 = 2$
+
+Les trois valeurs coïncident ($2 = 2 = 2$), donc $f$ est **continue en $1$**.
+
+
+
+<MiniQuiz
+  id="continuite-definition"
+  titre="Mini-quiz : la continuité"
+  questions={[
+    {
+      question: "Une fonction f est continue en a si :",
+      choix: [
+        "f est dérivable en a",
+        "La limite de f(x) quand x tend vers a est égale à f(a)",
+        "f(a) existe",
+      ],
+      reponse: 1,
+      explication: "La continuité en a signifie exactement que la limite de f(x) en a est égale à la valeur f(a).",
+    },
+    {
+      question: "Laquelle de ces fonctions n'est PAS continue sur R tout entier ?",
+      choix: [
+        "Une fonction polynôme",
+        "Une fonction définie par morceaux avec un saut au raccordement",
+        "La fonction exponentielle",
+      ],
+      reponse: 1,
+      explication: "Un saut au point de raccordement signifie que la limite à gauche et à droite ne correspondent pas à la même valeur : la fonction n'est pas continue en ce point.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 2 — Théorème des valeurs intermédiaires (TVI)
+
+### 2.1 Énoncé du théorème
+
+Soit $f$ une fonction **continue** sur un intervalle $[a ; b]$. Pour tout réel $k$ compris entre
+$f(a)$ et $f(b)$, l'équation
+$$
+f(x) = k
+$$
+admet **au moins une solution** $c \in [a ; b]$.
+
+
+<VideoEmbed youtube="_GiOoUocT3s" title="Introduction aux suites" />
+
+
+> 💡 Interprétation graphique : si la courbe part d'un point en dessous de la droite $y = k$ et
+> arrive à un point au-dessus (ou inversement), alors elle **doit forcément croiser** cette
+> droite au moins une fois, puisqu'elle est tracée sans lever le crayon.
+
+### 2.2 Corollaire — cas des fonctions strictement monotones
+
+Si en plus $f$ est **strictement monotone** (strictement croissante ou strictement décroissante)
+sur $[a ; b]$, alors pour tout réel $k$ compris entre $f(a)$ et $f(b)$, l'équation $f(x) = k$
+admet une **unique solution** $c \in [a ; b]$.
+
+> 💡 C'est la version la plus utilisée en pratique : elle permet de justifier à la fois
+> l'**existence** et l'**unicité** d'une solution, ce qui est indispensable pour parler "de la"
+> solution (et non "d'une" solution).
+
+### 2.3 Rédaction type à connaître
+
+Pour démontrer qu'une équation $f(x) = k$ admet une unique solution sur $[a ; b]$ :
+
+1. $f$ est continue sur $[a ; b]$ (le dire explicitement, en citant les propriétés de continuité).
+2. $f$ est strictement monotone sur $[a ; b]$ (s'appuyer sur le tableau de variations, souvent
+   obtenu via le signe de $f'$).
+3. $k$ est compris entre $f(a)$ et $f(b)$ (calculer ou encadrer ces deux valeurs).
+4. Conclure, par le corollaire du TVI, que l'équation $f(x) = k$ admet une **unique** solution
+   $c$ sur $[a ; b]$.
+
+### 2.4 Extension aux limites en $\pm\infty$
+
+Le théorème s'étend au cas où $a$ ou $b$ sont remplacés par $-\infty$ ou $+\infty$, à condition
+de remplacer $f(a)$ ou $f(b)$ par la **limite** de $f$ en cet infini :
+$$
+\lim_{x \to -\infty} f(x) \quad \text{et} \quad \lim_{x \to +\infty} f(x)
+$$
+
+<MiniQuiz
+  id="tvi-corollaire"
+  titre="Mini-quiz : le TVI et son corollaire"
+  questions={[
+    {
+      question: "Le TVI seul (sans corollaire) garantit :",
+      choix: [
+        "L'existence d'au moins une solution",
+        "L'existence d'une unique solution",
+        "Qu'il n'y a pas de solution",
+      ],
+      reponse: 0,
+      explication: "Le TVI de base garantit seulement l'existence d'au moins une solution ; c'est le corollaire (avec la stricte monotonie) qui garantit l'unicité.",
+    },
+    {
+      question: "Pour utiliser le corollaire du TVI, il faut vérifier que f est :",
+      choix: [
+        "Continue seulement",
+        "Continue ET strictement monotone sur l'intervalle",
+        "Dérivable deux fois",
+      ],
+      reponse: 1,
+      explication: "Le corollaire (existence ET unicité) demande à la fois la continuité et la stricte monotonie sur l'intervalle considéré.",
+    },
+    {
+      question: "Dans la rédaction type, que faut-il vérifier en dernier avant de conclure ?",
+      choix: [
+        "Que f est dérivable",
+        "Que k est compris entre f(a) et f(b)",
+        "Que a et b sont positifs",
+      ],
+      reponse: 1,
+      explication: "On vérifie que k est bien compris entre f(a) et f(b) avant de pouvoir conclure à l'existence (et l'unicité) de la solution.",
+    },
+  ]}
+/>
+
+---
+
+## Partie 3 — Résoudre $f(x) = k$ en pratique
+
+### 3.1 Exemple Video
+
+<VideoEmbed youtube="V6yeF43DuGk" title="Introduction aux suites" />
+
+### 3.1 Exemple complet rédigé
+
+Soit $f(x) = x^3 + x - 1$ sur $[0 ; 1]$. Montrons que l'équation $f(x) = 0$ admet une unique
+solution sur $[0 ; 1]$.
+
+- $f$ est une fonction polynôme, donc **continue** sur $[0 ; 1]$.
+- $f'(x) = 3x^2 + 1 > 0$ pour tout $x$, donc $f$ est **strictement croissante** sur $[0 ; 1]$.
+- $f(0) = -1$ et $f(1) = 1$, donc $0$ est bien compris entre $f(0)$ et $f(1)$.
+- D'après le corollaire du TVI, l'équation $f(x) = 0$ admet une **unique solution** $c$ sur
+  $[0 ; 1]$.
+
+---
