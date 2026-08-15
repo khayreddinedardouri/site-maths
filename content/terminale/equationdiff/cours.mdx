@@ -1,0 +1,135 @@
+---
+titre: "Équations différentielles du premier ordre"
+ordre: 10
+partie: "Analyse"
+---
+
+## Qu'est-ce qu'une équation différentielle ?
+
+Une **équation différentielle** est une équation dont l'inconnue est une **fonction** $y$, et qui relie cette fonction à sa dérivée $y'$.
+
+**Exemple :** $y' = 3y$ — on cherche toutes les fonctions $y$ dont la dérivée est égale à $3$ fois elles-mêmes.
+
+Résoudre une équation différentielle, c'est trouver **toutes** les fonctions qui la vérifient.
+
+---
+
+## Partie 1 — Équation sans second membre : $y' = ay$
+
+### La solution générale
+
+Les solutions de l'équation $y' = ay$ (où $a$ est un réel donné) sont **toutes** les fonctions de la forme :
+$$
+y(x) = C e^{ax}, \qquad C \in \mathbb{R}
+$$
+
+> 💡 $C$ est une constante quelconque : il y a une **infinité** de solutions, une pour chaque valeur de $C$.
+
+**Exemple :** résoudre $y' = 3y$.
+$$
+y(x) = C e^{3x}
+$$
+
+**Exemple :** résoudre $y' = -2y$.
+$$
+y(x) = C e^{-2x}
+$$
+
+### Trouver LA solution qui vérifie une condition initiale
+
+Si on connaît la valeur de $y$ en un point (souvent $y(0)$), on peut déterminer la constante $C$.
+
+**Méthode :** remplacer $x$ par la valeur donnée dans $y(x)=Ce^{ax}$, puis isoler $C$.
+
+**Exemple :** résoudre $y' = -2y$ avec $y(0) = 5$.
+
+On sait que $y(x) = Ce^{-2x}$. On remplace $x=0$ :
+$$
+y(0) = Ce^{0} = C
+$$
+Comme $y(0)=5$, on a $C=5$. La solution cherchée est :
+$$
+y(x) = 5e^{-2x}
+$$
+
+**Exemple :** résoudre $y'=4y$ avec $y(0)=-1$.
+$$
+y(x)=Ce^{4x}, \quad y(0)=C=-1 \quad\Rightarrow\quad y(x)=-e^{4x}
+$$
+
+---
+
+## Partie 2 — Équation avec second membre : $y' = ay + b$
+
+### La méthode, en 3 étapes
+
+1. **Solution particulière constante** $y_p$ : on cherche une fonction constante qui vérifie l'équation ($y_p' = 0$), ce qui donne $0 = ay_p+b$, donc :
+$$
+y_p = -\frac{b}{a}
+$$
+2. **Solution générale de l'équation sans second membre associée** $y'=ay$ : c'est $Ce^{ax}$.
+3. **Solution générale de $y'=ay+b$** : on additionne les deux :
+$$
+y(x) = Ce^{ax} - \frac{b}{a}, \qquad C \in \mathbb{R}
+$$
+
+**Exemple :** résoudre $y' = 2y + 6$.
+- $a=2$, $b=6$, donc $y_p = -\dfrac{6}{2} = -3$
+- Solution générale :
+$$
+y(x) = Ce^{2x} - 3
+$$
+
+**Exemple :** résoudre $y' = -y + 4$.
+- $a=-1$, $b=4$, donc $y_p = -\dfrac{4}{-1} = 4$
+- Solution générale :
+$$
+y(x) = Ce^{-x} + 4
+$$
+
+### Avec une condition initiale
+
+**Exemple :** résoudre $y' = -y + 4$ avec $y(0) = 1$.
+
+On sait déjà que $y(x) = Ce^{-x}+4$. On remplace $x=0$ :
+$$
+y(0) = C + 4
+$$
+Comme $y(0)=1$, on a $C+4=1$, donc $C=-3$. La solution cherchée est :
+$$
+y(x) = -3e^{-x} + 4
+$$
+
+**Exemple :** résoudre $y'=2y+6$ avec $y(0)=-5$.
+$$
+y(x)=Ce^{2x}-3, \quad y(0)=C-3=-5 \quad\Rightarrow\quad C=-2 \quad\Rightarrow\quad y(x)=-2e^{2x}-3
+$$
+
+---
+
+## À retenir
+
+<svg viewBox="0 0 380 170" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "380px", margin: "16px auto", display: "block"}}>
+  <rect x="0" y="0" width="380" height="170" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="0" y1="45" x2="380" y2="45" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1.2" />
+  <line x1="190" y1="0" x2="190" y2="170" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
+
+  <text x="95" y="25" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">Équation</text>
+  <text x="285" y="25" fontSize="12" fontWeight="600" textAnchor="middle" fill="currentColor">Solution générale</text>
+
+  <text x="95" y="80" fontSize="13" textAnchor="middle" fill="#38bdf8">y' = ay</text>
+  <text x="285" y="80" fontSize="13" textAnchor="middle" fill="#38bdf8">y = Ce^(ax)</text>
+
+  <text x="95" y="135" fontSize="13" textAnchor="middle" fill="#fb7185">y' = ay + b</text>
+  <text x="285" y="128" fontSize="13" textAnchor="middle" fill="#fb7185">y = Ce^(ax) − b/a</text>
+</svg>
+
+- **Sans second membre** ($y'=ay$) : $y(x)=Ce^{ax}$.
+- **Avec second membre** ($y'=ay+b$) : on cherche d'abord la solution particulière constante $y_p=-\frac{b}{a}$, puis on ajoute $Ce^{ax}$.
+- Une **condition initiale** $y(x_0)$ permet toujours de déterminer la valeur exacte de $C$.
+
+---
+
+## Exercice vidéo
+
+<VideoEmbed youtube="UQjt0O_-M_g" title="Exercice EquaDiff" />

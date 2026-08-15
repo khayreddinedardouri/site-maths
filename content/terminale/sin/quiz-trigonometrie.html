@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz : Trigonométrie</title>
+<style>
+  :root {
+    --blue: #0284c7;
+    --blue-soft: rgba(56,189,248,0.1);
+    --rose: #e11d48;
+    --rose-soft: rgba(251,113,133,0.1);
+    --gray: #475569;
+    --green: #16a34a;
+    --bg: #f8fafc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: #1e293b;
+    margin: 0;
+    padding: 24px 16px 60px;
+    display: flex;
+    justify-content: center;
+  }
+  .wrap { max-width: 560px; width: 100%; }
+  h1 {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 4px;
+    color: #0f172a;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .progress-bar {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--rose));
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .q-count {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .question {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    color: #0f172a;
+  }
+  .option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    background: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: #1e293b;
+  }
+  .option:hover:not(:disabled) {
+    border-color: var(--blue);
+    background: var(--blue-soft);
+  }
+  .option.correct {
+    border-color: var(--green);
+    background: rgba(22,163,74,0.1);
+    font-weight: 600;
+  }
+  .option.wrong {
+    border-color: var(--rose);
+    background: var(--rose-soft);
+    font-weight: 600;
+  }
+  .option:disabled { cursor: default; }
+  .feedback {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.ok { background: rgba(22,163,74,0.1); color: #15803d; }
+  .feedback.ko { background: var(--rose-soft); color: #be123c; }
+  .next-btn {
+    margin-top: 18px;
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: var(--blue);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: none;
+  }
+  .next-btn.show { display: block; }
+  .result {
+    text-align: center;
+    display: none;
+  }
+  .result.show { display: block; }
+  .result .score {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--blue), var(--rose));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 8px 0;
+  }
+  .result p { color: var(--gray); font-size: 15px; }
+  .restart-btn {
+    margin-top: 16px;
+    padding: 12px 24px;
+    border: 2px solid var(--blue);
+    border-radius: 10px;
+    background: white;
+    color: var(--blue);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 15px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎯 Quiz : Parité, périodicité &amp; trigonométrie</h1>
+  <p class="subtitle">Sinus, cosinus, tangente — teste-toi !</p>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="card" id="quizCard">
+    <div class="q-count" id="qCount"></div>
+    <div class="question" id="question"></div>
+    <div id="options"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="next-btn" id="nextBtn">Question suivante →</button>
+  </div>
+
+  <div class="card result" id="resultCard">
+    <p>Score final</p>
+    <div class="score" id="finalScore"></div>
+    <p id="resultMsg"></p>
+    <button class="restart-btn" id="restartBtn">Recommencer</button>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "f(x) = x² + 3. Que peut-on dire de f ?",
+    options: ["f est paire", "f est impaire", "f n'est ni paire ni impaire", "f est périodique"],
+    correct: 0,
+    explain: "f(-x) = (-x)² + 3 = x² + 3 = f(x), donc f est paire. Sa courbe est symétrique par rapport à l'axe des ordonnées."
+  },
+  {
+    q: "f(x) = x³ - x. Que peut-on dire de f ?",
+    options: ["f est paire", "f est impaire", "f n'est ni paire ni impaire", "On ne peut pas savoir"],
+    correct: 1,
+    explain: "f(-x) = (-x)³ - (-x) = -x³ + x = -(x³ - x) = -f(x), donc f est impaire. Sa courbe est symétrique par rapport à l'origine."
+  },
+  {
+    q: "Une fonction périodique de période T = 5 vérifie :",
+    options: ["f(x+5) = f(x) pour tout x", "f(5x) = f(x)", "f(x)+5 = f(x)", "f(-x) = f(x+5)"],
+    correct: 0,
+    explain: "Par définition, une fonction périodique de période T vérifie f(x+T) = f(x) pour tout x du domaine."
+  },
+  {
+    q: "La fonction cosinus est :",
+    options: ["Paire", "Impaire", "Ni paire ni impaire", "Non définie sur ℝ"],
+    correct: 0,
+    explain: "cos(-x) = cos(x) pour tout x : cosinus est paire, sa courbe est symétrique par rapport à l'axe des ordonnées."
+  },
+  {
+    q: "La fonction sinus est :",
+    options: ["Paire", "Impaire", "Ni paire ni impaire", "2π-antipériodique seulement"],
+    correct: 1,
+    explain: "sin(-x) = -sin(x) pour tout x : sinus est impaire, sa courbe est symétrique par rapport à l'origine."
+  },
+  {
+    q: "Quelle est la période de sinus et cosinus ?",
+    options: ["π", "2π", "π/2", "4π"],
+    correct: 1,
+    explain: "sin(x+2π) = sin(x) et cos(x+2π) = cos(x) : sinus et cosinus sont 2π-périodiques."
+  },
+  {
+    q: "cos(π/3) vaut :",
+    options: ["√2/2", "√3/2", "1/2", "1"],
+    correct: 2,
+    explain: "cos(π/3) = 1/2. C'est une valeur remarquable à connaître par cœur."
+  },
+  {
+    q: "sin(π/4) vaut :",
+    options: ["1/2", "√3/2", "√2/2", "0"],
+    correct: 2,
+    explain: "sin(π/4) = √2/2. Pratique à retenir : à π/4, sinus et cosinus sont égaux."
+  },
+  {
+    q: "La dérivée de sin(x) est :",
+    options: ["cos(x)", "-cos(x)", "-sin(x)", "1/cos(x)"],
+    correct: 0,
+    explain: "sin'(x) = cos(x). À l'inverse, cos'(x) = -sin(x) — attention au signe !"
+  },
+  {
+    q: "La dérivée de cos(x) est :",
+    options: ["sin(x)", "-sin(x)", "cos(x)", "-cos(x)"],
+    correct: 1,
+    explain: "cos'(x) = -sin(x). C'est le piège classique : n'oublie pas le signe moins."
+  },
+  {
+    q: "Quelle est la relation fondamentale entre sinus et cosinus ?",
+    options: ["sin(x) + cos(x) = 1", "sin²(x) + cos²(x) = 1", "sin(x) × cos(x) = 1", "sin²(x) - cos²(x) = 1"],
+    correct: 1,
+    explain: "cos²(x) + sin²(x) = 1 pour tout x : c'est le théorème de Pythagore appliqué dans le cercle trigonométrique de rayon 1."
+  },
+  {
+    q: "La fonction tangente est :",
+    options: ["Paire et 2π-périodique", "Impaire et π-périodique", "Paire et π-périodique", "Impaire et 2π-périodique"],
+    correct: 1,
+    explain: "tan(x) = sin(x)/cos(x) est impaire (quotient d'une impaire par une paire), et sa période est π (pas 2π comme sin et cos !)."
+  }
+];
+
+let current = 0;
+let score = 0;
+const qCount = document.getElementById('qCount');
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const feedbackEl = document.getElementById('feedback');
+const nextBtn = document.getElementById('nextBtn');
+const progressFill = document.getElementById('progressFill');
+const quizCard = document.getElementById('quizCard');
+const resultCard = document.getElementById('resultCard');
+
+function loadQuestion() {
+  const item = questions[current];
+  qCount.textContent = `Question ${current + 1} / ${questions.length}`;
+  questionEl.textContent = item.q;
+  optionsEl.innerHTML = '';
+  feedbackEl.className = 'feedback';
+  feedbackEl.textContent = '';
+  nextBtn.className = 'next-btn';
+  progressFill.style.width = `${(current / questions.length) * 100}%`;
+
+  item.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i);
+    optionsEl.appendChild(btn);
+  });
+}
+
+function selectAnswer(i) {
+  const item = questions[current];
+  const buttons = optionsEl.querySelectorAll('.option');
+  buttons.forEach((b, idx) => {
+    b.disabled = true;
+    if (idx === item.correct) b.classList.add('correct');
+    else if (idx === i) b.classList.add('wrong');
+  });
+
+  feedbackEl.classList.add('show');
+  if (i === item.correct) {
+    score++;
+    feedbackEl.classList.add('ok');
+    feedbackEl.textContent = '✅ ' + item.explain;
+  } else {
+    feedbackEl.classList.add('ko');
+    feedbackEl.textContent = '❌ ' + item.explain;
+  }
+  nextBtn.classList.add('show');
+}
+
+nextBtn.onclick = () => {
+  current++;
+  if (current < questions.length) {
+    loadQuestion();
+  } else {
+    showResult();
+  }
+};
+
+function showResult() {
+  quizCard.style.display = 'none';
+  resultCard.classList.add('show');
+  progressFill.style.width = '100%';
+  document.getElementById('finalScore').textContent = `${score} / ${questions.length}`;
+  const pct = score / questions.length;
+  let msg;
+  if (pct === 1) msg = "🏆 Parfait ! Tu maîtrises complètement le chapitre.";
+  else if (pct >= 0.75) msg = "👏 Très bien ! Relis juste les points ratés.";
+  else if (pct >= 0.5) msg = "🙂 Pas mal, mais une relecture du cours te fera du bien.";
+  else msg = "📖 Retourne voir le cours puis retente le quiz !";
+  document.getElementById('resultMsg').textContent = msg;
+}
+
+document.getElementById('restartBtn').onclick = () => {
+  current = 0;
+  score = 0;
+  resultCard.classList.remove('show');
+  quizCard.style.display = 'block';
+  loadQuestion();
+};
+
+loadQuestion();
+</script>
+</body>
+</html>
