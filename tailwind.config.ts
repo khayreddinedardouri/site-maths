@@ -7,9 +7,6 @@ const config: Config = {
       colors: {
         paper: "#FAF9F4",
         ink: "#1C1C1A",
-        board: "#1F3A34",
-        "board-light": "#2C4E45",
-        "board-line": "#3E635A",
         chalk: "#F4EFE1",
         "chalk-yellow": "#E8B94B",
         "chalk-blue": "#7FB0BC",
