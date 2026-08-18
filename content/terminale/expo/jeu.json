@@ -1,0 +1,83 @@
+{
+  "chapitre": "Fonction exponentielle",
+  "titre": "Le jeu de l'exponentielle",
+  "questions": [
+    {
+      "type": "qcm",
+      "id": "q1",
+      "question": "Quelle est la dérivée de la fonction exponentielle ?",
+      "choix": ["x·e^(x-1)", "e^x", "0", "e^(x-1)"],
+      "reponse": 1,
+      "explication": "C'est LA propriété fondamentale : (eˣ)' = eˣ."
+    },
+    {
+      "type": "vrai_faux",
+      "id": "q2",
+      "question": "Pour tout réel x, e^x > 0.",
+      "reponse": true,
+      "explication": "L'exponentielle est toujours strictement positive, jamais nulle."
+    },
+    {
+      "type": "calcul",
+      "id": "q3",
+      "question": "Calcule e⁰.",
+      "reponsesAcceptees": ["1"],
+      "placeholder": "e⁰ = ...",
+      "explication": "Par définition, f(0) = 1."
+    },
+    {
+      "type": "qcm",
+      "id": "q4",
+      "question": "e^(a+b) est égal à :",
+      "choix": ["e^a + e^b", "e^a × e^b", "e^a − e^b", "e^a / e^b"],
+      "reponse": 1,
+      "explication": "eᵃ⁺ᵇ = eᵃ × eᵇ, exactement comme pour les puissances."
+    },
+    {
+      "type": "vrai_faux",
+      "id": "q5",
+      "question": "La fonction exponentielle est strictement décroissante sur ℝ.",
+      "reponse": false,
+      "explication": "Comme (eˣ)' = eˣ > 0, elle est strictement CROISSANTE sur ℝ."
+    },
+    {
+      "type": "calcul",
+      "id": "q6",
+      "question": "Quelle est la limite de eˣ quand x tend vers −∞ ?",
+      "reponsesAcceptees": ["0"],
+      "placeholder": "...",
+      "explication": "lim(x→−∞) eˣ = 0 : la courbe s'approche de l'axe des abscisses sans jamais le toucher."
+    },
+    {
+      "type": "clic_courbe",
+      "id": "q7",
+      "question": "Clique sur la courbe représentative de y = eˣ.",
+      "courbes": ["exp-croissante", "exp-decroissante", "parabole", "droite-croissante"],
+      "reponse": "exp-croissante",
+      "explication": "La courbe de eˣ est croissante, passe par (0;1) et (1;e), avec l'axe des abscisses comme asymptote en −∞."
+    },
+    {
+      "type": "qcm",
+      "id": "q8",
+      "question": "lim(x→+∞) eˣ/x vaut :",
+      "choix": ["0", "1", "+∞"],
+      "reponse": 2,
+      "explication": "Croissances comparées : eˣ l'emporte toujours sur x, même divisé par x."
+    },
+    {
+      "type": "vrai_faux",
+      "id": "q9",
+      "question": "En +∞, eˣ l'emporte toujours sur xⁿ, quel que soit l'entier n.",
+      "reponse": true,
+      "explication": "C'est le résultat général des croissances comparées."
+    },
+    {
+      "type": "calcul",
+      "id": "q10",
+      "question": "Résous e^(2x−1) = 1. Donne la valeur de x.",
+      "reponsesAcceptees": ["1/2", "0.5", "0,5"],
+      "placeholder": "x = ...",
+      "explication": "1 = e⁰, donc 2x−1 = 0, d'où x = 1/2."
+    }
+  ]
+}

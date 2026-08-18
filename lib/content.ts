@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
+import type { Jeu } from "@/lib/jeux/types";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
@@ -74,6 +75,17 @@ export async function getQcm(niveau: Niveau, slug: string): Promise<Qcm | null> 
   try {
     const raw = await fs.readFile(qcmPath, "utf-8");
     return JSON.parse(raw) as Qcm;
+  } catch {
+    return null;
+  }
+}
+
+/** Charge le jeu (10 questions, mécanique à vies) d'un chapitre, si présent. Retourne null sinon. */
+export async function getJeu(niveau: Niveau, slug: string): Promise<Jeu | null> {
+  const jeuPath = path.join(CONTENT_DIR, niveau, slug, "jeu.json");
+  try {
+    const raw = await fs.readFile(jeuPath, "utf-8");
+    return JSON.parse(raw) as Jeu;
   } catch {
     return null;
   }

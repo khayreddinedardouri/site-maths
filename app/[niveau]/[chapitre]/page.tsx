@@ -4,12 +4,13 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import { getChapitres, getCours, getDocuments, getQcm, type Niveau } from "@/lib/content";
+import { getChapitres, getCours, getDocuments, getQcm, getJeu, type Niveau } from "@/lib/content";
 import QcmPlayer from "@/components/QcmPlayer";
 import VideoEmbed from "@/components/VideoEmbed";
 import MiniQuiz from "@/components/MiniQuiz";
 import { ProgressProvider } from "@/components/ProgressContext";
 import ProgressBar from "@/components/ProgressBar";
+import JeuChapitre from "@/components/jeux/JeuChapitre";
 
 const NIVEAUX: Niveau[] = ["1ere", "terminale"];
 
@@ -39,9 +40,10 @@ export default async function ChapitrePage({
     notFound();
   }
 
-  const [documents, qcm] = await Promise.all([
+  const [documents, qcm, jeu] = await Promise.all([
     getDocuments(niveau, params.chapitre),
     getQcm(niveau, params.chapitre),
+    getJeu(niveau, params.chapitre),
   ]);
 
   // Optionnel : URL de soumission d'un Google Form pour agréger les scores QCM.
@@ -106,7 +108,7 @@ export default async function ChapitrePage({
           )}
         </div>
 
-        {qcm && <QcmPlayer qcm={qcm} sheetUrl={sheetUrl} />}
+        {jeu ? <JeuChapitre jeu={jeu} /> : qcm && <QcmPlayer qcm={qcm} sheetUrl={sheetUrl} />}
       </div>
     </div>
   );
