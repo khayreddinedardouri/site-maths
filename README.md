@@ -197,6 +197,92 @@ Le bouton "Envoyer mon score au professeur" apparaîtra automatiquement sur les 
 3. Ajoutez la variable d'environnement `NEXT_PUBLIC_FEEDBACK_FORM_URL` si utilisée.
 4. Déployez.
 
+## Ajouter un jeu de fin de chapitre (10 questions, à la place du QCM)
+
+Chaque chapitre peut avoir un **jeu** de 10 questions avec 3 vies (❤️❤️❤️), à la place
+de l'ancien QCM classique. Dès qu'un fichier `jeu.json` existe dans le dossier du
+chapitre, il remplace automatiquement le QCM sur la page — pas besoin de toucher au
+code, ni pour ce chapitre ni pour les autres (les chapitres sans `jeu.json` gardent
+le QCM normalement).
+
+**1. Créez le fichier** `content/{niveau}/mon-chapitre/jeu.json`
+
+**2. Remplissez exactement 10 questions**, en piochant parmi 4 types :
+
+- **`qcm`** — question à choix multiples classique
+```json
+  {
+    "type": "qcm",
+    "id": "q1",
+    "question": "Quelle est la dérivée de la fonction exponentielle ?",
+    "choix": ["x·e^(x-1)", "e^x", "0", "e^(x-1)"],
+    "reponse": 1,
+    "explication": "C'est LA propriété fondamentale : (eˣ)' = eˣ."
+  }
+```
+  `reponse` est l'**index** (à partir de 0) du bon choix dans `choix`.
+
+- **`vrai_faux`** — affirmation vraie ou fausse
+```json
+  {
+    "type": "vrai_faux",
+    "id": "q2",
+    "question": "Pour tout réel x, e^x > 0.",
+    "reponse": true,
+    "explication": "L'exponentielle est toujours strictement positive, jamais nulle."
+  }
+```
+
+- **`calcul`** — l'élève tape sa réponse dans un champ texte
+```json
+  {
+    "type": "calcul",
+    "id": "q3",
+    "question": "Calcule e⁰.",
+    "reponsesAcceptees": ["1"],
+    "placeholder": "e⁰ = ...",
+    "explication": "Par définition, f(0) = 1."
+  }
+```
+  `reponsesAcceptees` est une **liste** : mettez toutes les formes possibles pour ne
+  pas pénaliser un élève pour une virgule au lieu d'un point (ex. `["1/2", "0.5", "0,5"]`).
+  La comparaison ignore les espaces, la casse, et accepte `,` comme `.`.
+
+- **`clic_courbe`** — l'élève clique sur la bonne courbe parmi 4 mini-graphiques
+```json
+  {
+    "type": "clic_courbe",
+    "id": "q7",
+    "question": "Clique sur la courbe représentative de y = eˣ.",
+    "courbes": ["exp-croissante", "exp-decroissante", "parabole", "droite-croissante"],
+    "reponse": "exp-croissante",
+    "explication": "La courbe de eˣ est croissante, passe par (0;1) et (1;e)..."
+  }
+```
+  Les courbes disponibles (déjà dessinées dans le composant, rien à créer) :
+  `exp-croissante`, `exp-decroissante`, `droite-croissante`, `parabole`,
+  `log-croissante`, `constante`.
+
+**3. Structure globale du fichier** :
+```json
+{
+  "chapitre": "Fonction exponentielle",
+  "titre": "Le jeu de l'exponentielle",
+  "questions": [ /* vos 10 questions ici, dans n'importe quel ordre de types */ ]
+}
+```
+
+**4. Envoyez** : `git add . && git commit -m "Jeu chapitre exponentielle" && git push`
+
+Le jeu apparaît directement sur `/{niveau}/mon-chapitre`, à l'endroit où était le QCM.
+Mécanique : 3 vies, une erreur en retire une, à 0 vie c'est terminé (bouton Rejouer) ;
+en répondant aux 10 questions sans épuiser ses vies, l'élève voit son score final.
+
+> 💡 Le plus simple pour un nouveau chapitre : copiez `content/terminale/expo/jeu.json`
+> comme modèle, et adaptez les 10 questions au contenu du nouveau chapitre.
+
+
+
 ## Prochaines étapes de contenu (feuille de route)
 
 Cette mise à jour pose l'infrastructure (LaTeX, vidéos, traceur, build corrigé) et livre
