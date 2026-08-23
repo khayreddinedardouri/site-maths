@@ -75,41 +75,10 @@ Votre contenu en markdown ici.
 ```
 
 3. (Optionnel) Ajoutez un `qcm.json` sur le même modèle que les exemples fournis.
-4. (Optionnel) Ajoutez des PDF d'exercices ou de TD **directement dans**
-   `content/{niveau}/mon-chapitre/`, à côté de `cours.mdx`. Ils sont copiés
-   automatiquement vers `public/content/{niveau}/mon-chapitre/` (voir section
-   suivante) et apparaissent alors dans la section "Documents" de la page.
+4. (Optionnel) Placez les PDF d'exercices dans
+   `public/content/{niveau}/mon-chapitre/`, ils apparaîtront automatiquement
+   dans la section "Documents" de la page.
 5. `git add . && git commit -m "Ajout chapitre" && git push` — Vercel redéploie seul.
-
-## Ajouter un TD / une fiche d'exercices à un chapitre existant
-
-Déposez simplement le PDF **dans le dossier du chapitre**, à côté de son `cours.mdx` :
-
-```
-content/{niveau}/mon-chapitre/mon-td.pdf
-```
-
-Un script (`scripts/sync-content-docs.mjs`) le copie automatiquement vers
-`public/content/{niveau}/mon-chapitre/` — c'est cet endroit que Next.js sert
-réellement et que la page de chapitre lit pour afficher la liste des
-"Documents". Ce script tourne tout seul :
-
-- avant `npm run dev` (en local) ;
-- avant `npm run build` (donc aussi au déploiement sur Vercel).
-
-Vous pouvez aussi le lancer à la main à tout moment avec :
-
-```bash
-npm run sync-docs
-```
-
-Il ne fait que **copier** (jamais supprimer) et ignore les fichiers déjà à
-jour, donc il est sans risque de le relancer plusieurs fois. Après avoir
-déposé le PDF, pensez simplement à :
-
-```bash
-git add . && git commit -m "Ajout TD" && git push
-```
 
 ## Écrire des formules en LaTeX dans un cours
 
@@ -120,14 +89,6 @@ Les fichiers `cours.mdx` supportent LaTeX via `remark-math` + `rehype-katex` :
 
 Après avoir récupéré une mise à jour qui touche aux dépendances, pensez à relancer
 `npm install` (trois paquets : `remark-math`, `rehype-katex`, `katex`).
-
-> Ces trois paquets étaient déjà installés mais n'étaient pas réellement branchés
-> sur le rendu MDX (le CSS de KaTeX n'était pas importé, et les plugins
-> `remark-math`/`rehype-katex` n'étaient pas passés à `MDXRemote`) : les `$...$`
-> s'affichaient donc comme du texte brut au lieu de formules. C'est corrigé dans
-> `app/[niveau]/[chapitre]/page.tsx` et `app/layout.tsx`. Tous les chapitres de
-> Suites ont aussi été réécrits avec la vraie syntaxe LaTeX (`$u_n$`, `$$...$$`)
-> à la place de l'ancienne notation avec des backticks (`` `u(n)` ``).
 
 ## Ajouter une vidéo à un chapitre (YouTube ou Google Drive)
 
@@ -302,3 +263,99 @@ notamment :
 Ce sont des chapitres volumineux qui méritent chacun le même niveau de détail que celui
 livré pour les suites : la meilleure approche est de les traiter un par un, avec un QCM
 dédié à la fin de chaque chapitre non vide.
+
+
+## Ajouter un jeu de fin de chapitre (10 questions, à la place du QCM)
+
+Chaque chapitre peut avoir un **jeu** de 10 questions avec 3 vies (❤️❤️❤️), à la place
+de l'ancien QCM classique. Dès qu'un fichier `jeu.json` existe dans le dossier du
+chapitre, il remplace automatiquement le QCM sur la page — pas besoin de toucher au
+code, ni pour ce chapitre ni pour les autres (les chapitres sans `jeu.json` gardent
+le QCM normalement).
+
+**1. Créez le fichier** `content/{niveau}/mon-chapitre/jeu.json`
+
+**2. Remplissez exactement 10 questions**, en piochant parmi 4 types :
+
+- **`qcm`** — question à choix multiples classique
+```json
+  {
+    "type": "qcm",
+    "id": "q1",
+    "question": "Quelle est la dérivée de la fonction exponentielle ?",
+    "choix": ["x·e^(x-1)", "e^x", "0", "e^(x-1)"],
+    "reponse": 1,
+    "explication": "C'est LA propriété fondamentale : (eˣ)' = eˣ."
+  }
+```
+  `reponse` est l'**index** (à partir de 0) du bon choix dans `choix`.
+
+- **`vrai_faux`** — affirmation vraie ou fausse
+```json
+  {
+    "type": "vrai_faux",
+    "id": "q2",
+    "question": "Pour tout réel x, e^x > 0.",
+    "reponse": true,
+    "explication": "L'exponentielle est toujours strictement positive, jamais nulle."
+  }
+```
+
+- **`calcul`** — l'élève tape sa réponse dans un champ texte
+```json
+  {
+    "type": "calcul",
+    "id": "q3",
+    "question": "Calcule e⁰.",
+    "reponsesAcceptees": ["1"],
+    "placeholder": "e⁰ = ...",
+    "explication": "Par définition, f(0) = 1."
+  }
+```
+  `reponsesAcceptees` est une **liste** : mettez toutes les formes possibles pour ne
+  pas pénaliser un élève pour une virgule au lieu d'un point (ex. `["1/2", "0.5", "0,5"]`).
+  La comparaison ignore les espaces, la casse, et accepte `,` comme `.`.
+
+- **`clic_courbe`** — l'élève clique sur la bonne courbe parmi 4 mini-graphiques
+```json
+  {
+    "type": "clic_courbe",
+    "id": "q7",
+    "question": "Clique sur la courbe représentative de y = eˣ.",
+    "courbes": ["exp-croissante", "exp-decroissante", "parabole", "droite-croissante"],
+    "reponse": "exp-croissante",
+    "explication": "La courbe de eˣ est croissante, passe par (0;1) et (1;e)..."
+  }
+```
+  Les courbes disponibles (déjà dessinées dans le composant, rien à créer) :
+  `exp-croissante`, `exp-decroissante`, `droite-croissante`, `parabole`,
+  `log-croissante`, `constante`.
+
+**3. Structure globale du fichier** :
+```json
+{
+  "chapitre": "Fonction exponentielle",
+  "titre": "Le jeu de l'exponentielle",
+  "questions": [ /* vos 10 questions ici, dans n'importe quel ordre de types */ ]
+}
+```
+
+**4. Envoyez** : `git add . && git commit -m "Jeu chapitre exponentielle" && git push`
+
+Le jeu apparaît directement sur `/{niveau}/mon-chapitre`, à l'endroit où était le QCM.
+Mécanique : 3 vies, une erreur en retire une, à 0 vie c'est terminé (bouton Rejouer) ;
+en répondant aux 10 questions sans épuiser ses vies, l'élève voit son score final.
+
+> 💡 Le plus simple pour un nouveau chapitre : copiez `content/terminale/expo/jeu.json`
+> comme modèle, et adaptez les 10 questions au contenu du nouveau chapitre.
+
+
+
+app/
+├── [niveau]/
+│   ├── page.tsx              ← /terminale  (liste tous les chapitres, y compris "Suites")
+│   └── [chapitre]/
+│       └── page.tsx          ← /terminale/suites-arithmetiques-geometriques (une partie individuelle)
+└── terminale/
+    └── suites/
+        └── page.tsx          ← /terminale/suites (la page "hub" avec les 4 cartes)
