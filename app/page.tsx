@@ -25,9 +25,16 @@ export default async function HomePage() {
           direct pour savoir où vous en êtes — à votre rythme, et sans jamais vous ennuyer.
         </p>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+        <div className="mt-12 grid gap-6 sm:grid-cols-3">
           <NiveauCard titre="1ère générale" nb={premiere.length} href="/1ere" accent="pink" />
           <NiveauCard titre="Terminale" nb={terminale.length} href="/terminale" accent="sky" />
+          <NiveauCard
+            titre="Supérieur"
+            icon="🎓"
+            label="Annales et examens"
+            href="/examens/superieur"
+            accent="gold"
+          />
         </div>
       </section>
     </div>
@@ -37,16 +44,24 @@ export default async function HomePage() {
 function NiveauCard({
   titre,
   nb,
+  label,
+  icon,
   href,
   accent,
 }: {
   titre: string;
-  nb: number;
+  nb?: number;
+  label?: string;
+  icon?: string;
   href: string;
-  accent: "pink" | "sky";
+  accent: "pink" | "sky" | "gold";
 }) {
   const gradient =
-    accent === "pink" ? "from-pink-400 to-fuchsia-400 shadow-pink-200" : "from-sky-400 to-blue-400 shadow-sky-200";
+    accent === "pink"
+      ? "from-pink-400 to-fuchsia-400 shadow-pink-200"
+      : accent === "sky"
+        ? "from-sky-400 to-blue-400 shadow-sky-200"
+        : "from-[#E8B94B] to-[#B9862F] shadow-[0_20px_25px_-5px_rgba(232,185,75,0.35)]";
 
   return (
     <Link
@@ -54,12 +69,13 @@ function NiveauCard({
       className={`group relative block overflow-hidden rounded-2xl bg-gradient-to-br p-8 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl ${gradient}`}
     >
       <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10 transition-transform duration-500 group-hover:scale-150" />
+      {icon && <span className="relative mb-1 block text-3xl">{icon}</span>}
       <h2 className="relative font-display text-2xl">{titre}</h2>
       <p className="relative mt-2 text-sm text-white/80">
-        {nb} chapitre{nb > 1 ? "s" : ""} disponible{nb > 1 ? "s" : ""}
+        {label ?? `${nb} chapitre${nb && nb > 1 ? "s" : ""} disponible${nb && nb > 1 ? "s" : ""}`}
       </p>
       <span className="relative mt-6 inline-flex items-center gap-1 text-sm font-semibold">
-        Voir les chapitres
+        {label ? "Voir les examens" : "Voir les chapitres"}
         <span className="transition-transform group-hover:translate-x-1">→</span>
       </span>
     </Link>
