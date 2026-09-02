@@ -20,9 +20,10 @@ export default async function HomePage() {
             pas seulement les réciter.
           </span>
         </h1>
-        <p className="mt-4 max-w-xl text-ink/70">
-          Tout le programme de 1ère et Terminale, classé par chapitre, avec des quiz corrigés en
-          direct pour savoir où vous en êtes — à votre rythme, et sans jamais vous ennuyer.
+        <p className="mt-7 max-w-xl text-ink/70">
+          Tout le programme de 1ère et Terminale, classé par chapitre, avec des quiz et TDs pour savoir où vous en êtes          pour savoir où vous en êtes — à votre rythme, et sans jamais vous ennuyer.
+          Et pour aller plus loin : des annales pour le Supérieur, classes préparatoires, Licence/Bachelor et Master.
+          
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
@@ -30,10 +31,9 @@ export default async function HomePage() {
           <NiveauCard titre="Terminale" nb={terminale.length} href="/terminale" accent="sky" />
           <NiveauCard
             titre="Supérieur"
-            icon="🎓"
             label="Annales et examens"
             href="/examens/superieur"
-            accent="gold"
+            accent="pink"
           />
         </div>
       </section>
@@ -54,14 +54,10 @@ function NiveauCard({
   label?: string;
   icon?: string;
   href: string;
-  accent: "pink" | "sky" | "gold";
+  accent: "pink" | "sky";
 }) {
   const gradient =
-    accent === "pink"
-      ? "from-pink-400 to-fuchsia-400 shadow-pink-200"
-      : accent === "sky"
-        ? "from-sky-400 to-blue-400 shadow-sky-200"
-        : "from-[#E8B94B] to-[#B9862F] shadow-[0_20px_25px_-5px_rgba(232,185,75,0.35)]";
+    accent === "pink" ? "from-pink-400 to-fuchsia-400 shadow-pink-200" : "from-sky-400 to-blue-400 shadow-sky-200";
 
   return (
     <Link
