@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import PdfViewer from "@/components/PdfViewer";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -13,6 +14,18 @@ import ProgressBar from "@/components/ProgressBar";
 import JeuChapitre from "@/components/jeux/JeuChapitre";
 
 const NIVEAUX: Niveau[] = ["1ere", "terminale"];
+/**
+ * Composant utilisé pour remplacer les <h3> générés par le markdown.
+ * Il détecte un préfixe du type "2.1 " dans le titre de section et lui
+ * attribue un id "2-1" — c'est cet id que ciblent les liens de citation
+ * renvoyés par /api/chat (ex: /terminale/expo#2-1).
+ */
+function H3({ children }: { children?: ReactNode }) {
+  const texte = Array.isArray(children) ? children.join("") : String(children ?? "");
+  const match = texte.match(/^(\d+\.\d+)\s+/);
+  const id = match ? match[1].replace(".", "-") : undefined;
+  return <h3 id={id}>{children}</h3>;
+}
 
 export async function generateStaticParams() {
   const params = [];
@@ -63,7 +76,7 @@ export default async function ChapitrePage({
           <article className="prose prose-neutral mt-8 max-w-none prose-headings:font-display prose-headings:font-semibold">
             <MDXRemote
               source={cours.content}
-              components={{ VideoEmbed, MiniQuiz }}
+              components={{ VideoEmbed, MiniQuiz, h3: H3 }}
               options={{
                 mdxOptions: {
                   remarkPlugins: [remarkMath],

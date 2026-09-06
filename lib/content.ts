@@ -2,7 +2,6 @@ import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 import type { Jeu } from "@/lib/jeux/types";
-
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
 export type Niveau = "1ere" | "terminale";
@@ -25,6 +24,19 @@ export type QcmQuestion = {
 export type Qcm = {
   chapitre: string;
   questions: QcmQuestion[];
+};
+
+/** Une portion de cours identifiée par sa position (partie / section numérotée). */
+export type Section = {
+  niveau: Niveau;
+  chapitreSlug: string;
+  chapitreTitre: string;
+  partieNum: number | null;
+  partieTitre: string | null;
+  sectionNum: string | null; // ex "2.1"
+  sectionTitre: string | null;
+  texte: string;
+  anchor: string; // ex "2-1"
 };
 
 /** Liste les chapitres d'un niveau, triés par ordre défini dans le frontmatter du cours. */
@@ -69,6 +81,85 @@ export async function getCours(niveau: Niveau, slug: string) {
   return { titre: (data.titre as string) ?? slug, content };
 }
 
+/**
+ * Découpe le markdown d'un cours en sections, en suivant les headings
+ * `## Partie N — Titre` et `### N.M Titre`.
+ */
+function decouperEnSections(
+  markdown: string
+): Omit<Section, "niveau" | "chapitreSlug" | "chapitreTitre">[] {
+  const lignes = markdown.split("\n");
+  const sections: Omit<Section, "niveau" | "chapitreSlug" | "chapitreTitre">[] = [];
+
+  let partieNum: number | null = null;
+  let partieTitre: string | null = null;
+  let sectionNum: string | null = null;
+  let sectionTitre: string | null = null;
+  let buffer: string[] = [];
+
+  const flush = () => {
+    const texte = buffer.join("\n").trim();
+    buffer = [];
+    if (texte.length === 0) return;
+    sections.push({
+      partieNum,
+      partieTitre,
+      sectionNum,
+      sectionTitre,
+      texte,
+      anchor: sectionNum
+        ? sectionNum.replace(".", "-")
+        : `partie-${partieNum ?? "intro"}`,
+    });
+  };
+
+  for (const ligne of lignes) {
+    const partieMatch = ligne.match(/^##\s+Partie\s+(\d+)\s*[—-]\s*(.+)$/);
+    const sectionMatch = ligne.match(/^###\s+(\d+\.\d+)\s+(.+)$/);
+
+    if (partieMatch) {
+      flush();
+      partieNum = Number(partieMatch[1]);
+      partieTitre = partieMatch[2].trim();
+      sectionNum = null;
+      sectionTitre = null;
+      continue;
+    }
+    if (sectionMatch) {
+      flush();
+      sectionNum = sectionMatch[1];
+      sectionTitre = sectionMatch[2].trim();
+      continue;
+    }
+    buffer.push(ligne);
+  }
+  flush();
+
+  return sections;
+}
+
+/** Charge un cours et le retourne découpé en sections citables. */
+export async function getCoursDecoupe(niveau: Niveau, slug: string): Promise<Section[]> {
+  const coursPath = path.join(CONTENT_DIR, niveau, slug, "cours.mdx");
+  const raw = await fs.readFile(coursPath, "utf-8");
+  const { data, content } = matter(raw);
+  const chapitreTitre = (data.titre as string) ?? slug;
+
+  return decouperEnSections(content).map((s) => ({
+    ...s,
+    niveau,
+    chapitreSlug: slug,
+    chapitreTitre,
+  }));
+}
+
+/** Toutes les sections de tous les chapitres d'un niveau — sert de base à l'index d'embeddings. */
+export async function getToutesLesSections(niveau: Niveau): Promise<Section[]> {
+  const chapitres = await getChapitres(niveau);
+  const tout = await Promise.all(chapitres.map((c) => getCoursDecoupe(niveau, c.slug)));
+  return tout.flat();
+}
+
 /** Charge le QCM d'un chapitre, si présent. Retourne null sinon. */
 export async function getQcm(niveau: Niveau, slug: string): Promise<Qcm | null> {
   const qcmPath = path.join(CONTENT_DIR, niveau, slug, "qcm.json");
@@ -100,8 +191,6 @@ export type ExamenPrive = {
 /**
  * Cherche un examen dédié à partir d'un code d'accès.
  * Structure attendue : public/examens-prives/{code}/mon-examen.pdf
- * Le code est assaini (alphanumérique, - et _ uniquement) pour éviter
- * toute tentative de traversée de chemin.
  */
 export async function getExamenPrive(code: string): Promise<ExamenPrive | null> {
   const safeCode = code.trim().replace(/[^a-zA-Z0-9-_]/g, "");

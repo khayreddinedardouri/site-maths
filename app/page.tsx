@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getChapitres } from "@/lib/content";
+import ChatBot from "@/components/ChatBot";
 
 export default async function HomePage() {
   const premiere = await getChapitres("1ere");
@@ -35,6 +36,10 @@ export default async function HomePage() {
             href="/examens/superieur"
             accent="pink"
           />
+        </div>
+
+        <div className="mt-16">
+          <ChatBot />
         </div>
       </section>
     </div>
