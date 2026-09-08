@@ -150,7 +150,7 @@ Question de l'élève : ${question}`;
 
   try {
     const resultat = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
+      model: "gemini-2.0-flash",
       contents: prompt,
     });
 
@@ -177,3 +177,4 @@ Question de l'élève : ${question}`;
     return NextResponse.json({ erreur: "Erreur lors de l'appel au modèle." }, { status: 500 });
   }
 }
+
