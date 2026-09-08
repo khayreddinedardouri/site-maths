@@ -1,5 +1,11 @@
-import { pipeline, type FeatureExtractionPipeline } from "@xenova/transformers";
+import { env, pipeline, type FeatureExtractionPipeline } from "@xenova/transformers";
 import { getToutesLesSections, type Section } from "@/lib/content";
+
+// Sur Vercel (et tout environnement serverless), le système de fichiers est en
+// lecture seule sauf /tmp. Sans ça, @xenova/transformers plante avec ENOENT
+// en essayant d'écrire son cache dans node_modules.
+env.cacheDir = "/tmp/.cache";
+env.allowLocalModels = false;
 
 export type Chunk = Section & { embedding: number[] };
 
