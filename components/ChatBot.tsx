@@ -92,7 +92,7 @@ export default function ChatBot() {
         <button
           onClick={envoyer}
           disabled={enCours}
-          className="rounded-lg bg-board-light px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+          className="rounded-lg bg-[#001f3f] hover:bg-[#00284f] px-4 py-2 text-sm font-bold text-white disabled:opacity-50"
         >
           Envoyer
         </button>
