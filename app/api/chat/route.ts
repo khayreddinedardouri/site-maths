@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import { rechercherChunksPertinents } from "@/lib/embeddings";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const runtime = "nodejs";
+
 console.log("Clé chargée ?", process.env.GEMINI_API_KEY ? "oui, longueur=" + process.env.GEMINI_API_KEY.length : "NON, undefined");
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 

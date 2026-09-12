@@ -63,7 +63,14 @@ export default function ChatBot() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: q }),
+        cache: "no-store",
       });
+
+      if (!res.ok) {
+        const texteErreur = await res.text();
+        throw new Error(`${res.status} ${texteErreur || "Erreur API"}`);
+      }
+
       const data = await res.json();
       setMessages((m) => [
         ...m,
