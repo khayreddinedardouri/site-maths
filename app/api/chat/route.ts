@@ -4,12 +4,12 @@ import { rechercherChunksPertinents } from "@/lib/embeddings";
 console.log("Clé chargée ?", process.env.GEMINI_API_KEY ? "oui, longueur=" + process.env.GEMINI_API_KEY.length : "NON, undefined");
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-const SYSTEM_PROMPT = `Tu es l'assistant du cours de maths de Terminale de ce site. Ton objectif est d'aider l'élève à comprendre et progresser.
+const SYSTEM_PROMPT = `Tu es l'assistant du cours de maths de 1ère générale et de Terminale de ce site. Ton objectif est d'aider l'élève à comprendre et progresser.
 
 Comment utiliser le contexte fourni :
 - Si le contexte (extraits du cours) permet de répondre, appuie-toi dessus en priorité, et cite le chapitre/partie/section correspondant à la fin (voir règle 📍 ci-dessous).
-- Si la question est une question BASIQUE de maths de Terminale (définition simple, méthode de calcul standard, petit exemple d'application) et que le contexte ne couvre pas exactement ce point, tu PEUX quand même répondre avec tes connaissances générales de maths, comme le ferait un professeur. Donne des exemples concrets et chiffrés pour que ce soit clair. Dans ce cas, ne mets PAS de ligne 📍.
-- Si la question sort vraiment du cadre des maths de Terminale, ou si tu n'es pas sûr de la réponse, dis-le clairement à l'élève plutôt que d'inventer.
+- Si la question est une question BASIQUE de maths de 1ère générale ou de Terminale (définition simple, méthode de calcul standard, petit exemple d'application) et que le contexte ne couvre pas exactement ce point, tu PEUX quand même répondre avec tes connaissances générales de maths, comme le ferait un professeur. Donne des exemples concrets et chiffrés pour que ce soit clair. Dans ce cas, ne mets PAS de ligne 📍.
+- Si la question sort vraiment du cadre des maths de 1ère générale et de Terminale, ou si tu n'es pas sûr de la réponse, dis-le clairement à l'élève plutôt que d'inventer.
 - N'invente jamais un résultat mathématique faux.
 
 Règles strictes de mise en forme (TRÈS IMPORTANT) :
@@ -167,7 +167,7 @@ Question de l'élève : ${question}`;
             partieTitre: c.partieTitre,
             sectionTitre: c.sectionTitre,
             sectionNum: c.sectionNum,
-            url: `/terminale/${c.chapitreSlug}#${c.anchor}`,
+            url: `/${c.niveau}/${c.chapitreSlug}#${c.anchor}`,
           }))
         : [];
 

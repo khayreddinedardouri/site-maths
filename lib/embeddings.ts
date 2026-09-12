@@ -34,7 +34,8 @@ async function embedder(texte: string): Promise<number[]> {
 }
 
 async function construireIndex(): Promise<Chunk[]> {
-  const sections = await getToutesLesSections("terminale");
+  const niveaux = ["1ere", "terminale"] as const;
+  const sections = (await Promise.all(niveaux.map((niveau) => getToutesLesSections(niveau)))).flat();
   const chunks: Chunk[] = [];
 
   for (const section of sections) {
