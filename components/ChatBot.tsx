@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const STORAGE_KEY = "maths-chatbot-messages-v1";
 
 type Source = {
   chapitreTitre: string;
@@ -20,6 +22,33 @@ export default function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [question, setQuestion] = useState("");
   const [enCours, setEnCours] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Message[];
+        setMessages(parsed);
+      } else {
+        setMessages([]);
+      }
+    } catch {
+      setMessages([]);
+    } finally {
+      setLoaded(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!loaded) return;
+
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    } catch {
+      // Ignorer les erreurs d'écriture locale si le navigateur refuse le stockage.
+    }
+  }, [loaded, messages]);
 
   async function envoyer() {
     const q = question.trim();
@@ -54,9 +83,29 @@ export default function ChatBot() {
     }
   }
 
+  function effacerHistorique() {
+    setMessages([]);
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // Ignorer les erreurs d'écriture locale si le navigateur refuse le stockage.
+    }
+  }
+
   return (
     <div className="flex flex-col gap-4 rounded-lg border border-board/15 p-6">
-      <h2 className="font-display text-lg">Pose ta question sur le cours</h2>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="font-display text-lg">Pose ta question sur le cours</h2>
+        <button
+          type="button"
+          onClick={effacerHistorique}
+          className="rounded-full border border-pink-200 bg-pink-50 px-3 py-1.5 text-xs font-semibold text-pink-600 transition hover:bg-pink-100"
+        >
+          Effacer l’historique du navigateur
+        </button>
+      </div>
+
+      <p className="text-xs text-ink/60">Historique conservé sur ce navigateur.</p>
 
       <div className="flex max-h-96 flex-col gap-3 overflow-y-auto">
         {messages.map((m, i) => (

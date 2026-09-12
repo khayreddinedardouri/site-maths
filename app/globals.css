@@ -11,6 +11,18 @@
   --grid-line: rgba(31, 58, 52, 0.06);
 }
 
+.font-display {
+  font-family: "Fraunces", Georgia, serif;
+}
+
+.font-sans {
+  font-family: "IBM Plex Sans", Arial, sans-serif;
+}
+
+.font-mono {
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+}
+
 html {
   scroll-behavior: smooth;
 }

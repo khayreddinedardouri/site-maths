@@ -52,6 +52,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               >
                 Examens
               </Link>
+              <Link
+                href="/tableau-de-bord"
+                className="rounded-full border border-fuchsia-200 bg-fuchsia-50 px-4 py-2 font-medium text-fuchsia-700 transition-all hover:scale-105 hover:bg-fuchsia-100"
+              >
+                Comm ELEV
+              </Link>
             </nav>
           </div>
         </header>
