@@ -1,0 +1,218 @@
+﻿---
+titre: "Trigonométrie I"
+ordre: 6
+partie: "Géométrie"
+---
+
+## Partie 1 — Dans un triangle rectangle
+
+Dans un triangle rectangle, on appelle angle aigu $\theta$ l'angle que l'on étudie.
+
+Dans ce chapitre, les angles sont exprimés en radians, par exemple $\frac{\pi}{6}$, $\frac{\pi}{4}$, $\frac{\pi}{3}$.
+
+On a alors :
+
+$$
+\sin(\theta)=\frac{\text{côté opposé}}{\text{hypoténuse}}
+$$
+
+$$
+\cos(\theta)=\frac{\text{côté adjacent}}{\text{hypoténuse}}
+$$
+
+$$
+\tan(\theta)=\frac{\text{côté opposé}}{\text{côté adjacent}}
+$$
+
+<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "360px", margin: "18px auto", display: "block"}}>
+  <rect x="0" y="0" width="360" height="180" fill="none" stroke="currentColor" strokeOpacity="0.2"/>
+  <line x1="40" y1="140" x2="290" y2="140" stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.5"/>
+  <line x1="40" y1="140" x2="40" y2="40" stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.5"/>
+  <line x1="40" y1="140" x2="290" y2="40" stroke="#38bdf8" strokeWidth="2.2"/>
+  <line x1="290" y1="40" x2="290" y2="140" stroke="currentColor" strokeOpacity="0.35" strokeWidth="1.2"/>
+  <line x1="40" y1="140" x2="290" y2="140" stroke="currentColor" strokeOpacity="0.35" strokeWidth="1.2"/>
+
+  <text x="36" y="31" fontSize="12" fill="currentColor">A</text>
+  <text x="296" y="155" fontSize="12" fill="currentColor">B</text>
+  <text x="26" y="145" fontSize="12" fill="currentColor">C</text>
+
+  <text x="150" y="120" fontSize="12" fill="#38bdf8">Angle θ (en rad)</text>
+  <text x="70" y="88" fontSize="12" fill="currentColor">côté opposé</text>
+  <text x="160" y="155" fontSize="12" fill="currentColor">côté adjacent</text>
+  <text x="245" y="92" fontSize="12" fill="currentColor">hypoténuse</text>
+</svg>
+
+### Exemple
+Dans un triangle rectangle, si $\theta = \frac{\pi}{6}$, alors :
+
+$$
+\sin\left(\frac{\pi}{6}\right)=\frac{1}{2},\qquad
+\cos\left(\frac{\pi}{6}\right)=\frac{\sqrt{3}}{2},\qquad
+\tan\left(\frac{\pi}{6}\right)=\frac{1}{\sqrt{3}}
+$$
+
+---
+
+## Partie 2 — Valeurs remarquables
+
+Voici les valeurs à connaître par cœur.
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/PC43kNq6aYE?si=1i6H899sT9_J7mQY"
+  title="Vidéo sur la trigonométrie"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+  style={{ maxWidth: '100%', margin: '18px auto', display: 'block' }}
+></iframe>
+
+<svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style={{maxWidth: "520px", margin: "18px auto", display: "block"}}>
+  <rect x="0" y="0" width="520" height="220" rx="12" fill="none" stroke="currentColor" strokeOpacity="0.25"/>
+
+  <text x="40" y="28" fontSize="13" fontWeight="700" fill="currentColor">Angle</text>
+  <text x="170" y="28" fontSize="13" fontWeight="700" fill="currentColor">sin</text>
+  <text x="255" y="28" fontSize="13" fontWeight="700" fill="currentColor">cos</text>
+  <text x="340" y="28" fontSize="13" fontWeight="700" fill="currentColor">tan</text>
+
+  <line x1="20" y1="40" x2="500" y2="40" stroke="currentColor" strokeOpacity="0.25"/>
+
+  <text x="40" y="70" fontSize="12" fill="currentColor">0</text>
+  <text x="170" y="70" fontSize="12" fill="currentColor">0</text>
+  <text x="255" y="70" fontSize="12" fill="currentColor">1</text>
+  <text x="340" y="70" fontSize="12" fill="currentColor">0</text>
+
+  <text x="40" y="100" fontSize="12" fill="currentColor">π/6</text>
+  <text x="170" y="100" fontSize="12" fill="currentColor">1/2</text>
+  <text x="255" y="100" fontSize="12" fill="currentColor">√3/2</text>
+  <text x="340" y="100" fontSize="12" fill="currentColor">1/√3</text>
+
+  <text x="40" y="130" fontSize="12" fill="currentColor">π/4</text>
+  <text x="170" y="130" fontSize="12" fill="currentColor">√2/2</text>
+  <text x="255" y="130" fontSize="12" fill="currentColor">√2/2</text>
+  <text x="340" y="130" fontSize="12" fill="currentColor">1</text>
+
+  <text x="40" y="160" fontSize="12" fill="currentColor">π/3</text>
+  <text x="170" y="160" fontSize="12" fill="currentColor">√3/2</text>
+  <text x="255" y="160" fontSize="12" fill="currentColor">1/2</text>
+  <text x="340" y="160" fontSize="12" fill="currentColor">√3</text>
+
+  <text x="40" y="190" fontSize="12" fill="currentColor">π/2</text>
+  <text x="170" y="190" fontSize="12" fill="currentColor">1</text>
+  <text x="255" y="190" fontSize="12" fill="currentColor">0</text>
+  <text x="340" y="190" fontSize="12" fill="currentColor">non défini</text>
+</svg>
+
+> 💡 Les valeurs $\frac{\pi}{6}$, $\frac{\pi}{4}$ et $\frac{\pi}{3}$ sont les plus importantes à mémoriser.
+
+---
+
+## Partie 3 — Relations fondamentales
+
+Dans un triangle rectangle, on a toujours :
+
+$$
+\sin^2(\theta)+\cos^2(\theta)=1
+$$
+
+Et aussi :
+
+$$
+\tan(\theta)=\frac{\sin(\theta)}{\cos(\theta)}
+$$
+
+### Exemple
+Si $\sin(\theta)=\frac{3}{5}$, alors :
+
+$$
+\cos^2(\theta)=1-\left(\frac{3}{5}\right)^2=1-\frac{9}{25}=\frac{16}{25}
+$$
+
+Donc :
+
+$$
+\cos(\theta)=\frac{4}{5}
+$$
+
+(sous l'hypothèse que $\theta$ est aigu, donc $\cos(\theta) >0$).
+
+---
+
+## Partie 4 — Utiliser la trigonométrie
+
+La trigonométrie sert à calculer :
+
+- une longueur inconnue,
+- un angle inconnu,
+- une hauteur inaccessible.
+
+### Cas 1 — on connaît l'angle et un côté
+On trouve un autre côté avec le bon rapport trigonométrique.
+
+### Cas 2 — on connaît deux côtés
+On peut retrouver l'angle avec :
+
+$$
+\sin(\theta)=\frac{\text{opp}}{\text{hyp}},\quad
+\cos(\theta)=\frac{\text{adj}}{\text{hyp}},\quad
+\tan(\theta)=\frac{\text{opp}}{\text{adj}}
+$$
+
+### Exemple
+Un arbre est à $10$ m d'un observateur. L'angle d'élévation vaut $\frac{\pi}{5}$ rad.
+
+On cherche la hauteur $h$.
+
+$$
+\tan\left(\frac{\pi}{5}\right)=\frac{h}{10}
+$$
+
+Donc :
+
+$$
+h=10\tan\left(\frac{\pi}{5}\right)
+$$
+
+---
+
+## Partie 5 — Étude de cas simple
+
+Cette partie sert à choisir la bonne formule selon les données du triangle.
+
+### Cas A — on connaît l'hypoténuse
+On utilise surtout $\sin$ ou $\cos$.
+
+Exemple : si on connaît l'hypoténuse et un angle, on peut calculer le côté opposé ou le côté adjacent.
+
+### Cas B — on connaît le côté adjacent
+On utilise $\cos$ ou $\tan$.
+
+Exemple : si on connaît le côté adjacent et l'angle, on peut retrouver l'hypoténuse ou le côté opposé.
+
+### Cas C — on connaît le côté opposé
+On utilise $\sin$ ou $\tan$.
+
+Exemple : si on connaît le côté opposé et l'angle, on peut retrouver l'hypoténuse ou le côté adjacent.
+
+### Règle simple
+- si tu connais l'hypoténuse → $\sin$ ou $\cos$
+- si tu connais le côté adjacent → $\cos$ ou $\tan$
+- si tu connais le côté opposé → $\sin$ ou $\tan$
+
+> 💡 En pratique, on regarde d’abord ce qu’on connaît : un côté, un angle, ou l’hypoténuse. Ensuite, on choisit la formule qui contient ce côté et l’angle.
+
+---
+
+## Partie 6 — Récapitulatif
+
+À retenir :
+
+- $\sin$ = côté opposé / hypoténuse
+- $\cos$ = côté adjacent / hypoténuse
+- $\tan$ = côté opposé / côté adjacent
+- $\sin^2\theta+\cos^2\theta=1$
+- les valeurs remarquables de $\frac{\pi}{6}$, $\frac{\pi}{4}$ et $\frac{\pi}{3}$ sont très utiles.
+
+---

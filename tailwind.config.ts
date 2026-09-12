@@ -8,7 +8,7 @@ const config: Config = {
         paper: "#FAF9F4",
         ink: "#1C1C1A",
         chalk: "#F4EFE1",
-        "chalk-yellow": "#E8B94B",
+        "chalk-yellow": "#C68E1C",
         "chalk-blue": "#7FB0BC",
         "chalk-coral": "#D9784A",
         "bebe-pink": "#FFD1E3",

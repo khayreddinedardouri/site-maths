@@ -150,7 +150,7 @@ Question de l'élève : ${question}`;
 
   try {
     const resultat = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
+      model: "gemini-3.8-flash",
       contents: prompt,
     });
 

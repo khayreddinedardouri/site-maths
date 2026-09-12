@@ -37,13 +37,13 @@ export default function QcmPlayer({ qcm, sheetUrl }: { qcm: Qcm; sheetUrl?: stri
   }
 
   return (
-    <div className="mt-10 rounded-lg bg-board p-6 text-chalk sm:p-8">
+    <div className="mt-10 rounded-lg bg-board p-6 text-sky-bleu-dark sm:p-8">
       <h2 className="font-display text-xl">QCM — {qcm.chapitre}</h2>
 
       <div className="mt-6 space-y-8">
         {qcm.questions.map((q, qi) => (
           <fieldset key={q.id}>
-            <legend className="text-sm text-chalk/80">
+            <legend className="text-sm text-sky-bleu-dark/80">
               {qi + 1}. {q.question}
             </legend>
             <div className="mt-3 space-y-2">
@@ -52,11 +52,11 @@ export default function QcmPlayer({ qcm, sheetUrl }: { qcm: Qcm; sheetUrl?: stri
                 const estCorrecte = ci === q.reponse;
                 let etat = "border-chalk/20";
                 if (valide && selectionne) {
-                  etat = estCorrecte ? "border-chalk-blue bg-chalk-blue/10" : "border-chalk-coral bg-chalk-coral/10";
+                  etat = estCorrecte ? "border-sky-bleu-dark bg-sky-bleu/25" : "border-chalk-coral bg-chalk-coral/10";
                 } else if (valide && estCorrecte) {
-                  etat = "border-chalk-blue/60";
+                  etat = "border-sky-bleu-dark/80 bg-sky-bleu/20";
                 } else if (selectionne) {
-                  etat = "border-chalk-yellow";
+                  etat = "border-sky-bleu-dark bg-sky-bleu/25";
                 }
 
                 return (
@@ -65,7 +65,7 @@ export default function QcmPlayer({ qcm, sheetUrl }: { qcm: Qcm; sheetUrl?: stri
                     type="button"
                     onClick={() => choisir(q.id, ci)}
                     disabled={valide}
-                    className={`block w-full rounded-md border px-4 py-2 text-left text-sm transition-colors ${etat}`}
+                    className={`block w-full rounded-md border px-4 py-2 text-left text-sm text-sky-bleu-dark transition-colors ${etat}`}
                   >
                     {choix}
                   </button>
@@ -73,7 +73,7 @@ export default function QcmPlayer({ qcm, sheetUrl }: { qcm: Qcm; sheetUrl?: stri
               })}
             </div>
             {valide && (
-              <p className="mt-2 text-xs text-chalk/60">{q.explication}</p>
+              <p className="mt-2 text-xs text-sky-bleu-dark/70">{q.explication}</p>
             )}
           </fieldset>
         ))}
@@ -84,7 +84,7 @@ export default function QcmPlayer({ qcm, sheetUrl }: { qcm: Qcm; sheetUrl?: stri
           type="button"
           disabled={!complet}
           onClick={() => setValide(true)}
-          className="mt-8 rounded-md bg-chalk-yellow px-5 py-2 text-sm font-medium text-board disabled:cursor-not-allowed disabled:opacity-40"
+          className="mt-8 rounded-md bg-sky-bleu-dark px-5 py-2 text-sm font-medium text-board disabled:cursor-not-allowed disabled:opacity-40"
         >
           Corriger
         </button>
@@ -97,7 +97,7 @@ export default function QcmPlayer({ qcm, sheetUrl }: { qcm: Qcm; sheetUrl?: stri
             <button
               type="button"
               onClick={envoyerFeedback}
-              className="rounded-md border border-chalk/30 px-4 py-2 text-sm hover:border-chalk-yellow"
+              className="rounded-md border border-chalk/30 px-4 py-2 text-sm hover:border-sky-bleu-dark"
             >
               Envoyer mon score au professeur
             </button>

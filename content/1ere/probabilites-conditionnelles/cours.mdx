@@ -1,0 +1,109 @@
+---
+titre: "Probabilités conditionnelles"
+ordre: 8
+partie: "Probabilités et statistiques"
+---
+
+## Partie 1 — Expérience aléatoire
+
+Une expérience aléatoire est une expérience dont le résultat n'est pas connu à l'avance.
+
+### Exemple
+- lancer un dé,
+- tirer une carte dans un paquet,
+- choisir au hasard un élève dans une classe.
+
+On appelle **univers** l'ensemble des résultats possibles.
+
+---
+
+## Partie 2 — Probabilité d'un événement
+
+La probabilité d'un événement $A$ est le nombre :
+$$
+P(A)=\frac{\text{nombre de cas favorables}}{\text{nombre de cas possibles}}
+$$
+
+### Exemple
+Lors d'un lancer de dé équilibré :
+$$
+P(\text{obtenir un 4})=\frac{1}{6}
+$$
+
+---
+
+## Partie 3 — Probabilité conditionnelle
+
+La probabilité conditionnelle de $A$ sachant $B$ est notée :
+$$
+P(A\mid B)
+$$
+
+Elle représente la probabilité de $A$ lorsqu'on sait déjà que $B$ est réalisé.
+
+### Formule
+$$
+P(A\mid B)=\frac{P(A\cap B)}{P(B)}
+$$
+
+### Exemple
+Dans une classe, on sait que 30 % des élèves jouent au football. Parmi eux, 40 % jouent aussi au basket.
+
+Alors :
+$$
+P(\text{basket} \mid \text{football})=0,4
+$$
+
+---
+
+## Partie 4 — Indépendance
+
+Deux événements $A$ et $B$ sont indépendants si :
+$$
+P(A\cap B)=P(A)\times P(B)
+$$
+
+### Conséquence
+Si $A$ et $B$ sont indépendants, alors :
+$$
+P(A\mid B)=P(A)
+$$
+
+---
+
+## Partie 5 — Arbres pondérés
+
+Un arbre pondéré permet de représenter les différentes étapes d'une expérience aléatoire.
+
+### Exemple
+On lance une pièce puis on tire une carte.
+
+- on peut calculer la probabilité d'un chemin,
+- puis la probabilité d'un résultat final en multipliant les probabilités des branches.
+
+---
+
+## Partie 6 — Formule des probabilités totales
+
+Si les événements $B_1, B_2, \dots, B_n$ forment une partition de l'univers, alors :
+$$
+P(A)=\sum_{i=1}^{n} P(A\cap B_i)
+$$
+
+ou encore :
+$$
+P(A)=\sum_{i=1}^{n} P(B_i)\,P(A\mid B_i)
+$$
+
+---
+
+## Partie 7 — Récapitulatif
+
+À retenir :
+
+- la probabilité conditionnelle s'écrit $P(A\mid B)$,
+- elle se calcule avec $\dfrac{P(A\cap B)}{P(B)}$,
+- deux événements indépendants vérifient $P(A\cap B)=P(A)P(B)$,
+- les arbres pondérés et la formule des probabilités totales sont des outils très utiles.
+
+---

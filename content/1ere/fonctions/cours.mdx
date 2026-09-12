@@ -1,1 +1,221 @@
+﻿---
+titre: "Fonctions"
+ordre: 1
+partie: "Analyse"
+---
 
+## Partie 1 — Définition et ensemble de définition
+
+Une fonction associe à chaque réel $x$ d'un ensemble de départ un unique réel $y$.
+On note :
+$$
+f : D \rightarrow \mathbb{R}
+$$
+
+- $D$ est l'ensemble de définition.
+- $f(x)$ est l'image de $x$ par $f$.
+
+### Exemple
+$$
+f(x)=2x+1
+$$
+Alors :
+$$
+f(0)=1, \qquad f(2)=5, \qquad f(-3)=-5
+$$
+
+### Ensemble de définition
+On cherche les valeurs de $x$ pour lesquelles la formule a un sens.
+
+- si le dénominateur est présent, il faut avoir $\text{dénominateur} \neq 0$,
+- si une racine carrée est présente, il faut avoir le radicande $\ge 0$,
+- si un logarithme est présent, il faut avoir l'argument $>0$.
+
+### Exemple
+$$
+f(x)=\frac{1}{x-3}
+$$
+Alors :
+$$
+D=\mathbb{R}\setminus\{3\}
+$$
+
+---
+
+## Partie 2 — Représentation graphique
+
+La courbe représentative d'une fonction est l'ensemble des points
+$$
+M(x;f(x))
+$$
+
+Ainsi, à chaque valeur de $x$, on associe son image $f(x)$.
+
+### Lecture graphique
+- le domaine de définition se lit sur l'axe des abscisses,
+- le minimum ou le maximum se lit sur l'axe des ordonnées,
+- un point de la courbe vérifie $y=f(x)$.
+
+---
+
+## Partie 3 — Fonctions affines
+
+Une fonction affine est de la forme :
+$$
+f(x)=ax+b
+$$
+avec $a$ et $b$ réels.
+
+### Propriétés
+- si $a>0$, la fonction est croissante,
+- si $a<0$, la fonction est décroissante,
+- si $a=0$, la fonction est constante.
+
+### Théorème important
+La courbe représentative d'une fonction affine est une droite.
+
+- $a$ est le coefficient directeur,
+- $b$ est l'ordonnée à l'origine.
+
+### Exemple
+$$
+f(x)=3x-2
+$$
+Ici $a=3>0$, donc $f$ est croissante.
+
+---
+
+## Partie 4 — Fonctions polynômes du second degré
+
+Une fonction du second degré est de la forme :
+$$
+f(x)=ax^2+bx+c
+$$
+avec $a\neq 0$.
+
+### Courbe
+Sa représentation graphique est une parabole.
+
+- si $a>0$, la parabole est tournée vers le haut,
+- si $a<0$, la parabole est tournée vers le bas.
+
+### Sommet
+Le sommet a pour abscisse :
+$$
+x_S=-\frac{b}{2a}
+$$
+Et pour ordonnée :
+$$
+y_S=f(x_S)
+$$
+
+### Axe de symétrie
+La parabole a pour axe de symétrie la droite :
+$$
+x=-\frac{b}{2a}
+$$
+
+### Exemple
+$$
+f(x)=x^2-4x+3
+$$
+Alors :
+$$
+x_S=\frac{4}{2}=2
+$$
+Et :
+$$
+f(2)=4-8+3=-1
+$$
+Donc le sommet est :
+$$
+S(2;-1)
+$$
+
+---
+
+## Partie 5 — Résolution d'équations et d'inéquations
+
+### 1. Équation du type $f(x)=0$
+On cherche les valeurs de $x$ qui annulent la fonction.
+
+### Exemple
+$$
+2x+3=0
+$$
+Donc :
+$$
+2x=-3
+\qquad x=-\frac{3}{2}
+$$
+
+### 2. Inéquation du type $f(x)\ge 0$
+On cherche les valeurs de $x$ pour lesquelles la fonction est positive ou nulle.
+
+### Exemple
+$$
+x^2-5x+6\ge 0
+$$
+On factorise :
+$$
+(x-2)(x-3)\ge 0
+$$
+Les zéros sont $2$ et $3$.
+
+Donc :
+- $f(x)\ge 0$ pour $x\le 2$ ou $x\ge 3$,
+- $f(x)\le 0$ pour $2\le x\le 3$.
+
+---
+
+## Partie 6 — Théorèmes et résultats à connaître
+
+### Théorème 1 — Variation d'une fonction affine
+Pour $f(x)=ax+b$ :
+- si $a>0$, $f$ est croissante sur $\mathbb{R}$,
+- si $a<0$, $f$ est décroissante sur $\mathbb{R}$.
+
+### Théorème 2 — Sommet d'une parabole
+Pour $f(x)=ax^2+bx+c$ avec $a\neq 0$ :
+$$
+x_S=-\frac{b}{2a}
+$$
+Le sommet est donc :
+$$
+S\left(-\frac{b}{2a};f\left(-\frac{b}{2a}\right)\right)
+$$
+
+### Théorème 3 — Discriminant
+Pour l'équation :
+$$
+ax^2+bx+c=0
+$$
+le discriminant est :
+$$
+\Delta=b^2-4ac
+$$
+
+- si $\Delta>0$, deux solutions réelles distinctes,
+- si $\Delta=0$, une solution double,
+- si $\Delta<0$, aucune solution réelle.
+
+### Théorème 4 — Signe d'une parabole
+Le signe de $ax^2+bx+c$ dépend du signe de $a$ et des racines éventuelles.
+
+- si $a>0$, la parabole est positive à l'extérieur des racines,
+- si $a<0$, la parabole est négative à l'extérieur des racines.
+
+---
+
+## Partie 7 — Récapitulatif
+
+À retenir :
+
+- une fonction associe à chaque $x$ un unique $y$,
+- l'ensemble de définition doit être déterminé avant d'étudier la fonction,
+- une fonction affine est une droite,
+- une fonction du second degré est une parabole,
+- le sommet donne le maximum ou le minimum,
+- le discriminant permet de connaître le nombre de solutions d'une équation du second degré.
+
+---

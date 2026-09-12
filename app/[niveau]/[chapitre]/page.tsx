@@ -9,6 +9,7 @@ import { getChapitres, getCours, getDocuments, getQcm, getJeu, type Niveau } fro
 import QcmPlayer from "@/components/QcmPlayer";
 import VideoEmbed from "@/components/VideoEmbed";
 import MiniQuiz from "@/components/MiniQuiz";
+import ExponentialExplorer from "@/components/ExponentialExplorer";
 import { ProgressProvider } from "@/components/ProgressContext";
 import ProgressBar from "@/components/ProgressBar";
 import JeuChapitre from "@/components/jeux/JeuChapitre";
@@ -76,7 +77,7 @@ export default async function ChapitrePage({
           <article className="prose prose-neutral mt-8 max-w-none prose-headings:font-display prose-headings:font-semibold">
             <MDXRemote
               source={cours.content}
-              components={{ VideoEmbed, MiniQuiz, h3: H3 }}
+              components={{ VideoEmbed, MiniQuiz, ExponentialExplorer, h3: H3 }}
               options={{
                 mdxOptions: {
                   remarkPlugins: [remarkMath],
