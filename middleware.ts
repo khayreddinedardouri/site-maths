@@ -49,12 +49,15 @@ export function middleware(request: NextRequest) {
   if (pathname === "/tableau-de-bord" || pathname.startsWith("/tableau-de-bord/")) {
     const allowedIps = getAllowedIps();
     const clientIp = getClientIp(request);
+    const hostname = request.nextUrl.hostname.toLowerCase();
 
-    const isLocalHost = ["localhost", "127.0.0.1", "::1", "::ffff:127.0.0.1"].includes(
-      request.nextUrl.hostname.toLowerCase()
-    );
+    const isLocalHost = ["localhost", "127.0.0.1", "::1", "::ffff:127.0.0.1", "0.0.0.0"].includes(hostname);
+    const isPrivateLocalHost =
+      hostname.startsWith("192.168.") ||
+      hostname.startsWith("10.") ||
+      hostname.startsWith("172.");
 
-    if (!allowedIps.includes(clientIp) && !isLocalHost) {
+    if (!allowedIps.includes(clientIp) && !isLocalHost && !isPrivateLocalHost) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
