@@ -1,0 +1,506 @@
+---
+titre: "Probabilités — Cours complet (Terminale et Mathématiques expertes)"
+ordre: 15
+partie: "Probabilités"
+---
+
+# Conditionnement et indépendance
+
+
+## Qu'est-ce qu'une probabilité conditionnelle ?
+
+Soient $A$ et $B$ deux évènements, avec $P(B) \neq 0$. La **probabilité de $A$ sachant $B$**, notée $P_B(A)$, est la probabilité que $A$ se réalise **en sachant déjà** que $B$ s'est réalisé :
+$$
+P_B(A) = P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+> 💡 "Sachant $B$" veut dire qu'on **réduit l'univers** : on ne regarde plus toute l'expérience, mais seulement ce qui se passe à l'intérieur de $B$.
+
+### La formule des probabilités composées
+
+En multipliant les deux membres par $P(B)$, on obtient une formule très utile pour les arbres :
+$$
+P(A \cap B) = P(B) \times P_B(A)
+$$
+
+**Exemple :** une urne contient 7 boules rouges et 3 boules vertes. On tire une boule, on ne la remet pas, puis on en tire une seconde. $R_1$ : « la 1ère boule est rouge », $R_2$ : « la 2e boule est rouge ».
+
+On a $P(R_1) = \dfrac{7}{10}$, et sachant $R_1$ réalisé, il reste 6 boules rouges sur 9 : $P_{R_1}(R_2) = \dfrac{6}{9}$. Donc :
+$$
+P(R_1 \cap R_2) = \frac{7}{10} \times \frac{6}{9} = \frac{7}{15}
+$$
+
+## L'arbre pondéré
+
+**Règle à retenir : sur un arbre, la somme des probabilités portées par les branches issues d'un même nœud vaut toujours 1.**
+
+<table style={{width: "100%", borderCollapse: "collapse", margin: "20px 0", fontSize: "15px"}}>
+  <thead>
+    <tr style={{borderBottom: "2px solid rgba(56,189,248,0.4)"}}>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>Ce que je veux</th>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>Ce que je fais sur l'arbre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{borderBottom: "1px solid rgba(0,0,0,0.08)"}}>
+      <td style={{padding: "10px 12px"}}>Probabilité d'un chemin (d'une feuille)</td>
+      <td style={{padding: "10px 12px"}}>Je <strong>multiplie</strong> les probabilités des branches du chemin</td>
+    </tr>
+    <tr style={{background: "rgba(56,189,248,0.04)"}}>
+      <td style={{padding: "10px 12px"}}>Probabilité d'un évènement (plusieurs feuilles)</td>
+      <td style={{padding: "10px 12px"}}>J'<strong>additionne</strong> les probabilités des feuilles concernées</td>
+    </tr>
+  </tbody>
+</table>
+
+## Partition de l'univers et probabilités totales
+
+Des évènements $B_1, B_2, \ldots, B_n$ forment une **partition** de l'univers s'ils sont deux à deux incompatibles, de probabilités non nulles, et si leur réunion est l'univers tout entier (en pratique : sur l'arbre, ce sont toutes les branches du premier niveau).
+
+**Formule des probabilités totales.** Si $B_1,\ldots,B_n$ forment une partition de l'univers, alors pour tout évènement $A$ :
+$$
+P(A) = \sum_{i=1}^n P(B_i) \times P_{B_i}(A)
+$$
+
+> 💡 Concrètement : on additionne, pour **chaque chemin de l'arbre qui mène à $A$**, le produit des probabilités de ce chemin.
+
+**Exemple :** une entreprise s'approvisionne auprès de deux fournisseurs : 70 % chez $F_1$, 30 % chez $F_2$. Le taux de pièces défectueuses est de 2 % chez $F_1$ et 5 % chez $F_2$. On note $D$ : « la pièce est défectueuse ».
+$$
+P(D) = P(F_1) \times P_{F_1}(D) + P(F_2) \times P_{F_2}(D) = 0{,}7 \times 0{,}02 + 0{,}3 \times 0{,}05 = 0{,}029
+$$
+
+## Indépendance de deux évènements
+
+$A$ et $B$ sont **indépendants** si savoir que $B$ est réalisé **ne change rien** à la probabilité de $A$. Cela se traduit par :
+$$
+P(A \cap B) = P(A) \times P(B)
+$$
+
+**Règle simple à retenir : si $A$ et $B$ sont indépendants, $P_B(A) = P(A)$ (et réciproquement).**
+
+> 💡 Ne pas confondre **indépendant** et **incompatible** ! Deux évènements incompatibles ($A \cap B = \varnothing$) ne sont indépendants que si l'un des deux a une probabilité nulle. Ce sont deux notions différentes.
+
+**Exemple :** on lance un dé équilibré. $A$ : « obtenir un nombre pair », $B$ : « obtenir un multiple de 3 ». On a $P(A) = \frac12$, $P(B) = \frac13$, et $A \cap B = \{6\}$ donc $P(A \cap B) = \frac16 = \frac12 \times \frac13$ : $A$ et $B$ sont bien indépendants.
+
+
+## À retenir
+
+- $P_B(A) = \dfrac{P(A \cap B)}{P(B)}$, et donc $P(A \cap B) = P(B) \times P_B(A)$.
+- Sur un arbre : on **multiplie** le long d'un chemin, on **additionne** entre plusieurs chemins menant au même évènement.
+- Probabilités totales : $P(A) = \sum_i P(B_i) \times P_{B_i}(A)$, dès que les $B_i$ forment une partition de l'univers.
+- $A$ et $B$ sont indépendants si $P(A \cap B) = P(A) \times P(B)$ — **indépendant** ne veut pas dire **incompatible**.
+
+---
+
+# Variables aléatoires et concentration
+
+
+## Qu'est-ce qu'une variable aléatoire ?
+
+Une **variable aléatoire** $X$ est une fonction qui associe un nombre réel à chaque issue d'une expérience aléatoire. Quand $X$ ne prend qu'un nombre fini de valeurs $x_1,\ldots,x_n$, on dit qu'elle est **discrète**, et sa **loi de probabilité** est la donnée de toutes les probabilités $P(X=x_i)$.
+
+**Règle simple à retenir : la somme de toutes les probabilités d'une loi vaut toujours 1.**
+$$
+\sum_{i=1}^n P(X=x_i) = 1
+$$
+
+## Espérance, variance, écart-type
+
+$$
+E(X) = \sum_{i=1}^n p_i x_i
+\qquad\qquad
+V(X) = \sum_{i=1}^n p_i\big(x_i-E(X)\big)^2 = E(X^2)-\big(E(X)\big)^2
+\qquad\qquad
+\sigma(X) = \sqrt{V(X)}
+$$
+
+> 💡 $E(X)$ est la valeur « moyenne attendue » de $X$ sur un grand nombre de répétitions. $V(X)$ et $\sigma(X)$ mesurent à quel point les valeurs de $X$ sont dispersées autour de cette moyenne.
+
+**Exemple :** un jeu rapporte 10 € avec probabilité $0{,}2$, 2 € avec probabilité $0{,}5$, et fait perdre 5 € avec probabilité $0{,}3$. Soit $X$ le gain.
+$$
+E(X) = 0{,}2\times10 + 0{,}5\times2 - 0{,}3\times5 = 1{,}5 \text{ €}
+$$
+Le jeu est favorable au joueur, en moyenne.
+
+### Linéarité de l'espérance
+
+$$
+E(aX+b) = a\,E(X)+b
+\qquad\qquad
+V(aX+b) = a^2\,V(X)
+$$
+
+### Somme de deux variables aléatoires
+
+$$
+E(X+Y) = E(X)+E(Y)
+$$
+
+**Si en plus $X$ et $Y$ sont indépendantes :**
+$$
+V(X+Y) = V(X)+V(Y)
+$$
+
+## L'inégalité de Bienaymé-Tchebychev
+
+Pour une variable aléatoire $X$ d'espérance $E(X)$ et de variance $V(X)$, et pour tout réel $\delta>0$ :
+$$
+P\big(\lvert X-E(X)\rvert \geq \delta\big) \leq \frac{V(X)}{\delta^2}
+$$
+
+> 💡 Cette inégalité (admise) dit que $X$ **s'éloigne rarement beaucoup** de sa moyenne, surtout quand sa variance est petite.
+
+## La loi des grands nombres
+
+On répète $n$ fois, de façon indépendante, la même expérience : $X_1,\ldots,X_n$ ont toutes la même loi, d'espérance $\mu$ et de variance $V$. On note $M_n = \dfrac{X_1+\cdots+X_n}{n}$ la moyenne observée.
+
+On a $E(M_n)=\mu$ et $V(M_n) = \dfrac{V}{n}$ : la variance de la moyenne **tend vers 0** quand $n$ grandit, donc $M_n$ se **concentre** de plus en plus autour de $\mu$. Formellement, pour tout $\delta>0$ :
+$$
+P\big(\lvert M_n-\mu\rvert \geq \delta\big) \xrightarrow[n\to+\infty]{} 0
+$$
+
+**Règle simple à retenir : plus on répète une expérience, plus la moyenne des résultats observés se rapproche de l'espérance théorique.** C'est ce qui justifie d'estimer une probabilité par une fréquence observée sur un grand nombre d'essais.
+
+
+## À retenir
+
+- $E(X) = \sum p_i x_i$ et $V(X) = E(X^2)-E(X)^2$.
+- Linéarité : $E(aX+b)=aE(X)+b$ ; pour une somme, $E(X+Y)=E(X)+E(Y)$ toujours, mais $V(X+Y)=V(X)+V(Y)$ **seulement si $X$ et $Y$ sont indépendantes**.
+- Bienaymé-Tchebychev : $P(\lvert X-E(X)\rvert\geq\delta) \leq \dfrac{V(X)}{\delta^2}$.
+- Loi des grands nombres : la moyenne $M_n$ de $n$ répétitions indépendantes se concentre autour de l'espérance théorique $\mu$ quand $n$ devient grand.
+
+---
+
+# Loi binomiale
+
+
+## Épreuve et schéma de Bernoulli
+
+Une **épreuve de Bernoulli** est une expérience à deux issues : « succès » (probabilité $p$) et « échec » (probabilité $1-p$). Un **schéma de Bernoulli** de paramètres $(n,p)$ consiste à répéter $n$ fois, **de façon indépendante**, une même épreuve de Bernoulli de paramètre $p$.
+
+> 💡 Les cas classiques d'indépendance : un tirage **avec remise**, ou un tirage **sans remise dans une population très grande** (où enlever un élément ne change presque rien aux proportions).
+
+## Les coefficients binomiaux
+
+$\dbinom{n}{k}$ est le nombre de chemins de l'arbre d'un schéma de Bernoulli à $n$ répétitions qui comportent exactement $k$ succès. C'est aussi le nombre de façons de choisir $k$ éléments parmi $n$ :
+$$
+\binom{n}{k} = \frac{n!}{k!(n-k)!}
+$$
+
+<table style={{width: "100%", borderCollapse: "collapse", margin: "20px 0", fontSize: "15px"}}>
+  <thead>
+    <tr style={{borderBottom: "2px solid rgba(56,189,248,0.4)"}}>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>Propriété</th>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>Formule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{borderBottom: "1px solid rgba(0,0,0,0.08)"}}>
+      <td style={{padding: "10px 12px"}}>Cas extrêmes</td>
+      <td style={{padding: "10px 12px"}}>$\dbinom{n}{0}=\dbinom{n}{n}=1$</td>
+    </tr>
+    <tr style={{borderBottom: "1px solid rgba(0,0,0,0.08)", background: "rgba(56,189,248,0.04)"}}>
+      <td style={{padding: "10px 12px"}}>Symétrie</td>
+      <td style={{padding: "10px 12px"}}>$\dbinom{n}{k}=\dbinom{n}{n-k}$</td>
+    </tr>
+    <tr>
+      <td style={{padding: "10px 12px"}}>Relation de Pascal</td>
+      <td style={{padding: "10px 12px"}}>$\dbinom{n}{k}+\dbinom{n}{k+1}=\dbinom{n+1}{k+1}$</td>
+    </tr>
+  </tbody>
+</table>
+
+> 💡 La relation de Pascal permet de construire le **triangle de Pascal** : chaque coefficient est la somme des deux situés juste au-dessus de lui.
+
+## La loi binomiale
+
+Si $X$ compte le nombre de succès dans un schéma de Bernoulli de paramètres $(n,p)$, on dit que $X$ suit la **loi binomiale** $\mathcal B(n,p)$, et :
+$$
+P(X=k) = \binom{n}{k}\,p^k\,(1-p)^{n-k} \qquad \text{pour } k=0,1,\ldots,n
+$$
+
+$$
+E(X) = np \qquad\qquad V(X) = np(1-p)
+$$
+
+### Méthode : reconnaître une loi binomiale
+
+Pour affirmer que $X \sim \mathcal B(n,p)$, il faut vérifier **trois conditions** :
+1. On répète $n$ fois la **même** épreuve.
+2. Les répétitions sont **indépendantes**.
+3. L'épreuve n'a que deux issues (succès / échec), de probabilité de succès $p$ **constante** à chaque répétition.
+
+**Exemple :** un QCM comporte 10 questions, chacune avec 4 réponses possibles dont une seule exacte ; un candidat répond au hasard à chaque question, indépendamment des autres. Soit $X$ le nombre de bonnes réponses.
+
+Les trois conditions sont vérifiées avec $n=10$ et $p=0{,}25$, donc $X \sim \mathcal B(10\,;\,0{,}25)$.
+$$
+P(X=3) = \binom{10}{3}(0{,}25)^3(0{,}75)^7 \approx 0{,}250
+\qquad\qquad
+E(X) = 10\times0{,}25 = 2{,}5
+$$
+
+
+## À retenir
+
+- Schéma de Bernoulli = $n$ répétitions indépendantes d'une épreuve à deux issues (succès $p$ / échec $1-p$).
+- $\dbinom{n}{k} = \dfrac{n!}{k!(n-k)!}$ : nombre de chemins de l'arbre avec exactement $k$ succès.
+- $X\sim\mathcal B(n,p) \;\Rightarrow\; P(X=k)=\dbinom{n}{k}p^k(1-p)^{n-k}$, $E(X)=np$, $V(X)=np(1-p)$.
+- Toujours vérifier les **trois conditions** du schéma de Bernoulli avant d'utiliser la loi binomiale.
+
+---
+
+# Lois à densité : uniforme et exponentielle
+
+
+## Qu'est-ce qu'une variable aléatoire continue ?
+
+Une variable aléatoire $X$ est **continue** (dite « à densité ») si elle peut prendre **toute valeur** d'un intervalle, et non plus seulement un nombre fini de valeurs. Sa loi est alors définie par une fonction **densité** $f$, continue et positive, telle que pour $a \leq b$ :
+$$
+P(a\leq X\leq b) = \int_a^b f(t)\,dt
+$$
+
+> 💡 $P(a\leq X\leq b)$ se lit comme une **aire sous la courbe** de $f$, entre $a$ et $b$. L'aire totale sous la courbe (sur tout l'intervalle de définition) vaut toujours 1.
+
+**Règle simple à retenir : pour une variable continue, $P(X=a)=0$ pour tout réel $a$.** Du coup $P(X\leq a)=P(X<a)$, $P(X\geq a)=P(X>a)$, etc.
+
+## La loi uniforme
+
+$X$ suit la loi uniforme sur $[a;b]$ si sa densité est **constante** : $f(t) = \dfrac{1}{b-a}$ sur $[a;b]$.
+
+$$
+P(c\leq X\leq d) = \frac{d-c}{b-a} \qquad (a\leq c\leq d\leq b)
+\qquad\qquad
+E(X) = \frac{a+b}{2}
+$$
+
+> 💡 $X$ « tombe au hasard » n'importe où dans $[a;b]$, de façon équiprobable : la probabilité d'un sous-intervalle ne dépend que de **sa longueur**, pas de sa position.
+
+## La loi exponentielle
+
+$X$ suit la loi exponentielle de paramètre $\lambda>0$ si sa densité est $f(t) = \lambda e^{-\lambda t}$ sur $[0;+\infty[$.
+
+$$
+P(X\leq a) = 1-e^{-\lambda a}
+\qquad
+P(X> a) = e^{-\lambda a}
+\qquad
+E(X) = \frac{1}{\lambda}
+$$
+
+### La propriété d'absence de mémoire
+
+Pour $s,t\geq0$ :
+$$
+P_{X>s}(X>s+t) = P(X>t)
+$$
+
+On le démontre simplement :
+$$
+P_{X>s}(X>s+t) = \frac{P(X>s+t)}{P(X>s)} = \frac{e^{-\lambda(s+t)}}{e^{-\lambda s}} = e^{-\lambda t} = P(X>t)
+$$
+
+> 💡 Si $X$ modélise une durée de vie, cette propriété dit que savoir que l'appareil a **déjà fonctionné $s$ unités de temps** ne change rien à la probabilité qu'il fonctionne **encore $t$ unités de temps de plus**. L'appareil ne « vieillit » pas — c'est un modèle adapté à une panne purement accidentelle.
+
+<table style={{width: "100%", borderCollapse: "collapse", margin: "20px 0", fontSize: "15px"}}>
+  <thead>
+    <tr style={{borderBottom: "2px solid rgba(251,113,133,0.4)"}}>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>Loi</th>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>Densité</th>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>Espérance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{borderBottom: "1px solid rgba(0,0,0,0.08)"}}>
+      <td style={{padding: "10px 12px"}}>Uniforme sur $[a;b]$</td>
+      <td style={{padding: "10px 12px"}}>$f(t)=\dfrac{1}{b-a}$</td>
+      <td style={{padding: "10px 12px"}}>$\dfrac{a+b}{2}$</td>
+    </tr>
+    <tr style={{background: "rgba(251,113,133,0.04)"}}>
+      <td style={{padding: "10px 12px"}}>Exponentielle de paramètre $\lambda$</td>
+      <td style={{padding: "10px 12px"}}>$f(t)=\lambda e^{-\lambda t}$</td>
+      <td style={{padding: "10px 12px"}}>$\dfrac{1}{\lambda}$</td>
+    </tr>
+  </tbody>
+</table>
+
+**Exemple :** la durée de vie $T$ (en heures) d'une ampoule suit la loi exponentielle de paramètre $\lambda=0{,}001$.
+$$
+P(T>1000) = e^{-1} \approx 0{,}368 \qquad\qquad E(T) = 1000 \text{ heures}
+$$
+
+
+## À retenir
+
+- Pour une variable continue, $P(a\leq X\leq b)$ est une **aire sous la courbe** de densité, et $P(X=a)=0$.
+- Loi uniforme sur $[a;b]$ : $P(c\leq X\leq d)=\dfrac{d-c}{b-a}$, $E(X)=\dfrac{a+b}{2}$.
+- Loi exponentielle de paramètre $\lambda$ : $P(X\leq a)=1-e^{-\lambda a}$, $E(X)=\dfrac1\lambda$.
+- **Absence de mémoire** (loi exponentielle uniquement) : $P_{X>s}(X>s+t)=P(X>t)$.
+
+---
+
+# Loi normale
+
+
+## La loi normale centrée réduite
+
+$Z$ suit la loi normale centrée réduite $\mathcal N(0,1)$ si sa densité est :
+$$
+f(t) = \frac{1}{\sqrt{2\pi}}\,e^{-t^2/2} \qquad \text{sur } \mathbb R
+$$
+
+Sa courbe (la « courbe en cloche », ou courbe de Gauss) est **symétrique par rapport à l'axe des ordonnées**, avec $E(Z)=0$ et $\sigma(Z)=1$.
+
+> 💡 Par symétrie, $P(Z\leq0)=0{,}5$, et pour tout réel $a$, $P(Z\geq a)=P(Z\leq -a)$. Il n'existe pas de primitive simple de $f$ : les probabilités $P(Z\leq a)$ se lisent à la calculatrice.
+
+**Règle simple à retenir : $P(-1{,}96\leq Z\leq1{,}96)\approx0{,}95$ et $P(-2{,}58\leq Z\leq2{,}58)\approx0{,}99$.**
+
+## Le théorème de Moivre-Laplace
+
+Si $X_n \sim \mathcal B(n,p)$ et $Z_n = \dfrac{X_n-np}{\sqrt{np(1-p)}}$, alors pour tous réels $a\leq b$ :
+$$
+P(a\leq Z_n\leq b) \xrightarrow[n\to+\infty]{} P(a\leq Z\leq b) \qquad \text{où } Z\sim\mathcal N(0,1)
+$$
+
+> 💡 Quand $n$ est grand, une loi binomiale $\mathcal B(n,p)$ « ressemble » à une loi normale de même espérance $np$ et de même variance $np(1-p)$. C'est ce qui justifie d'utiliser la loi normale pour les grands échantillons.
+
+## La loi normale générale
+
+$X$ suit la loi $\mathcal N(\mu,\sigma^2)$ (espérance $\mu$, écart-type $\sigma$) si $\dfrac{X-\mu}{\sigma} \sim \mathcal N(0,1)$. La courbe de densité est alors symétrique autour de $x=\mu$.
+
+<table style={{width: "100%", borderCollapse: "collapse", margin: "20px 0", fontSize: "15px"}}>
+  <thead>
+    <tr style={{borderBottom: "2px solid rgba(251,113,133,0.4)"}}>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>Intervalle</th>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>Probabilité</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{borderBottom: "1px solid rgba(0,0,0,0.08)"}}>
+      <td style={{padding: "10px 12px"}}>$[\mu-\sigma\,;\,\mu+\sigma]$</td>
+      <td style={{padding: "10px 12px"}}>$\approx 0{,}68$</td>
+    </tr>
+    <tr style={{borderBottom: "1px solid rgba(0,0,0,0.08)", background: "rgba(251,113,133,0.04)"}}>
+      <td style={{padding: "10px 12px"}}>$[\mu-2\sigma\,;\,\mu+2\sigma]$</td>
+      <td style={{padding: "10px 12px"}}>$\approx 0{,}95$</td>
+    </tr>
+    <tr>
+      <td style={{padding: "10px 12px"}}>$[\mu-3\sigma\,;\,\mu+3\sigma]$</td>
+      <td style={{padding: "10px 12px"}}>$\approx 0{,}997$</td>
+    </tr>
+  </tbody>
+</table>
+
+## Intervalle de fluctuation et prise de décision
+
+Pour un échantillon de taille $n$ issu d'une population où une caractéristique a pour proportion $p$ (avec $n\geq30$, $np\geq5$ et $n(1-p)\geq5$), la fréquence observée $F$ appartient, avec une probabilité d'environ $0{,}95$, à l'intervalle de fluctuation :
+$$
+I_n = \left[\,p-1{,}96\sqrt{\frac{p(1-p)}{n}}\;;\;p+1{,}96\sqrt{\frac{p(1-p)}{n}}\,\right]
+$$
+
+### Méthode : tester une hypothèse sur une proportion
+
+1. Calculer l'intervalle de fluctuation $I_n$ associé à la proportion $p$ supposée.
+2. Comparer la fréquence $f$ réellement observée à cet intervalle.
+3. Si $f\notin I_n$, on **rejette** l'hypothèse « la proportion est $p$ », au risque de 5 %. Sinon, on ne la rejette pas.
+
+## Estimation : l'intervalle de confiance
+
+Pour estimer une proportion **inconnue** $p$ à partir d'une fréquence $f$ observée sur un échantillon de taille $n$ (avec $n\geq30$, $nf\geq5$ et $n(1-f)\geq5$), l'intervalle de confiance au niveau 95 % est :
+$$
+\left[\,f-\frac{1}{\sqrt n}\;;\;f+\frac{1}{\sqrt n}\,\right]
+$$
+
+> 💡 Ne pas confondre : la **fluctuation** part d'une proportion $p$ **connue** pour encadrer une fréquence future ; l'**estimation** part d'une fréquence **observée** pour encadrer une proportion inconnue.
+
+**Exemple :** sur un sondage de $n=1000$ personnes, $f=0{,}54$ se disent favorables à une mesure.
+$$
+\left[0{,}54-\frac{1}{\sqrt{1000}}\;;\;0{,}54+\frac{1}{\sqrt{1000}}\right] \approx [0{,}508\,;\,0{,}572]
+$$
+
+
+## À retenir
+
+- $Z\sim\mathcal N(0,1)$ : courbe symétrique en 0, $P(-1{,}96\leq Z\leq1{,}96)\approx0{,}95$.
+- Moivre-Laplace : une $\mathcal B(n,p)$ ressemble à une $\mathcal N(np, np(1-p))$ quand $n$ est grand.
+- Fluctuation (p **connu**) : $I_n = \left[p-1{,}96\sqrt{\frac{p(1-p)}{n}}\,;\,p+1{,}96\sqrt{\frac{p(1-p)}{n}}\right]$.
+- Estimation (p **inconnu**, à partir de $f$ observé) : $\left[f-\frac{1}{\sqrt n}\,;\,f+\frac{1}{\sqrt n}\right]$.
+
+---
+
+# Graphes probabilistes
+
+
+## Qu'est-ce qu'un graphe probabiliste ?
+
+Un **graphe probabiliste** est un graphe orienté et pondéré dont les sommets représentent les **états** possibles d'un système, et dont chaque arête porte la probabilité de passer d'un état à l'autre **à l'étape suivante**.
+
+**Règle simple à retenir : la somme des probabilités des arêtes sortant d'un même sommet vaut toujours 1.**
+
+### La matrice de transition
+
+Pour des sommets ordonnés $E_1,\ldots,E_n$, la **matrice de transition** $M$ associée est la matrice carrée dont le coefficient $m_{ij}$ (ligne $i$, colonne $j$) est la probabilité de passer de l'état $E_i$ à l'état $E_j$.
+
+> 💡 Chaque **ligne** de $M$ a une somme égale à 1 (on dit que $M$ est une matrice **stochastique**).
+
+**Exemple :** un système a deux états $A$ et $B$. S'il est en $A$, il reste en $A$ avec probabilité $0{,}8$ et passe en $B$ avec probabilité $0{,}2$. S'il est en $B$, il reste en $B$ avec probabilité $0{,}7$ et passe en $A$ avec probabilité $0{,}3$.
+
+<table style={{width: "100%", borderCollapse: "collapse", margin: "20px 0", fontSize: "15px"}}>
+  <thead>
+    <tr style={{borderBottom: "2px solid rgba(56,189,248,0.4)"}}>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>De \ Vers</th>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>$A$</th>
+      <th style={{textAlign: "left", padding: "10px 12px", opacity: 0.75, fontWeight: 600}}>$B$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{borderBottom: "1px solid rgba(0,0,0,0.08)"}}>
+      <td style={{padding: "10px 12px"}}>$A$</td>
+      <td style={{padding: "10px 12px"}}>$0{,}8$</td>
+      <td style={{padding: "10px 12px"}}>$0{,}2$</td>
+    </tr>
+    <tr style={{background: "rgba(56,189,248,0.04)"}}>
+      <td style={{padding: "10px 12px"}}>$B$</td>
+      <td style={{padding: "10px 12px"}}>$0{,}3$</td>
+      <td style={{padding: "10px 12px"}}>$0{,}7$</td>
+    </tr>
+  </tbody>
+</table>
+
+$$
+M = \begin{pmatrix} 0{,}8 & 0{,}2 \\ 0{,}3 & 0{,}7 \end{pmatrix}
+$$
+
+## État probabiliste et évolution
+
+L'**état probabiliste** à l'étape $n$ est la matrice ligne $P_n = \begin{pmatrix}a_n & b_n\end{pmatrix}$ (pour deux états), où $a_n$ et $b_n$ sont les probabilités que le système soit respectivement dans chaque état à l'étape $n$, avec $a_n+b_n=1$.
+
+$$
+P_{n+1} = P_n \times M \qquad\qquad\text{donc}\qquad\qquad P_n = P_0 \times M^n
+$$
+
+> 💡 Pour calculer l'état à l'étape $n$ : on multiplie, à partir de l'état initial $P_0$, par $M$ autant de fois que nécessaire (à la main pour quelques étapes, ou avec $M^n$ à la calculatrice pour un grand $n$).
+
+## L'état stable
+
+Un état $P=\begin{pmatrix}a&b\end{pmatrix}$ est **stable** (ou état d'équilibre) s'il vérifie $P = P\times M$ : l'état du système ne change plus, en probabilité, d'une étape à l'autre.
+
+> 💡 Si tous les coefficients de $M$ (ou d'une puissance de $M$) sont strictement positifs, alors $P_n$ converge, quel que soit l'état initial $P_0$, vers un **unique** état stable.
+
+### Méthode : calculer l'état stable (cas à deux états)
+
+1. Poser $P=\begin{pmatrix}a&b\end{pmatrix}$ avec $a+b=1$.
+2. Écrire l'équation $P = P\times M$ : cela donne un système de deux équations (une est toujours redondante).
+3. Résoudre ce système **avec la condition $a+b=1$**.
+
+**Exemple (suite du graphe ci-dessus) :** on cherche $P=\begin{pmatrix}a&b\end{pmatrix}$, $a+b=1$, tel que $P=PM$ :
+$$
+a = 0{,}8a+0{,}3b \quad\Longleftrightarrow\quad 0{,}2a = 0{,}3b \quad\Longleftrightarrow\quad a = 1{,}5\,b
+$$
+Avec $a+b=1$ : $1{,}5b+b=1 \Rightarrow b=0{,}4$ et $a=0{,}6$. L'état stable est $P=(0{,}6\;\;0{,}4)$ : à long terme, le système se trouve en $A$ avec une probabilité de 60 % et en $B$ avec une probabilité de 40 %, **quel que soit l'état de départ**.
+
+
+## À retenir
+
+- Dans un graphe probabiliste, la somme des probabilités sortant d'un même sommet vaut 1 ; la matrice de transition $M$ a chaque ligne de somme 1.
+- $P_{n+1}=P_n\times M$, donc $P_n = P_0\times M^n$.
+- Un état stable vérifie $P=P\times M$ (avec $a+b=1$) : si $M$ est à coefficients strictement positifs, $P_n$ y converge quel que soit l'état de départ.
